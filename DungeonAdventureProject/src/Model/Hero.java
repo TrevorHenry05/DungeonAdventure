@@ -59,4 +59,8 @@ public abstract class Hero extends DungeonCharacter {
 	public void addItemToInvetory(final Item theItem) {
 		myInventory.add(theItem);
 	}
+	
+	public void removeItemFromInventory(final Item theItem) {
+		myInventory.remove(theItem);
+	}
 }
