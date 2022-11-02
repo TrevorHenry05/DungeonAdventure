@@ -58,8 +58,8 @@ public abstract class DungeonCharacter {
 	public boolean attack(final DungeonCharacter theEnemy) {
 		int chance = Utility.randomNumberGen(0,100);
 		
-		if(chance < (myChanceToHit * 100)) {
-			theEnemy.takeDamage(Utility.randomNumberGen(myMinDamage, myMaxDamage));
+		if(chance < (getChanceToHit() * 100)) {
+			theEnemy.takeDamage(Utility.randomNumberGen(getMinDamage(), getMaxDamage()));
 			return true;
 		}
 		
