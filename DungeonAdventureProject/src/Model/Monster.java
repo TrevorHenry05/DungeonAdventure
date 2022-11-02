@@ -1,5 +1,7 @@
 package Model;
 
+import Utility.Utility;
+
 public class Monster extends DungeonCharacter {
 	
 	private final double myHealChance;
@@ -31,4 +33,14 @@ public class Monster extends DungeonCharacter {
 		return myMonsterType;
 	}
 	
+	public boolean heal() {
+		int chance = Utility.randomNumberGen(0,100);
+		
+		if(chance < (100 * getHealChance())) {
+			setHitPoints(getHitPoints() + Utility.randomNumberGen(getHealMin(), getHealMax()));
+			return true;
+		}
+		
+		return false;
+	}
 }
