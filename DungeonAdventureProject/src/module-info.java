@@ -6,4 +6,6 @@
  *
  */
 module DungeonAdventureProject {
+	
+requires java.desktop;
 }
