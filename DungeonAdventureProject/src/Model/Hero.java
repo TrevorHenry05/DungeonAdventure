@@ -7,7 +7,7 @@ import Utility.Utility;
 
 public abstract class Hero extends DungeonCharacter {
 	
-	//private final String myCharacterName;
+	private final String myCharacterName;
 	private final double myBlockChance;
 	private final String myClassName;
 	private List<Item> myInventory;
@@ -15,15 +15,19 @@ public abstract class Hero extends DungeonCharacter {
 	private int myCurrY;
 	private DungeonRoom myCurrRoom;
 	
-	public Hero(final int theHitPoints, final int theMinDamage, final int theMaxDamage, final double theChanceToHit, final int theAttackSpeed, final double theBlockChance, final String theClassName) {
+	public Hero(final int theHitPoints, final int theMinDamage, final int theMaxDamage, final double theChanceToHit, final int theAttackSpeed, final double theBlockChance, final String theClassName, final String theCharacterName) {
 		super(theHitPoints, theMinDamage, theMaxDamage, theChanceToHit, theAttackSpeed);
-		//myCharacterName = theCharacterName;
+		myCharacterName = theCharacterName;
 		myBlockChance = theBlockChance;
 		myClassName = theClassName;
 		myCurrX = 0;
 		myCurrY = 0;
 		myInventory = new ArrayList<Item>();
 		myCurrRoom = null;	
+	}
+	
+	public String getCharacterName() {
+		return myCharacterName;
 	}
 	
 	public double getBlockChance() {
@@ -77,4 +81,5 @@ public abstract class Hero extends DungeonCharacter {
 			
 		return false;	
 	}
+	
 }
