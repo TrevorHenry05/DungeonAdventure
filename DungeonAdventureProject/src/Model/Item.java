@@ -1,11 +1,11 @@
 package Model;
 
 public class Item {
-	private final String  myType;
-	private final char myDescription;
+	private final char  myType;
+	private final String myDescription;
 	private final boolean myItemUsable;
 	
-	public Item(final String theType, final char theDescription, final boolean theItemUsable) {
+	public Item(final char theType, final String theDescription, final boolean theItemUsable) {
 		myType = theType;
 		myDescription = theDescription;
 		myItemUsable = theItemUsable;
@@ -15,11 +15,11 @@ public class Item {
 		
 	}
 	
-	public String getType() {
+	public char getType() {
 		return myType;
 	}
 	
-	public char getDescription() {
+	public String getDescription() {
 		return myDescription;
 	}
 	
