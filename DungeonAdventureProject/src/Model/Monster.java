@@ -43,4 +43,21 @@ public class Monster extends DungeonCharacter {
 		
 		return false;
 	}
+	
+	public boolean attack(final Hero theHero) {
+		
+		int chanceHit = Utility.randomNumberGen(0,100);
+		int chanceHeroBlock = Utility.randomNumberGen(0,100);
+			
+		if(chanceHit < (getChanceToHit() * 100)) {
+			if(chanceHeroBlock >= (theHero.getBlockChance() * 100)) {
+				theHero.takeDamage(Utility.randomNumberGen(getMinDamage(), getMaxDamage()));
+				return true;
+			}
+		}
+			
+		return false;	
+	}
+
+
 }

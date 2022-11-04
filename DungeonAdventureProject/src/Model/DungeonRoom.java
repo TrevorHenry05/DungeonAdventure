@@ -48,7 +48,54 @@ public class DungeonRoom {
 		return myEast;
 	}
 	
+	public boolean isMonster() {
+		if(getMonster() == null) {
+			return false;
+		}
+		
+		return true;
+	}
+	
 	public char[][] createRoom() {
-		return null;
+		char[][] room = new char[3][3];
+		
+		room[0][0] = '*';
+		room[0][2] = '*';
+		room[2][0] = '*';
+		room[2][2] = '*';
+						
+		if(getItemsInRoom().length > 1) {
+			room[1][1] = 'M';
+		} else if( getItemsInRoom().length == 0) {
+			room[1][1] = ' ';
+		} else {
+			room[1][1] = getItemsInRoom()[0].getDescription();
+		}
+		
+		if(isNorth()) {
+			room[0][1] = '-';
+		} else {
+			room[0][1] = '*';
+		}
+		
+		if(isWest()) {
+			room[1][0] = '|';
+		} else {
+			room[1][0] = '*';
+		}
+		
+		if(isEast()) {
+			room[1][2] = '|';
+		} else {
+			room[1][2] = '*';
+		}
+		
+		if(isSouth()) {
+			room[2][1] = '-';
+		} else {
+			room[2][1] = '*';
+		}
+		
+		return room;
 	}
 }

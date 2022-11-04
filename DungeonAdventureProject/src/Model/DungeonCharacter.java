@@ -1,6 +1,5 @@
 package Model;
 
-import Utility.Utility;
 
 public abstract class DungeonCharacter {
 	 
@@ -55,15 +54,7 @@ public abstract class DungeonCharacter {
 		this.setHitPoints(this.getHitPoints() - theDamage);
 	}
 	
-	public boolean attack(final DungeonCharacter theEnemy) {
-		int chance = Utility.randomNumberGen(0,100);
 		
-		if(chance < (getChanceToHit() * 100)) {
-			theEnemy.takeDamage(Utility.randomNumberGen(getMinDamage(), getMaxDamage()));
-			return true;
-		}
-		
-		return false;
-	}
+	
 	
 }
