@@ -3,6 +3,8 @@ package Model;
 import java.util.ArrayList;
 import java.util.List;
 
+import Utility.Utility;
+
 public abstract class Hero extends DungeonCharacter {
 	
 	//private final String myCharacterName;
@@ -62,5 +64,17 @@ public abstract class Hero extends DungeonCharacter {
 	
 	public void removeItemFromInventory(final Item theItem) {
 		myInventory.remove(theItem);
+	}
+	
+	public boolean attack(final Monster theMonster) {
+		
+		int chanceHit = Utility.randomNumberGen(0,100);
+			
+		if(chanceHit < (getChanceToHit() * 100)) {
+				theMonster.takeDamage(Utility.randomNumberGen(getMinDamage(), getMaxDamage()));
+				return true;
+		}
+			
+		return false;	
 	}
 }

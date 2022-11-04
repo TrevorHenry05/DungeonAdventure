@@ -18,4 +18,10 @@ public class Dungeon {
 	public boolean isMazeTraversible(final DungeonRoom[][] theDungeon) {
 		return false;
 	}
+	
+	public String toString() {
+		StringBuilder sb = new StringBuilder();
+		
+		return sb.toString();
+	}
 }
