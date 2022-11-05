@@ -1,8 +1,10 @@
 package Model;
 
+import java.util.List;
+
 public class DungeonRoom {
 	
-	private Item[] myItemsInRoom;
+	private List<Item> myItemsInRoom;
 	private char[][] myRoom;
 	private Monster myMonster;
 	private final boolean myNorth;
@@ -10,7 +12,7 @@ public class DungeonRoom {
 	private final boolean myWest;
 	private final boolean myEast;
 	
-	public DungeonRoom(final Item[] theItemsInRoom, final Monster theMonster, final boolean theNorth, final boolean theSouth, final boolean theWest, final boolean theEast) {
+	public DungeonRoom(final List<Item> theItemsInRoom, final Monster theMonster, final boolean theNorth, final boolean theSouth, final boolean theWest, final boolean theEast) {
 		myItemsInRoom = theItemsInRoom;		
 		myMonster = theMonster;
 		myNorth = theNorth;
@@ -24,7 +26,7 @@ public class DungeonRoom {
 		return myMonster;
 	}
 	
-	public Item[] getItemsInRoom() {
+	public List<Item> getItemsInRoom() {
 		return myItemsInRoom;
 	}
 	
@@ -66,12 +68,12 @@ public class DungeonRoom {
 		room[2][2] = '*';
 			
 		//add what items are in the room
-		if(getItemsInRoom().length > 1) {
+		if(getItemsInRoom().size() > 1) {
 			room[1][1] = 'M';
-		} else if( getItemsInRoom().length == 0) {
+		} else if( getItemsInRoom().size() == 0) {
 			room[1][1] = ' ';
 		} else {
-			room[1][1] = getItemsInRoom()[0].getType();
+			room[1][1] = getItemsInRoom().remove(0).getType();
 		}
 		
 		//Add north wall or door
