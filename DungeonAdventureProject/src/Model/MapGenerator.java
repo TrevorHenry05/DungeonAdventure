@@ -14,30 +14,30 @@ public class MapGenerator {
 
 	//Intro to the game
 	public static void Game_Beginning(){
-	           System.out.println("This is your game board:");
-	    System.out.println("-------------------------------");
+	           System.out.println("Maze");
+	    System.out.println("                      ");
 	}
 
 	//Game Board
 	public static void Game_Board(){
 	    //Declare new array, maze 10x10
-	    char maze[][] = new char[10][10];
+	    String maze[][] = new String[5][5];
 
 	    //Randomly print the obstacles in the maze.
 	    for (int i = 0; i < maze.length; i++){
 	        for (int j = 0; j < maze.length; j++){
 	            double random = Math.random();
-	            if (random <= .05){
-	                maze[i][j] = '*';
+	            if (random <= .04){
+	                maze[i][j] = Monster;
 	            }
-	            else if (random > .06 && random <= .15){
-	                maze[i][j] = 'X';
+	            else if (random > .04 && random <= .25){
+	                maze[i][j] = 'M';
 	            }
 	            else{
 	                maze[i][j] = '.';
 	            }
-	            maze[0][0] = 'P';
-	            maze[9][9] = 'E';
+	            maze[0][0] = "S";
+	            maze[4][4] = "E";
 	            System.out.print(maze[i][j]);
 	        }
 	        System.out.println("");
