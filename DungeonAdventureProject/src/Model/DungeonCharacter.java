@@ -44,10 +44,10 @@ public abstract class DungeonCharacter {
 	
 	public boolean isAlive() {
 		if(myHitPoints <= 0) {
-			return true;
+			return false;
 		}
 		
-		return false;
+		return true;
 	}
 	
 	public void takeDamage(final int theDamage) {
