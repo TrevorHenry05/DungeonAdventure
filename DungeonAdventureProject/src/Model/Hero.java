@@ -26,6 +26,10 @@ public abstract class Hero extends DungeonCharacter {
 		myCurrRoom = null;	
 	}
 	
+	public List<Item> getInventory() {
+		return myInventory;
+	}
+	
 	public String getCharacterName() {
 		return myCharacterName;
 	}
@@ -62,12 +66,46 @@ public abstract class Hero extends DungeonCharacter {
 		myCurrRoom = theCurrRoom;
 	}
 	
-	public void addItemToInvetory(final Item theItem) {
-		myInventory.add(theItem);
+	public void addItemToInventory(final Item theItem) {
+		getInventory().add(theItem);
 	}
 	
-	public void removeItemFromInventory(final Item theItem) {
-		myInventory.remove(theItem);
+	public String showInventory() {
+		StringBuilder sb = new StringBuilder();
+		for(Item item: getInventory()) {
+			sb.append(item.getDescription());
+			sb.append(System.lineSeparator());
+		}
+		
+		return sb.toString();
+	}
+	
+	public Item removeItemFromInventory(final String theItem) {
+		int i = 0;
+		
+		for(Item item: getInventory()) {
+			if(item.getDescription().equalsIgnoreCase(theItem)) {
+				break;
+			}
+		}
+		
+		Item item = getInventory().get(i);
+		getInventory().remove(i);
+		return item;
+	}
+	
+	public void useItem(final Item theItem) {
+		
+		
+		if(theItem.isUsable()) {
+			if(theItem.getType() == 'H') {
+				setHitPoints(getHitPoints() + Utility.randomNumberGen(5,15));
+			} else if(theItem.getType() == 'X') {
+				setHitPoints(getHitPoints() - Utility.randomNumberGen(1,20));
+			}
+		} else {
+			System.out.println("Item not usable");
+		}
 	}
 	
 	public boolean attack(final Monster theMonster) {

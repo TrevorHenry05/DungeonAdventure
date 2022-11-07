@@ -30,6 +30,8 @@ public class DungeonRoom {
 		return myItemsInRoom;
 	}
 	
+	
+	
 	public char[][] getRoom() {
 		return myRoom;
 	}
@@ -48,6 +50,21 @@ public class DungeonRoom {
 	
 	public boolean isEast() {
 		return myEast;
+	}
+	
+	public void addItem(final Item theItem) {
+		getItemsInRoom().add(theItem);
+	}
+	
+	public void removeItemsFromRoom(final Hero theHero) {		
+		for(Item item: getItemsInRoom()) {
+			if(item.getType() == 'X') {
+				theHero.useItem(item);
+				System.out.println("You encoutered trap!");
+			} else {
+				theHero.addItemToInventory(item);
+			}
+		}
 	}
 	
 	public boolean isMonster() {

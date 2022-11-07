@@ -11,9 +11,6 @@ public class Item {
 		myItemUsable = theItemUsable;
 	}
 	
-	public void  use(Hero theHero, Item theItem) {
-		
-	}
 	
 	public char getType() {
 		return myType;
@@ -23,7 +20,7 @@ public class Item {
 		return myDescription;
 	}
 	
-	public boolean getItemUsable() {
+	public boolean isUsable() {
 		return myItemUsable;
 	}
 }

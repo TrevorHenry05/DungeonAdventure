@@ -42,8 +42,7 @@ public class Dungeon {
 				
 				row3.append(getDungeon()[i][j].getRoom()[2][0]);
 				row3.append(getDungeon()[i][j].getRoom()[2][1]);
-				row3.append(getDungeon()[i][j].getRoom()[2][2]);
-				
+				row3.append(getDungeon()[i][j].getRoom()[2][2]);				
 			}
 			
 			sb.append(row1.toString());
