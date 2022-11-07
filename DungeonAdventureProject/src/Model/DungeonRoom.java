@@ -20,7 +20,7 @@ public class DungeonRoom {
 		myWest = theWest;
 		myEast = theEast;
 		myRoom = createRoom();
-	}
+	} 
 	
 	public Monster getMonster() {
 		return myMonster;

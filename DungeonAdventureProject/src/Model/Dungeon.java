@@ -1,9 +1,12 @@
 package Model;
 
-
+import java.util.ArrayList;
+import java.util.List;
+import java.util.Random;
 
 public class Dungeon {
 	private final DungeonRoom[][] myDungeon;
+	private final Random r = new Random();
 	
 	public Dungeon() {
 		myDungeon = createDungeon();
@@ -15,7 +18,18 @@ public class Dungeon {
 	
 	public DungeonRoom[][] createDungeon() {
 		DungeonRoom[][] d = new DungeonRoom[5][5];
-		
+		for (int i = 0; i < 5; i++) {
+			for (int j = 0; j < 5; j++) {
+				List<Item> items = new ArrayList<Item>();
+				if (r.nextDouble() < 0.1) {
+					items.add(new Item('H', "Health Potion", true));
+				}
+				if (r.nextDouble() < 0.1) {
+					items.add(new Item('V', "Vision Potion", true));
+				}
+				d[i][j] = new DungeonRoom(items, null, i > 0, i < 4, j > 0, j < 4);
+			}
+		}
 		
 		return d;
 	}
