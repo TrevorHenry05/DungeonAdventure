@@ -14,7 +14,7 @@ public class Dungeon {
 	}
 	
 	public DungeonRoom[][] createDungeon() {
-		DungeonRoom[][] d = new DungeonRoom[5][5];
+		DungeonRoom[][] d = new DungeonRoom[15][15];
 		
 		
 		return d;

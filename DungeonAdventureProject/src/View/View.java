@@ -1,12 +1,16 @@
 package View;
 
+import java.util.Scanner;
+
 import Model.Dungeon;
 import Model.Hero;
+import Model.HeroFactory;
+import Model.Monster;
 
 
 public class View {
 	
-	public static void displayDungeonNearHero(final Dungeon theDungeon, final Hero theHero) {
+	public void displayDungeonNearHero(final Dungeon theDungeon, final Hero theHero) {
 		StringBuilder sb = new StringBuilder();
 		
 		for(int i = theHero.getCurrX() - 1; ((i < theDungeon.getDungeon().length) && (i < theHero.getCurrX() + 2)); i ++) {
@@ -41,6 +45,28 @@ public class View {
 		}
 		
 		System.out.println(sb.toString());
+	}
+	
+	public static void incounter(final Hero theHero, final Monster theMonster) {
+		
+	}
+	
+	public Hero start() {
+		Scanner in = new Scanner(System.in);
+		HeroFactory hf = new HeroFactory();
+		
+		System.out.println("~~ Welcome to Dungeon Adventure ~~");
+		System.out.println("What do you want your hero's name to be:");
+		String name = in.next();
+		System.out.println("What hero class do you want to be (Warrior, Thief, or Priestess):");
+		String hero = in.next();
+		in.close();
+		
+		return hf.createHero(hero, name);		
+	}
+	
+	public void displayCurrRoom(final Hero theHero, final Dungeon theDungeon) {
+		System.out.println(theDungeon.getDungeon()[theHero.getCurrX()][theHero.getCurrY()].toString());
 	}
 	
 }
