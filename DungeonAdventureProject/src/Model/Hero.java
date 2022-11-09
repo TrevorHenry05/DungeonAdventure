@@ -27,10 +27,14 @@ public abstract class Hero extends DungeonCharacter {
 	}
 	
 	public String getCharacterName() {
+
 		return myCharacterName;
-	}
+}
 	
 	public double getBlockChance() {
+		
+		int chanceBlock = Utility.randomNumberGen(0,100);
+		
 		return myBlockChance;
 	}
 	
