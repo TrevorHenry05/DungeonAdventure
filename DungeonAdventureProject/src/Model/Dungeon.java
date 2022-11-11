@@ -13,14 +13,19 @@ public class Dungeon {
 		return myDungeon;
 	}
 	
+
 	public DungeonRoom[][] createDungeon() {
 		DungeonRoom[][] d = new DungeonRoom[15][15];
 		
 		
 		return d;
-	}
+
+}
 	
 	public boolean isMazeTraversible(final DungeonRoom[][] theDungeon) {
+		
+		
+		
 		return false;
 	}
 	
