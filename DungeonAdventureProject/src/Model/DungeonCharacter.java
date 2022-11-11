@@ -8,10 +8,11 @@ public abstract class DungeonCharacter {
 	private final int myMinDamage;
 	private final int myMaxDamage;
 	private final int myAttackSpeed;
-	//private final int myDamageRange;
+	private final int myMaxHitPoints;
 	
-	public DungeonCharacter(final int theHitPoints, final int theMinDamage, final int theMaxDamage, final double theChanceToHit, final int theAttackSpeed) {
+	public DungeonCharacter(final int theHitPoints,final int theMaxHitPoints, final int theMinDamage, final int theMaxDamage, final double theChanceToHit, final int theAttackSpeed) {
 		myHitPoints = theHitPoints;
+		myMaxHitPoints = theMaxHitPoints;
 		myMinDamage = theMinDamage;
 		myMaxDamage = theMaxDamage;
 		myChanceToHit = theChanceToHit;
@@ -20,6 +21,10 @@ public abstract class DungeonCharacter {
 	
 	public int getHitPoints() {
 		return myHitPoints;
+	}
+	
+	public int getMaxHitPoints() {
+		return myMaxHitPoints;
 	}
 	
 	public void setHitPoints(final int theHitPoints) {
