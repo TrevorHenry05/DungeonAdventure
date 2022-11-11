@@ -1,8 +1,10 @@
 package Model;
 
+import java.util.List;
+
 public class DungeonRoom {
 	
-	private Item[] myItemsInRoom;
+	private List<Item> myItemsInRoom;
 	private char[][] myRoom;
 	private Monster myMonster;
 	private final boolean myNorth;
@@ -10,7 +12,7 @@ public class DungeonRoom {
 	private final boolean myWest;
 	private final boolean myEast;
 	
-	public DungeonRoom(final Item[] theItemsInRoom, final Monster theMonster, final boolean theNorth, final boolean theSouth, final boolean theWest, final boolean theEast) {
+	public DungeonRoom(final List<Item> theItemsInRoom, final Monster theMonster, final boolean theNorth, final boolean theSouth, final boolean theWest, final boolean theEast) {
 		myItemsInRoom = theItemsInRoom;		
 		myMonster = theMonster;
 		myNorth = theNorth;
@@ -24,9 +26,11 @@ public class DungeonRoom {
 		return myMonster;
 	}
 	
-	public Item[] getItemsInRoom() {
+	public List<Item> getItemsInRoom() {
 		return myItemsInRoom;
 	}
+	
+	
 	
 	public char[][] getRoom() {
 		return myRoom;
@@ -48,6 +52,21 @@ public class DungeonRoom {
 		return myEast;
 	}
 	
+	public void addItem(final Item theItem) {
+		getItemsInRoom().add(theItem);
+	}
+	
+	public void removeItemsFromRoom(final Hero theHero) {		
+		for(Item item: getItemsInRoom()) {
+			if(item.getType() == 'X') {
+				theHero.useItem(item);
+				System.out.println("You encoutered trap!");
+			} else {
+				theHero.addItemToInventory(item);
+			}
+		}
+	}
+	
 	public boolean isMonster() {
 		if(getMonster() == null) {
 			return false;
@@ -66,12 +85,12 @@ public class DungeonRoom {
 		room[2][2] = '*';
 			
 		//add what items are in the room
-		if(getItemsInRoom().length > 1) {
+		if(getItemsInRoom().size() > 1) {
 			room[1][1] = 'M';
-		} else if( getItemsInRoom().length == 0) {
+		} else if( getItemsInRoom().size() == 0) {
 			room[1][1] = ' ';
 		} else {
-			room[1][1] = getItemsInRoom()[0].getType();
+			room[1][1] = getItemsInRoom().remove(0).getType();
 		}
 		
 		//Add north wall or door
