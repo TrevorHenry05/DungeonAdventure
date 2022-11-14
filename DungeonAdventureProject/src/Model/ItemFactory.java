@@ -22,6 +22,9 @@ public class ItemFactory {
 			return new Item('P', "Pillar of Polymorphism", false);
 		}
 		
+		if(theItem.equalsIgnoreCase("trap")) {
+			return new Item('X', "Trap", true);
+		}
 		throw new IllegalArgumentException("Illegal Argument Entered");
 	}
 }

@@ -15,8 +15,8 @@ public abstract class Hero extends DungeonCharacter {
 	private int myCurrY;
 	private DungeonRoom myCurrRoom;
 	
-	public Hero(final int theHitPoints, final int theMinDamage, final int theMaxDamage, final double theChanceToHit, final int theAttackSpeed, final double theBlockChance, final String theClassName, final String theCharacterName) {
-		super(theHitPoints, theMinDamage, theMaxDamage, theChanceToHit, theAttackSpeed);
+	public Hero(final int theHitPoints,final int theMaxHitPoints, final int theMinDamage, final int theMaxDamage, final double theChanceToHit, final int theAttackSpeed, final double theBlockChance, final String theClassName, final String theCharacterName) {
+		super(theHitPoints,theMaxHitPoints, theMinDamage, theMaxDamage, theChanceToHit, theAttackSpeed);
 		myCharacterName = theCharacterName;
 		myBlockChance = theBlockChance;
 		myClassName = theClassName;
@@ -26,11 +26,19 @@ public abstract class Hero extends DungeonCharacter {
 		myCurrRoom = null;	
 	}
 	
-	public String getCharacterName() {
-		return myCharacterName;
+	public List<Item> getInventory() {
+		return myInventory;
 	}
 	
+	public String getCharacterName() {
+
+		return myCharacterName;
+}
+	
 	public double getBlockChance() {
+		
+		int chanceBlock = Utility.randomNumberGen(0,100);
+		
 		return myBlockChance;
 	}
 	
@@ -62,12 +70,70 @@ public abstract class Hero extends DungeonCharacter {
 		myCurrRoom = theCurrRoom;
 	}
 	
-	public void addItemToInvetory(final Item theItem) {
-		myInventory.add(theItem);
+	public void addItemToInventory(final Item theItem) {
+		getInventory().add(theItem);
 	}
 	
-	public void removeItemFromInventory(final Item theItem) {
-		myInventory.remove(theItem);
+	public String showInventory() {
+		StringBuilder sb = new StringBuilder();
+		for(Item item: getInventory()) {
+			sb.append(item.getDescription());
+			sb.append(System.lineSeparator());
+		}
+		
+		return sb.toString();
+	}
+	
+	public Item removeItemFromInventory(final String theItem) {
+		int i = 0;
+		
+		for(Item item: getInventory()) {
+			if(item.getDescription().equalsIgnoreCase(theItem)) {
+				break;
+			}
+			i++;
+		}
+		
+		Item item = getInventory().get(i);
+		if(item.isUsable()) {
+			getInventory().remove(i);
+		}
+		return item;
+	}
+	
+	public void useItem(final Item theItem) {
+		
+		
+		if(theItem.isUsable()) {
+			if(theItem.getType() == 'H') {
+				int newHealth = getHitPoints() + Utility.randomNumberGen(5,15);
+				if(newHealth >= getMaxHitPoints()) {
+					setHitPoints(getMaxHitPoints());
+				} else {
+					setHitPoints(newHealth);
+				}
+			} else if(theItem.getType() == 'X') {
+				setHitPoints(getHitPoints() - Utility.randomNumberGen(1,20));
+			}
+		} else {
+			System.out.println("Item not usable");
+		}
+	}
+	
+	public boolean hasPillars() {
+		int total = 0;
+		
+		for(Item item: getInventory()) {
+			if(item.getType() == 'I' || item.getType() == 'A' || item.getType() == 'E' || item.getType() == 'P') {
+				total++;
+			}
+		}
+		
+		if(total >= 4) {
+			return true;
+		}
+		
+		return false;
 	}
 	
 	public boolean attack(final Monster theMonster) {

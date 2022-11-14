@@ -11,14 +11,20 @@ public class DungeonRoom {
 	private final boolean mySouth;
 	private final boolean myWest;
 	private final boolean myEast;
+	private final boolean myFinalRoom;
 	
-	public DungeonRoom(final List<Item> theItemsInRoom, final Monster theMonster, final boolean theNorth, final boolean theSouth, final boolean theWest, final boolean theEast) {
+	public DungeonRoom(final List<Item> theItemsInRoom, final Monster theMonster, final boolean theNorth, final boolean theSouth, final boolean theWest, final boolean theEast, final boolean theFinalRoom) {
 		myItemsInRoom = theItemsInRoom;		
 		myMonster = theMonster;
 		myNorth = theNorth;
 		mySouth = theSouth;
 		myWest = theWest;
 		myEast = theEast;
+		myFinalRoom = theFinalRoom;
+		myRoom = createRoom();
+	}
+	
+	public void setRoom() {
 		myRoom = createRoom();
 	}
 	
@@ -28,6 +34,10 @@ public class DungeonRoom {
 	
 	public List<Item> getItemsInRoom() {
 		return myItemsInRoom;
+	}
+	
+	public boolean isFinalRoom() {
+		return myFinalRoom;
 	}
 	
 	public char[][] getRoom() {
@@ -50,6 +60,32 @@ public class DungeonRoom {
 		return myEast;
 	}
 	
+	public void addItem(final Item theItem) {
+		getItemsInRoom().add(theItem);
+	}
+	
+	public void removeItemsFromRoom(final Hero theHero) {		
+		for(Item item: getItemsInRoom()) {
+			if(item.getType() == 'X') {
+				theHero.useItem(item);
+				System.out.println("You encoutered a trap!");
+			}
+			if (item.getType() == 'A' || item.getType() == 'I' || item.getType() == 'E' || item.getType() == 'P') {
+				System.out.println("You obtained the " + item.getDescription() + "!");
+				theHero.addItemToInventory(item);
+				if(theHero.hasPillars()) {
+					System.out.println("You have found all the pillars, now just make it to the exit!");
+				}
+			} 
+			if(item.getType() == 'H') {
+				System.out.println("You obtained a " + item.getDescription() + " potion");
+				theHero.addItemToInventory(item);
+			}
+		}
+		getItemsInRoom().clear();
+		setRoom();
+	}
+	
 	public boolean isMonster() {
 		if(getMonster() == null) {
 			return false;
@@ -68,12 +104,12 @@ public class DungeonRoom {
 		room[2][2] = '*';
 			
 		//add what items are in the room
-		if(getItemsInRoom().size() > 1) {
-			room[1][1] = 'M';
+		if(getItemsInRoom().size() == 1) {		
+			room[1][1] = getItemsInRoom().get(0).getType();
 		} else if( getItemsInRoom().size() == 0) {
 			room[1][1] = ' ';
 		} else {
-			room[1][1] = getItemsInRoom().remove(0).getType();
+			room[1][1] = 'M';
 		}
 		
 		//Add north wall or door

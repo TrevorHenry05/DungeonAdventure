@@ -16,6 +16,7 @@ public class Dungeon {
 		return myDungeon;
 	}
 	
+
 	public DungeonRoom[][] createDungeon() {
 		DungeonRoom[][] d = new DungeonRoom[5][5];
 		for (int i = 0; i < 5; i++) {
@@ -30,11 +31,43 @@ public class Dungeon {
 				d[i][j] = new DungeonRoom(items, null, i > 0, i < 4, j > 0, j < 4);
 			}
 		}
+		items = new ArrayList<Item>();
+		room = new DungeonRoom(items, monster, false, false, true, true, false);
+		d[3][2] = room;
 		
+		items = new ArrayList<Item>();
+		monster = mf.createMonster("skeleton");
+		items.add(If.createItem("inheritance"));
+		items.add(If.createItem("heal"));
+		
+		room = new DungeonRoom(items, monster, false, false, true, false, false);
+		d[0][3] = room;
+		
+		items = new ArrayList<Item>();
+		items.add(If.createItem("polymorphism"));
+		room = new DungeonRoom(items, monster, false, false, true, false, false);
+		d[1][3] = room;
+		
+		monster = null;
+		items = new ArrayList<Item>();
+		items.add(If.createItem("abstraction"));
+		room = new DungeonRoom(items, monster, false, true, true, false, false);
+		d[2][3] = room;
+		
+		monster = null;
+		items = new ArrayList<Item>();
+		room = new DungeonRoom(items, monster, true, false, true, false, true);
+		d[3][3] = room;
+		
+
 		return d;
-	}
+
+}
 	
 	public boolean isMazeTraversible(final DungeonRoom[][] theDungeon) {
+		
+		
+		
 		return false;
 	}
 	
@@ -56,8 +89,7 @@ public class Dungeon {
 				
 				row3.append(getDungeon()[i][j].getRoom()[2][0]);
 				row3.append(getDungeon()[i][j].getRoom()[2][1]);
-				row3.append(getDungeon()[i][j].getRoom()[2][2]);
-				
+				row3.append(getDungeon()[i][j].getRoom()[2][2]);				
 			}
 			
 			sb.append(row1.toString());
