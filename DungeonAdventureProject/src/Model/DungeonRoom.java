@@ -23,7 +23,16 @@ public class DungeonRoom {
 		myFinalRoom = theFinalRoom;
 		myRoom = createRoom();
 	}
-	
+	public DungeonRoom(final List<Item> theItemsInRoom, final Monster theMonster, final boolean theNorth, final boolean theSouth, final boolean theWest, final boolean theEast) {
+		myItemsInRoom = theItemsInRoom;		
+		myMonster = theMonster;
+		myNorth = theNorth;
+		mySouth = theSouth;
+		myWest = theWest;
+		myEast = theEast;
+		myFinalRoom = false;
+		myRoom = createRoom();
+	}
 	public void setRoom() {
 		myRoom = createRoom();
 	}
