@@ -5,18 +5,18 @@ public class mapgenerator {
 
 	public static void main(String[] args) {
 			
-		String[] Dungeon = new String[25];
-		String room1 = " ";
+		mapgenerator obj[] = new mapgenerator[25];
+		Room[] roomObjects = new Room[];
 		for (int i = 0; i < 25; i++){
 			double random = Math.random();
 			if (random <= .04){
-				room1 = ("monster");
+				roomObjects = new room();
             }
             else if (random > .04 && random <= .25){
-               room1 = ("item");
+               roomObjects = ("item");
             }
             else{
-                room1 =("pillar");
+            	roomObjects =("pillar");
             }
 		Dungeon[i]= room1;
 	
