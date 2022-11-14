@@ -9,8 +9,8 @@ public class Monster extends DungeonCharacter {
 	private final int myHealMax;
 	private final String myMonsterType;
 	
-	public Monster(final int theHitPoints, final int theMinDamage, final int theMaxDamage, final double theChanceToHit, final int theAttackSpeed, final double theHealChance, final int theHealMin, final int theHealMax, final String theMonsterType) {
-		super(theHitPoints, theMinDamage, theMaxDamage, theChanceToHit, theAttackSpeed);
+	public Monster(final int theHitPoints, final int theMaxHitPoints, final int theMinDamage, final int theMaxDamage, final double theChanceToHit, final int theAttackSpeed, final double theHealChance, final int theHealMin, final int theHealMax, final String theMonsterType) {
+		super(theHitPoints, theMaxHitPoints, theMinDamage, theMaxDamage, theChanceToHit, theAttackSpeed);
 		myHealChance = theHealChance;
 		myHealMin = theHealMin;
 		myHealMax = theHealMax;
@@ -35,9 +35,14 @@ public class Monster extends DungeonCharacter {
 	
 	public boolean heal() {
 		int chance = Utility.randomNumberGen(0,100);
+		int newHealth = getHitPoints() + Utility.randomNumberGen(getHealMin(), getHealMax());
 		
 		if(chance < (100 * getHealChance())) {
-			setHitPoints(getHitPoints() + Utility.randomNumberGen(getHealMin(), getHealMax()));
+			if(newHealth >= getMaxHitPoints()) {
+				setHitPoints(getMaxHitPoints());
+			} else {
+				setHitPoints(newHealth);
+			}
 			return true;
 		}
 		
