@@ -28,7 +28,11 @@ public abstract class DungeonCharacter {
 	}
 	
 	public void setHitPoints(final int theHitPoints) {
-		myHitPoints = theHitPoints;
+		if(theHitPoints < 0) {
+			myHitPoints = 0;
+		} else {
+			myHitPoints = theHitPoints;
+		}
 	}
 	
 	public double getChanceToHit() {

@@ -11,7 +11,7 @@ import Model.Monster;
 
 public class View {
 	
-	public static final Scanner INPUT = new Scanner(System.in);
+	private static final Scanner INPUT = new Scanner(System.in);
 	
 	public void displayDungeonNearHero(final Dungeon theDungeon, final Hero theHero) {
 		StringBuilder sb = new StringBuilder();
@@ -62,10 +62,17 @@ public class View {
 		System.out.println(sb.toString());
 	}
 	
-	public void encounter(final Hero theHero, final Monster theMonster) {
-		Scanner in = new Scanner(System.in);
-		
+	public String displayHeroAttacks() {
+		System.out.println("You have a chance to attack would you like to use normal attack(enter normal) or special attack(enter special): ");
+		String attack = INPUT.next();
+		while(!(attack.equalsIgnoreCase("normal") || attack.equalsIgnoreCase("special"))) {
+			System.out.println("Please enter valid attack option:");
+			attack = INPUT.next();
+		}
+
+		return attack;
 	}
+
 	
 	public Hero start() {
 		
@@ -96,6 +103,7 @@ public class View {
 	}
 	
 	public void displayCurrRoom(final Hero theHero) {
+		System.out.println("\n\nCurrent Room:\n");
 		System.out.println(theHero.getCurrRoom().toString());
 	}
 	
@@ -144,6 +152,10 @@ public class View {
 		
 		return direction;
 		
+	}
+	
+	public void displayText(final String theString) {
+		System.out.println(theString);
 	}
 	
 }
