@@ -15,8 +15,8 @@ public abstract class Hero extends DungeonCharacter {
 	private int myCurrY;
 	private DungeonRoom myCurrRoom;
 	
-	public Hero(final int theHitPoints, final int theMinDamage, final int theMaxDamage, final double theChanceToHit, final int theAttackSpeed, final double theBlockChance, final String theClassName, final String theCharacterName) {
-		super(theHitPoints, theMinDamage, theMaxDamage, theChanceToHit, theAttackSpeed);
+	public Hero(final int theHitPoints,final int theMaxHitPoints, final int theMinDamage, final int theMaxDamage, final double theChanceToHit, final int theAttackSpeed, final double theBlockChance, final String theClassName, final String theCharacterName) {
+		super(theHitPoints,theMaxHitPoints, theMinDamage, theMaxDamage, theChanceToHit, theAttackSpeed);
 		myCharacterName = theCharacterName;
 		myBlockChance = theBlockChance;
 		myClassName = theClassName;
@@ -91,10 +91,13 @@ public abstract class Hero extends DungeonCharacter {
 			if(item.getDescription().equalsIgnoreCase(theItem)) {
 				break;
 			}
+			i++;
 		}
 		
 		Item item = getInventory().get(i);
-		getInventory().remove(i);
+		if(item.isUsable()) {
+			getInventory().remove(i);
+		}
 		return item;
 	}
 	
@@ -103,7 +106,12 @@ public abstract class Hero extends DungeonCharacter {
 		
 		if(theItem.isUsable()) {
 			if(theItem.getType() == 'H') {
-				setHitPoints(getHitPoints() + Utility.randomNumberGen(5,15));
+				int newHealth = getHitPoints() + Utility.randomNumberGen(5,15);
+				if(newHealth >= getMaxHitPoints()) {
+					setHitPoints(getMaxHitPoints());
+				} else {
+					setHitPoints(newHealth);
+				}
 			} else if(theItem.getType() == 'X') {
 				setHitPoints(getHitPoints() - Utility.randomNumberGen(1,20));
 			}
@@ -112,7 +120,23 @@ public abstract class Hero extends DungeonCharacter {
 		}
 	}
 	
-	public boolean attack(final Monster theMonster) {
+	public boolean hasPillars() {
+		int total = 0;
+		
+		for(Item item: getInventory()) {
+			if(item.getType() == 'I' || item.getType() == 'A' || item.getType() == 'E' || item.getType() == 'P') {
+				total++;
+			}
+		}
+		
+		if(total >= 4) {
+			return true;
+		}
+		
+		return false;
+	}
+	
+	public boolean attack(final DungeonCharacter theMonster) {
 		
 		int chanceHit = Utility.randomNumberGen(0,100);
 			
@@ -122,6 +146,42 @@ public abstract class Hero extends DungeonCharacter {
 		}
 			
 		return false;	
+	}
+	
+	public abstract boolean special(final DungeonCharacter theMonster);
+	
+	public String toString() {
+		StringBuilder sb = new StringBuilder();
+		StringBuilder pillars = new StringBuilder();
+		int healCount = 0, visionCount = 0;
+		
+		sb.append("Name: " + getCharacterName());
+		sb.append(System.lineSeparator());
+		sb.append("Hit Points: " + getHitPoints());
+		sb.append(System.lineSeparator());
+		
+		
+		for(Item item: getInventory()) {
+			if(item.getType() == 'H') {
+				healCount++;
+			} 
+			if(item.getType() == 'V') {
+				visionCount++;	
+			}
+			
+			if(item.getType() == 'A' || item.getType() == 'I' || item.getType() == 'E' || item.getType() == 'P') {
+				pillars.append(item.getDescription());
+				pillars.append(System.lineSeparator());
+			}
+		}
+		
+		sb.append("Total Heal Potions: " + healCount);
+		sb.append(System.lineSeparator());
+		sb.append("Total Vision Pottions: "+ visionCount);
+		sb.append(System.lineSeparator());
+		sb.append("Pillars Found:\n" + pillars.toString());
+		
+		return sb.toString();
 	}
 	
 }
