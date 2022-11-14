@@ -2,9 +2,11 @@ package Model;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Random;
 
 public class Dungeon {
 	private final DungeonRoom[][] myDungeon;
+	private final Random r = new Random();
 	
 	public Dungeon() {
 		myDungeon = createDungeon();
@@ -16,68 +18,19 @@ public class Dungeon {
 	
 
 	public DungeonRoom[][] createDungeon() {
-		DungeonRoom[][] d = new DungeonRoom[4][4];
-		MonsterFactory mf =  new MonsterFactory();
-		ItemFactory If = new ItemFactory();
-		
-		List<Item> items = new ArrayList<Item>();
-		Monster monster = null;
-		DungeonRoom room;
-		
-		
-		room = new DungeonRoom(items, monster, false, true, false, true, false);
-		d[0][0] = room;
-		
-		monster = mf.createMonster("Ogre");
-		items.add(If.createItem("heal"));
-		
-		room = new DungeonRoom(items, monster, true, false, false, true, false);
-		d[1][0] = room;
-		
-		monster = null;
-		items = new ArrayList<Item>();
-		items.add(If.createItem("heal"));
-		room = new DungeonRoom(items, monster, false, true, false, true, false);
-		d[2][0] = room;
-		
-		items = new ArrayList<Item>();
-		items.add(If.createItem("heal"));
-		items.add(If.createItem("encapsulation"));
-		room = new DungeonRoom(items, monster, true, false, false, true, false);
-		d[3][0] = room;
-		
-		items = new ArrayList<Item>();
-		monster = mf.createMonster("gremlin");
-		room = new DungeonRoom(items, monster, false, false, true, true, false);
-		d[0][1] = room;
-		
-		items = new ArrayList<Item>();
-		items.add(If.createItem("heal"));
-		room = new DungeonRoom(items, monster, false, true, true, true, false);
-		d[1][1] = room;
-		
-		items = new ArrayList<Item>();
-		items.add(If.createItem("heal"));
-		monster = null;
-		room = new DungeonRoom(items, monster, true,  false, true, true, false);
-		d[2][1] = room;
-		
-		items = new ArrayList<Item>();
-		room = new DungeonRoom(items, monster, false, false, true, true, false);
-		d[3][1] = room;
-		
-		items = new ArrayList<Item>();
-		room = new DungeonRoom(items, monster, false, true, true, true, false);
-		d[0][2] = room;
-		
-		items = new ArrayList<Item>();
-		room = new DungeonRoom(items, monster, true, false, true, true, false);
-		d[1][2] = room;
-		
-		items = new ArrayList<Item>();
-		room = new DungeonRoom(items, monster, false, false, true, true, false);
-		d[2][2] = room;
-		
+		DungeonRoom[][] d = new DungeonRoom[5][5];
+		for (int i = 0; i < 5; i++) {
+			for (int j = 0; j < 5; j++) {
+				List<Item> items = new ArrayList<Item>();
+				if (r.nextDouble() < 0.1) {
+					items.add(new Item('H', "Health Potion", true));
+				}
+				if (r.nextDouble() < 0.1) {
+					items.add(new Item('V', "Vision Potion", true));
+				}
+				d[i][j] = new DungeonRoom(items, null, i > 0, i < 4, j > 0, j < 4);
+			}
+		}
 		items = new ArrayList<Item>();
 		room = new DungeonRoom(items, monster, false, false, true, true, false);
 		d[3][2] = room;
