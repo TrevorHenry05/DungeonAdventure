@@ -12,22 +12,11 @@ public class Thief extends Hero {
 	public boolean special(final DungeonCharacter  theMonster) {
 		int chance = Utility.randomNumberGen(0,100);
 		
-		if(chance < 40) {
-			theMonster.takeDamage(Utility.randomNumberGen(getMinDamage(),getMaxDamage()));
-			System.out.println("Rewarded Extra attack");
-			if(this.attack(theMonster)) {
-				System.out.println("Extra attack succesful");
-			} else {
-				System.out.println("Extra attack unsuccesful");
-			}
+		if(chance < 80) {
+			attack(theMonster);
 			return true;
 		} 
-		if ( chance < 80 && chance >= 40) {
-			this.attack(theMonster);
-			return true;
-		}
 		
 		return false;
-		
 	}
 }

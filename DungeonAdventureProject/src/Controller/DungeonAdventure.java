@@ -6,17 +6,18 @@ import Model.Dungeon;
 import Model.DungeonRoom;
 import Model.Hero;
 import Model.Monster;
+import Utility.Utility;
 import View.View;
 
 public class DungeonAdventure {
 
 	public static void main(String[] args) {
-		// TODO Auto-generated method stub
 		Scanner in = new Scanner(System.in);
 		View v = new View();
 		
+		v.displayHowToPlay();
 		//display hero creation prompt
-		Hero hero = v.start();
+		Hero hero = v.heroName();
 		//create dungeon
 		Dungeon dungeon = new Dungeon();
 		System.out.println(dungeon.toString());
@@ -54,6 +55,8 @@ public class DungeonAdventure {
 					break;
 				}
 			}
+			
+			v.displayOptions(hero, dungeon);
 			
 			moveHero(hero,dungeon, v.displayMoveOptions(getHeroCurrRoom(hero,dungeon)));
 					
@@ -98,15 +101,21 @@ public class DungeonAdventure {
 		double attacks = theHero.getAttackSpeed() / theMonster.getAttackSpeed();	
 		View v = new View();
 		
+		//figure out number of hero attacks
 		int heroAttacks = (int) Math.round(attacks);
 		if(heroAttacks < 1) {
 			heroAttacks = 1;
 		}
 		
-		for(int i = 0; i < heroAttacks; i++) {
+		//Hero attacks
+		while(heroAttacks > 0) {
+			//Get type of attack user wants
 			String attack = v.displayHeroAttacks();
+			
+			//if User wants a normal attack
 			int monsterHealth = theMonster.getHitPoints();
 			if(attack.equalsIgnoreCase("normal")) {
+				//if normal succeeded
 				if(theHero.attack(theMonster)) {
 					v.displayText("The attack succeeded and you dealt " + (monsterHealth - theMonster.getHitPoints()) + " damage. Monsters current health " + theMonster.getHitPoints());
 					monsterHealth = theMonster.getHitPoints();
@@ -115,40 +124,77 @@ public class DungeonAdventure {
 						v.displayText("The monster attempted to heal and healed " + (theMonster.getHitPoints() - monsterHealth) + " health points. Monsters current health " + theMonster.getHitPoints() + "\n");
 					} else {
 						return;
-					}	
+					}
+				//if normal failed
 				} else {
 					v.displayText("Your normal attack failed to land\n");
 				}
 			}
 			
+			//if user wants a special attack
 			if(attack.equalsIgnoreCase("special")) {
+				//if the hero is a priestess
 				if(theHero.getClassName().equalsIgnoreCase("priestess")) {
 					int heroHealth = theHero.getHitPoints();
 					theHero.special(theHero);
 					v.displayText("Your heal succeeded in healing " + (theHero.getHitPoints() - heroHealth) + " health points. Your current health is " + theHero.getHitPoints());				
-				} else {
+				//else if hero is a thief
+				} else if (theHero.getClassName().equalsIgnoreCase("thief")) {
+					//if special succeeded
 					if(theHero.special(theMonster)) {
 						v.displayText("The special attack succeeded and you dealt " + (monsterHealth - theMonster.getHitPoints()) + " damage. Monsters current health " + theMonster.getHitPoints());
+						int chance = Utility.randomNumberGen(0,100);				
+						//if rewarded extra attack
+						if(chance < 40) {
+							heroAttacks++;
+							v.displayText("Your special has rewarded you an extra attack in the turn!");
+						}
+						
+						//if monster is alive heal
 						monsterHealth = theMonster.getHitPoints();
 						if(theMonster.isAlive()) {
 							theMonster.heal();
 							v.displayText("The monster attempted to heal and healed " + (theMonster.getHitPoints() - monsterHealth) + " health points. Monsters current health " + theMonster.getHitPoints());
+						//else dead so return
 						} else {
 							return;
 						}
+					//else special failed
+					} else {
+						v.displayText("Your special attack failed to land");
+					}
+				//else any hero that does'nt have unique specials
+				} else {
+					//if special succeeded
+					if(theHero.special(theMonster)) {
+						v.displayText("The special attack succeeded and you dealt " + (monsterHealth - theMonster.getHitPoints()) + " damage. Monsters current health " + theMonster.getHitPoints());
+						monsterHealth = theMonster.getHitPoints();
+						//if monster still alive try heal
+						if(theMonster.isAlive()) {
+							theMonster.heal();
+							v.displayText("The monster attempted to heal and healed " + (theMonster.getHitPoints() - monsterHealth) + " health points. Monsters current health " + theMonster.getHitPoints() + "\n");
+						//else dead so return
+						} else {
+							return;
+						}
+					//else special failed
 					} else {
 						v.displayText("Your special attack failed to land");
 					}
 				}
 			}
 			
+			heroAttacks--;			
 		}
 		
+		//monsters attack
 		v.displayText("\nIts the " + theMonster.getMonsterType() + " turn to attack");
 		int heroHealth = theHero.getHitPoints();
+		//if attack succeeded
 		if(theMonster.attack(theHero)) {
 			v.displayText("The " + theMonster.getMonsterType() + " succesfuly landed an attack.");
 			v.displayText("You lost " + (heroHealth - theHero.getHitPoints()) + " health points. Your current health " + theHero.getHitPoints() + "\n");
+		//else attack failed
 		} else {
 			v.displayText("The " + theMonster.getMonsterType() + " failed in landing an attack\n");
 		}	
