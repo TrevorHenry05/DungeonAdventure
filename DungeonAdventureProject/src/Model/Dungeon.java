@@ -15,6 +15,7 @@ public class Dungeon {
 		return myDungeon;
 	}
 	
+
 	public DungeonRoom[][] createDungeon() {
 		DungeonRoom[][] d = new DungeonRoom[4][4];
 		MonsterFactory mf =  new MonsterFactory();
@@ -114,9 +115,10 @@ public class Dungeon {
 		
 
 		return d;
-	}
+
+}
 	
-	public static boolean isMazeTraversible(final DungeonRoom[][] theDungeon) {
+  public static boolean isMazeTraversible(final DungeonRoom[][] theDungeon) {
 		return isMazeTraversible(theDungeon, 0, 0, "");
 	}
 	
