@@ -1,8 +1,15 @@
 package Model;
 
+import java.io.Serializable;
 
-public abstract class DungeonCharacter {
+public abstract class DungeonCharacter implements Serializable {
 	 
+
+
+	/**
+	 * 
+	 */
+	private static final long serialVersionUID = 1L;
 	private int myHitPoints;
 	private final double myChanceToHit;
 	private final int myMinDamage;

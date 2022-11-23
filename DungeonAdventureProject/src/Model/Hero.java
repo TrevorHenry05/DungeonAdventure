@@ -7,6 +7,11 @@ import Utility.Utility;
 
 public abstract class Hero extends DungeonCharacter {
 	
+	/**
+	 * 
+	 */
+	private static final long serialVersionUID = 1L;
+	
 	private final String myCharacterName;
 	private final double myBlockChance;
 	private final String myClassName;
@@ -35,10 +40,7 @@ public abstract class Hero extends DungeonCharacter {
 		return myCharacterName;
 }
 	
-	public double getBlockChance() {
-		
-		int chanceBlock = Utility.randomNumberGen(0,100);
-		
+	public double getBlockChance() {		
 		return myBlockChance;
 	}
 	
@@ -87,11 +89,19 @@ public abstract class Hero extends DungeonCharacter {
 	public Item removeItemFromInventory(final String theItem) {
 		int i = 0;
 		
+		if(getInventory().size() == 0) {
+			return null;
+		}
+		
 		for(Item item: getInventory()) {
 			if(item.getDescription().equalsIgnoreCase(theItem)) {
 				break;
 			}
 			i++;
+		}
+		
+		if(i >= (getInventory().size())) {
+			return null;
 		}
 		
 		Item item = getInventory().get(i);
@@ -101,8 +111,10 @@ public abstract class Hero extends DungeonCharacter {
 		return item;
 	}
 	
-	public void useItem(final Item theItem) {
-		
+	public boolean useItem(final Item theItem) {
+		if(theItem == null) {
+			return false;
+		}
 		
 		if(theItem.isUsable()) {
 			if(theItem.getType() == 'H') {
@@ -112,12 +124,16 @@ public abstract class Hero extends DungeonCharacter {
 				} else {
 					setHitPoints(newHealth);
 				}
+			} else if(theItem.getType() == 'V') {
+				return true;
 			} else if(theItem.getType() == 'X') {
 				setHitPoints(getHitPoints() - Utility.randomNumberGen(1,20));
 			}
 		} else {
 			System.out.println("Item not usable");
 		}
+		
+		return false;
 	}
 	
 	public boolean hasPillars() {
