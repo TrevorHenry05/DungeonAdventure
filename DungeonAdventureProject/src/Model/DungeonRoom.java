@@ -1,8 +1,14 @@
 package Model;
 
+import java.io.Serializable;
 import java.util.List;
 
-public class DungeonRoom {
+public class DungeonRoom implements Serializable{
+	
+	/**
+	 * 
+	 */
+	private static final long serialVersionUID = 1L;
 	
 	private List<Item> myItemsInRoom;
 	private char[][] myRoom;
@@ -13,8 +19,9 @@ public class DungeonRoom {
 	private final boolean myEast;
 	private final boolean myEntrance;
 	private final boolean myExit;
+	private boolean myRoomChecked;
 	
-	public DungeonRoom(final List<Item> theItemsInRoom, final Monster theMonster, final boolean theNorth, final boolean theSouth, final boolean theWest, final boolean theEast, final boolean theExit, final boolean theEntrance) {
+	public DungeonRoom(final List<Item> theItemsInRoom, final Monster theMonster, final boolean theNorth, final boolean theSouth, final boolean theWest, final boolean theEast, final boolean theExit, final boolean theEntrance, final boolean theRoomChecked) {
 		myItemsInRoom = theItemsInRoom;		
 		myMonster = theMonster;
 		myNorth = theNorth;
@@ -23,11 +30,16 @@ public class DungeonRoom {
 		myEast = theEast;
 		myExit = theExit;
 		myEntrance = theEntrance;
+		myRoomChecked = theRoomChecked;
 		myRoom = createRoom();
 	}
 	
 	public void setRoom() {
 		myRoom = createRoom();
+	}
+	
+	public void setRoomChecked(final boolean theRoomChecked) {
+		myRoomChecked = theRoomChecked;
 	}
 	
 	public Monster getMonster() {
@@ -66,35 +78,8 @@ public class DungeonRoom {
 		return myEast;
 	}
 	
-	public void addItem(final Item theItem) {
-		getItemsInRoom().add(theItem);
-	}
-	
-	public String removeItemsFromRoom(final Hero theHero) {		
-		StringBuilder sb = new StringBuilder();
-		
-		for(Item item: getItemsInRoom()) {
-			if(item.getType() == 'X') {
-				theHero.useItem(item);
-				sb.append("You encoutered a trap!\n");
-			}
-			if (item.getType() == 'A' || item.getType() == 'I' || item.getType() == 'E' || item.getType() == 'P') {
-				sb.append("You obtained the " + item.getDescription() + "!\n");
-				theHero.addItemToInventory(item);
-				if(theHero.hasPillars()) {
-					sb.append("You have found all the pillars, now just make it to the exit!\n");
-				}
-			} 
-			if(item.getType() == 'H') {
-			sb.append("You obtained a " + item.getDescription() + " potion\n");
-			theHero.addItemToInventory(item);
-			}
-		}
-		
-		getItemsInRoom().clear();
-		setRoom();
-		
-		return sb.toString();
+	public boolean isChecked() {
+		return myRoomChecked;
 	}
 	
 	public boolean isMonster() {
@@ -104,6 +89,46 @@ public class DungeonRoom {
 		
 		return true;
 	}
+	
+	public void setMonster(final Monster theMonster) {
+		myMonster = theMonster;
+	}
+	
+	public void addItem(final Item theItem) {
+		getItemsInRoom().add(theItem);
+	}
+	
+	
+	public String removeItemsFromRoom(final Hero theHero) {		
+		StringBuilder sb = new StringBuilder();
+		
+		for(Item item: getItemsInRoom()) {
+			if(item.getType() == 'X') {
+				int currHeroHealth = theHero.getHitPoints();
+				theHero.useItem(item);				
+				sb.append("You encoutered a trap!\n");
+				sb.append("You lost " + (currHeroHealth - theHero.getHitPoints()) + " health to the trap.\n");
+			}
+			if (item.getType() == 'A' || item.getType() == 'I' || item.getType() == 'E' || item.getType() == 'P') {
+				sb.append("You obtained the " + item.getDescription() + "!\n");
+				theHero.addItemToInventory(item);
+				if(theHero.hasPillars()) {
+					sb.append("You have found all the pillars, now just make it to the exit!\n");
+				}
+			} 
+			if(item.getType() == 'H' || item.getType() == 'V') {
+			sb.append("You obtained a " + item.getDescription() + " potion\n");
+			theHero.addItemToInventory(item);
+			}
+			
+		}
+		
+		getItemsInRoom().clear();
+		setRoom();
+		
+		return sb.toString();
+	}
+	
 	
 	public char[][] createRoom() {
 		char[][] room = new char[3][3];

@@ -5,6 +5,11 @@ import Utility.Utility;
 public class Warrior extends Hero{
 
 	
+	/**
+	 * 
+	 */
+	private static final long serialVersionUID = 1L;
+
 	public Warrior(final String theCharacterName) {
 		super(125,125,35,60, 0.8, 4, 0.2, "Warrior", theCharacterName);
 	}
