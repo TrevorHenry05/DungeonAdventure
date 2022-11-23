@@ -4,6 +4,11 @@ import Utility.Utility;
 
 public class Monster extends DungeonCharacter {
 	
+	/**
+	 * 
+	 */
+	private static final long serialVersionUID = 1L;
+	
 	private final double myHealChance;
 	private final int myHealMin;
 	private final int myHealMax;

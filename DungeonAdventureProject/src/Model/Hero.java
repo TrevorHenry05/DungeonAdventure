@@ -7,6 +7,11 @@ import Utility.Utility;
 
 public abstract class Hero extends DungeonCharacter {
 	
+	/**
+	 * 
+	 */
+	private static final long serialVersionUID = 1L;
+	
 	private final String myCharacterName;
 	private final double myBlockChance;
 	private final String myClassName;
@@ -35,10 +40,7 @@ public abstract class Hero extends DungeonCharacter {
 		return myCharacterName;
 }
 	
-	public double getBlockChance() {
-		
-		int chanceBlock = Utility.randomNumberGen(0,100);
-		
+	public double getBlockChance() {		
 		return myBlockChance;
 	}
 	

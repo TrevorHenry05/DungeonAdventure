@@ -4,6 +4,11 @@ import Utility.Utility;
 
 public class Thief extends Hero {
 	
+	/**
+	 * 
+	 */
+	private static final long serialVersionUID = 1L;
+
 	public Thief(final String theCharacterName) {
 		super(75, 75, 20, 40, 0.8, 6, 0.4, "Thief", theCharacterName);
 	}
