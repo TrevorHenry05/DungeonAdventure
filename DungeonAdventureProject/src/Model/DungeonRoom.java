@@ -1,8 +1,14 @@
 package Model;
 
+import java.io.Serializable;
 import java.util.List;
 
-public class DungeonRoom {
+public class DungeonRoom implements Serializable{
+	
+	/**
+	 * 
+	 */
+	private static final long serialVersionUID = 1L;
 	
 	private List<Item> myItemsInRoom;
 	private char[][] myRoom;
@@ -76,9 +82,22 @@ public class DungeonRoom {
 		return myRoomChecked;
 	}
 	
+	public boolean isMonster() {
+		if(getMonster() == null) {
+			return false;
+		}
+		
+		return true;
+	}
+	
+	public void setMonster(final Monster theMonster) {
+		myMonster = theMonster;
+	}
+	
 	public void addItem(final Item theItem) {
 		getItemsInRoom().add(theItem);
 	}
+	
 	
 	public String removeItemsFromRoom(final Hero theHero) {		
 		StringBuilder sb = new StringBuilder();
@@ -110,13 +129,6 @@ public class DungeonRoom {
 		return sb.toString();
 	}
 	
-	public boolean isMonster() {
-		if(getMonster() == null) {
-			return false;
-		}
-		
-		return true;
-	}
 	
 	public char[][] createRoom() {
 		char[][] room = new char[3][3];

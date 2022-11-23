@@ -1,5 +1,6 @@
 package View;
 
+import java.io.File;
 import java.util.Scanner;
 
 import Model.Dungeon;
@@ -25,6 +26,68 @@ public class View {
 		System.out.println("\nInventory: When you view the inventory you will be shown your health, heal/vision potions, and pillars found and you will be given the option either use an item or go back\n"
 				+ "to the options menu. You are only able to use items if you have them.");
 		System.out.println("\nDeveloper Options: When in the options menu enter dungeon to view the whole dungeon.\n");
+	}
+	
+	public boolean displayMainMenu() {
+		System.out.println("Would you like to create a new game(create) or load a save game(load):");
+		String answer = INPUT.next();
+		
+		while(!(answer.equalsIgnoreCase("create") || answer.equalsIgnoreCase("load"))) {
+			System.out.println("PLease enter a valid option");
+			answer = INPUT.next();
+		}
+		
+		if(answer.equalsIgnoreCase("create")) {
+			return true;
+		}
+		
+		return false;
+	}
+	
+	public String displayLoadSave() {
+		String currDirectory = System.getProperty("user.dir");
+		String saveGameDir = currDirectory + "\\SaveGames";
+		File folder = new File(saveGameDir);
+		File[] listOfFiles = folder.listFiles();
+		System.out.println("\nList of save Games:");
+
+		for (int i = 0; i < listOfFiles.length; i++) {
+			  if (listOfFiles[i].isFile()) {
+				String file = listOfFiles[i].getName();
+			    System.out.println(file.substring(0, file.length() - 4));
+			  } 
+		}
+		
+		System.out.println("\nEnter the name of a save you want to load:");
+		String save = INPUT.next();
+		save = saveGameDir + "\\" + save + ".ser";
+		File tmpDir = new File(save);
+		while(!tmpDir.exists()) {
+			System.out.println("Enter a valid save game:");
+			save = INPUT.next();
+			save = saveGameDir + "\\" + save + ".ser";
+			tmpDir = new File(save);
+		}
+		
+		
+		return save;
+	}
+	
+	public String displaySaveGame() {
+		System.out.println("\nWhat do you want the name of the save to be?");
+		return INPUT.next();
+	}
+	
+	public String displayOverWrite() {
+		System.out.println("\nWould you like to overwrite this file(yes or no):");
+		String answer = INPUT.next();
+		
+		while(!(answer.equalsIgnoreCase("yes") || answer.equalsIgnoreCase("no"))) {
+			System.out.println("Not a valid input");
+			answer = INPUT.next();
+		}
+		
+		return answer;
 	}
 	
 	public Hero heroName() {
@@ -110,21 +173,24 @@ public class View {
 		System.out.println(theString);
 	}
 	
-	public void displayOptions(final Hero theHero, final Dungeon theDungeon) {
-		System.out.println("\nWould you like move on(move), or View inventory(inventory):");
+	public boolean displayOptions(final Hero theHero, final Dungeon theDungeon) {
+		System.out.println("\nWould you like move on(move), or View inventory(inventory), or Save game and exit(save):");
 		String choice = INPUT.next();
 		
 		if(choice.equalsIgnoreCase("inventory")) {
 			System.out.println(theHero.toString());
 			displayInventory(theHero, theDungeon);
+			return false;
 		} else if(choice.equalsIgnoreCase("dungeon")) {
 			System.out.println("\nDungeon:\n" + theDungeon.toString());
-			displayOptions(theHero, theDungeon);
+			return displayOptions(theHero, theDungeon);
 		} else if(choice.equalsIgnoreCase("move")) {
-			return;
+			return false;
+		} else if(choice.equalsIgnoreCase("save")) {
+			return true;
 		} else {
 			System.out.println("\nNot a valid option. Please enter a valid option\n");
-			displayOptions(theHero, theDungeon);
+			return displayOptions(theHero, theDungeon);
 		}
 	}
 	
@@ -167,13 +233,28 @@ public class View {
 				System.out.println("\nEnter a valid item to use");
 				displayInventory(theHero, theDungeon);
 			}
-		} else if(choice.equalsIgnoreCase("options")) {
-			
+		} else if(choice.equalsIgnoreCase("options")) {	
 			v.displayOptions(theHero, theDungeon);
 		} else {
 			System.out.println("\nNot a valid option. Please enter a valid option\n");
 			displayInventory(theHero, theDungeon);
 		}
+	}
+	
+	public boolean displayKeepPlayingOptions() {
+		System.out.println("Do you want to restart(restart) or would you like to quit(quit)?");
+		String answer = INPUT.next();
+		
+		while(!(answer.equalsIgnoreCase("restart") || answer.equalsIgnoreCase("quit"))) {
+			System.out.println("Not a valid option please enter a new one");
+			answer = INPUT.next();
+		}
+		
+		if(answer.equalsIgnoreCase("restart")) {
+			return true;
+		}
+		
+		return false;
 	}
 	
 	public void displayDungeonNearHero(final Dungeon theDungeon, final Hero theHero) {
