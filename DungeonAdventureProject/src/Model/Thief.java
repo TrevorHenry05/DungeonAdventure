@@ -18,7 +18,7 @@ public class Thief extends Hero {
 		int chance = Utility.randomNumberGen(0,100);
 		
 		if(chance < 80) {
-			attack(theMonster);
+			theMonster.takeDamage(Utility.randomNumberGen(getMinDamage(), getMaxDamage()));
 			return true;
 		} 
 		
