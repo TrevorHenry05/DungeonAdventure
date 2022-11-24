@@ -42,6 +42,7 @@ public class DungeonAdventure {
 				//dungeon from save game
 				dungeon = dsg.getDungeon();
 			}
+			v.displayText(dungeon.toString());
 			
 			//display hero info
 			v.displayText("Hello " + hero.getCharacterName() + " the " + hero.getClassName() + ", are you ready to adventure the dungeon?");
@@ -151,8 +152,7 @@ public class DungeonAdventure {
 		      e.printStackTrace();
 		}
 		
-		try
-        {   
+		try {   
             FileOutputStream file = new FileOutputStream(saveFile);
             ObjectOutputStream out = new ObjectOutputStream(file);
               
@@ -163,8 +163,7 @@ public class DungeonAdventure {
   
         }
           
-        catch(IOException ex)
-        {
+        catch(IOException ex) {
             System.out.println("IOException");
         }
 	}
@@ -244,7 +243,7 @@ public class DungeonAdventure {
 						v.displayText("The special attack succeeded and you dealt " + (monsterHealth - theMonster.getHitPoints()) + " damage. Monsters current health " + theMonster.getHitPoints());
 						int chance = Utility.randomNumberGen(0,100);				
 						//if rewarded extra attack
-						if(chance < 40) {
+						if(chance < 50) {
 							heroAttacks++;
 							v.displayText("Your special has rewarded you an extra attack in the turn!");
 						}

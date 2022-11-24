@@ -96,8 +96,18 @@ public class DungeonRoom implements Serializable{
 	
 	public void addItem(final Item theItem) {
 		getItemsInRoom().add(theItem);
+		myRoom = createRoom();
 	}
 	
+	public boolean containsPillar() {
+		for(Item item: getItemsInRoom()) {
+			if(item.getType() == 'A' || item.getType() == 'I' || item.getType() == 'E' || item.getType() == 'P') {
+				return true;
+			}
+		}
+		
+		return false;
+	}
 	
 	public String removeItemsFromRoom(final Hero theHero) {		
 		StringBuilder sb = new StringBuilder();
