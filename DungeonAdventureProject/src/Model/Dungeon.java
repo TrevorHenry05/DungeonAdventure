@@ -57,7 +57,7 @@ public class Dungeon implements Serializable {
 					
 					//add monster
 					chance = Utility.randomNumberGen(0, 100);
-					if(chance < 5) {
+					if(chance < 15) {
 						chance = Utility.randomNumberGen(0, 100);
 						if(chance < 33) {
 							monster = mf.createMonster("ogre");
@@ -93,7 +93,7 @@ public class Dungeon implements Serializable {
 		
 		placePillars(d);
 		
-		if(isMazeTraversible(d) && isPillarsObtainable(d)) {
+		if(isMazeTraversable(d) && isPillarsObtainable(d)) {
 			return d;
 		}
 
@@ -174,12 +174,12 @@ public class Dungeon implements Serializable {
 		
 	}
 	
-	public static boolean isMazeTraversible(final DungeonRoom[][] theDungeon) {
+	public static boolean isMazeTraversable (final DungeonRoom[][] theDungeon) {
 		resetRoomsChecked(theDungeon);
-		return isMazeTraversible(theDungeon, 0, 0, "");
+		return isMazeTraversable(theDungeon, 0, 0, "");
 	}
 	
-	public static boolean isMazeTraversible(final DungeonRoom[][] theDungeon, final int theX, final int theY, final String theDir) {
+	public static boolean isMazeTraversable(final DungeonRoom[][] theDungeon, final int theX, final int theY, final String theDir) {
 		DungeonRoom room = theDungeon[theX][theY];
 		boolean north = false, south = false, east = false, west = false;
 		
@@ -190,19 +190,19 @@ public class Dungeon implements Serializable {
 		} else {
 			room.setRoomChecked(true);
 			if(!(theDir.equalsIgnoreCase("north")) && room.isNorth()) {				
-				north = isMazeTraversible(theDungeon, theX -  1, theY, "south");
+				north = isMazeTraversable(theDungeon, theX -  1, theY, "south");
 			}
 			
 			if(!(theDir.equalsIgnoreCase("east")) && room.isEast()) {
-				east = isMazeTraversible(theDungeon, theX, theY + 1, "west");
+				east = isMazeTraversable(theDungeon, theX, theY + 1, "west");
 			}
 			
 			if(!(theDir.equalsIgnoreCase("west")) && room.isWest()) {
-				west = isMazeTraversible(theDungeon, theX, theY - 1, "east");
+				west = isMazeTraversable(theDungeon, theX, theY - 1, "east");
 			}
 			
 			if(!(theDir.equalsIgnoreCase("south")) && room.isSouth()) {
-				south = isMazeTraversible(theDungeon, theX + 1, theY, "north");
+				south = isMazeTraversable(theDungeon, theX + 1, theY, "north");
 			}
 			
 			
