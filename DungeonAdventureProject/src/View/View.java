@@ -1,6 +1,7 @@
 package View;
 
 import java.io.File;
+import java.util.Arrays;
 import java.util.Scanner;
 
 import Model.Dungeon;
@@ -98,7 +99,7 @@ public class View {
 	}
 	
 	public static Hero heroSelection(final String theName) {
-		System.out.println("What hero class do you want to be (Warrior, Thief, or Priestess):");
+		System.out.println("What hero class do you want to be (Warrior, Thief, berserker, or Priestess):");
 		
 		String heroType = INPUT.next();
 		
@@ -124,8 +125,11 @@ public class View {
 	public String displayMoveOptions(final DungeonRoom theRoom) {
 		 StringBuilder sb = new StringBuilder();
 		 sb.append("\nYou look around the room and see that there are doors to go");
+		 String[] options = new String[4];
+		 int i = 0;
 		 
 		 if(theRoom.isNorth()) {
+			 options[i++] = "up";
 			 sb.append(" Up");
 			 if(theRoom.isWest() || theRoom.isEast() || theRoom.isSouth()) {
 				 sb.append(" or");
@@ -133,6 +137,7 @@ public class View {
 		 }
 		 
 		 if(theRoom.isWest()) {
+			 options[i++] = "left";
 			 sb.append(" Left");
 			 if(theRoom.isEast() || theRoom.isSouth()) {
 				 sb.append(" or");
@@ -140,6 +145,7 @@ public class View {
 		 }
 		 
 		 if(theRoom.isEast()) {
+			 options[i++] = "right";
 			 sb.append(" Right");
 			 if(theRoom.isSouth()) {
 				 sb.append(" or");
@@ -147,22 +153,25 @@ public class View {
 		 }
 		 
 		 if(theRoom.isSouth()) {
+			 options[i] = "down";
 			 sb.append(" Down");
 		 }
 		 
 		 System.out.println(sb.toString());
 		 
-		 return getMoveOption(theRoom);
+		 return getMoveOption(theRoom, options);
 	}
 	
-	public String getMoveOption(final DungeonRoom theRoom) {
+	public String getMoveOption(final DungeonRoom theRoom, final String[] theOptions) {
 		System.out.println("Which way would you like to go:");
 		String direction = INPUT.next();
+		direction.toLowerCase();
 		
 		
-		while(!(direction.equalsIgnoreCase("up") || direction.equalsIgnoreCase("down") || direction.equalsIgnoreCase("left") || direction.equalsIgnoreCase("right"))) {
+		while(!(Arrays.asList(theOptions).contains(direction))) {
 			System.out.println("Invalid direction please enter another");
 			direction = INPUT.next();
+			direction.toLowerCase();
 		}
 		
 		return direction;

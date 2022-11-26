@@ -96,6 +96,7 @@ public class DungeonRoom implements Serializable{
 	
 	public void addItem(final Item theItem) {
 		getItemsInRoom().add(theItem);
+		//update room representation after adding item
 		myRoom = createRoom();
 	}
 	

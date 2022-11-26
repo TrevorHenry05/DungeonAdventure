@@ -19,16 +19,22 @@ public abstract class Hero extends DungeonCharacter {
 	private int myCurrX;
 	private int myCurrY;
 	private DungeonRoom myCurrRoom;
+	private int myAttacks;
 	
-	public Hero(final int theHitPoints,final int theMaxHitPoints, final int theMinDamage, final int theMaxDamage, final double theChanceToHit, final int theAttackSpeed, final double theBlockChance, final String theClassName, final String theCharacterName) {
+	public Hero(final int theHitPoints,final int theMaxHitPoints, final int theMinDamage, final int theMaxDamage, final double theChanceToHit, final int theAttackSpeed, final double theBlockChance, final String theClassName, final String theCharacterName, final int theAttacks) {
 		super(theHitPoints,theMaxHitPoints, theMinDamage, theMaxDamage, theChanceToHit, theAttackSpeed);
 		myCharacterName = theCharacterName;
 		myBlockChance = theBlockChance;
 		myClassName = theClassName;
 		myCurrX = 0;
 		myCurrY = 0;
+		myAttacks = theAttacks;
 		myInventory = new ArrayList<Item>();
 		myCurrRoom = null;	
+	}
+	
+	public int getAttacks() {
+		return myAttacks;
 	}
 	
 	public List<Item> getInventory() {
@@ -70,6 +76,10 @@ public abstract class Hero extends DungeonCharacter {
 	
 	public void setCurrRoom(final DungeonRoom theCurrRoom) {
 		myCurrRoom = theCurrRoom;
+	}
+	
+	public void setAttacks(final int theAttacks) {
+		myAttacks = theAttacks;
 	}
 	
 	public void addItemToInventory(final Item theItem) {
