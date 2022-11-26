@@ -3,6 +3,7 @@ package Model;
 import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.List;
+
 import Utility.Utility;
 
 public class Dungeon implements Serializable {
@@ -12,7 +13,9 @@ public class Dungeon implements Serializable {
 	 */
 	private static final long serialVersionUID = 1L;
 
+
 	private final DungeonRoom[][] myDungeon;
+	private final Random r = new Random();
 	
 	public Dungeon() {
 		myDungeon = createDungeon();
@@ -22,6 +25,7 @@ public class Dungeon implements Serializable {
 		return myDungeon;
 	}
 	
+
 
 	private static DungeonRoom[][] createDungeon() {
 		DungeonRoom[][] d = new DungeonRoom[7][7];
@@ -137,8 +141,7 @@ public class Dungeon implements Serializable {
 		int chance = Utility.randomNumberGen(0, 100);
 		if(chance < 70) {
 			return true;
-		}
-		
+		}	
 		return false;
 	}
 	
