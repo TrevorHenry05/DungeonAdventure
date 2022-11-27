@@ -7,6 +7,11 @@ import Utility.Utility;
 
 public abstract class Hero extends DungeonCharacter {
 	
+	/**
+	 * 
+	 */
+	private static final long serialVersionUID = 1L;
+	
 	private final String myCharacterName;
 	private final double myBlockChance;
 	private final String myClassName;
@@ -14,16 +19,22 @@ public abstract class Hero extends DungeonCharacter {
 	private int myCurrX;
 	private int myCurrY;
 	private DungeonRoom myCurrRoom;
+	private int myAttacks;
 	
-	public Hero(final int theHitPoints,final int theMaxHitPoints, final int theMinDamage, final int theMaxDamage, final double theChanceToHit, final int theAttackSpeed, final double theBlockChance, final String theClassName, final String theCharacterName) {
+	public Hero(final int theHitPoints,final int theMaxHitPoints, final int theMinDamage, final int theMaxDamage, final double theChanceToHit, final int theAttackSpeed, final double theBlockChance, final String theClassName, final String theCharacterName, final int theAttacks) {
 		super(theHitPoints,theMaxHitPoints, theMinDamage, theMaxDamage, theChanceToHit, theAttackSpeed);
 		myCharacterName = theCharacterName;
 		myBlockChance = theBlockChance;
 		myClassName = theClassName;
 		myCurrX = 0;
 		myCurrY = 0;
+		myAttacks = theAttacks;
 		myInventory = new ArrayList<Item>();
 		myCurrRoom = null;	
+	}
+	
+	public int getAttacks() {
+		return myAttacks;
 	}
 	
 	public List<Item> getInventory() {
@@ -35,10 +46,7 @@ public abstract class Hero extends DungeonCharacter {
 		return myCharacterName;
 }
 	
-	public double getBlockChance() {
-		
-		int chanceBlock = Utility.randomNumberGen(0,100);
-		
+	public double getBlockChance() {		
 		return myBlockChance;
 	}
 	
@@ -70,6 +78,10 @@ public abstract class Hero extends DungeonCharacter {
 		myCurrRoom = theCurrRoom;
 	}
 	
+	public void setAttacks(final int theAttacks) {
+		myAttacks = theAttacks;
+	}
+	
 	public void addItemToInventory(final Item theItem) {
 		getInventory().add(theItem);
 	}
@@ -87,11 +99,19 @@ public abstract class Hero extends DungeonCharacter {
 	public Item removeItemFromInventory(final String theItem) {
 		int i = 0;
 		
+		if(getInventory().size() == 0) {
+			return null;
+		}
+		
 		for(Item item: getInventory()) {
 			if(item.getDescription().equalsIgnoreCase(theItem)) {
 				break;
 			}
 			i++;
+		}
+		
+		if(i >= (getInventory().size())) {
+			return null;
 		}
 		
 		Item item = getInventory().get(i);
@@ -101,8 +121,10 @@ public abstract class Hero extends DungeonCharacter {
 		return item;
 	}
 	
-	public void useItem(final Item theItem) {
-		
+	public boolean useItem(final Item theItem) {
+		if(theItem == null) {
+			return false;
+		}
 		
 		if(theItem.isUsable()) {
 			if(theItem.getType() == 'H') {
@@ -112,12 +134,16 @@ public abstract class Hero extends DungeonCharacter {
 				} else {
 					setHitPoints(newHealth);
 				}
+			} else if(theItem.getType() == 'V') {
+				return true;
 			} else if(theItem.getType() == 'X') {
 				setHitPoints(getHitPoints() - Utility.randomNumberGen(1,20));
 			}
 		} else {
 			System.out.println("Item not usable");
 		}
+		
+		return false;
 	}
 	
 	public boolean hasPillars() {
@@ -136,7 +162,7 @@ public abstract class Hero extends DungeonCharacter {
 		return false;
 	}
 	
-	public boolean attack(final Monster theMonster) {
+	public boolean attack(final DungeonCharacter theMonster) {
 		
 		int chanceHit = Utility.randomNumberGen(0,100);
 			
@@ -146,6 +172,42 @@ public abstract class Hero extends DungeonCharacter {
 		}
 			
 		return false;	
+	}
+	
+	public abstract boolean special(final DungeonCharacter theMonster);
+	
+	public String toString() {
+		StringBuilder sb = new StringBuilder();
+		StringBuilder pillars = new StringBuilder();
+		int healCount = 0, visionCount = 0;
+		
+		sb.append("Name: " + getCharacterName());
+		sb.append(System.lineSeparator());
+		sb.append("Hit Points: " + getHitPoints());
+		sb.append(System.lineSeparator());
+		
+		
+		for(Item item: getInventory()) {
+			if(item.getType() == 'H') {
+				healCount++;
+			} 
+			if(item.getType() == 'V') {
+				visionCount++;	
+			}
+			
+			if(item.getType() == 'A' || item.getType() == 'I' || item.getType() == 'E' || item.getType() == 'P') {
+				pillars.append(item.getDescription());
+				pillars.append(System.lineSeparator());
+			}
+		}
+		
+		sb.append("Total Heal Potions: " + healCount);
+		sb.append(System.lineSeparator());
+		sb.append("Total Vision Pottions: "+ visionCount);
+		sb.append(System.lineSeparator());
+		sb.append("Pillars Found:\n" + pillars.toString());
+		
+		return sb.toString();
 	}
 	
 }

@@ -11,6 +11,9 @@ public class HeroFactory {
 		if(theHero.equalsIgnoreCase("thief")) {
 			return new Thief(theName);
 		}
+		if(theHero.equalsIgnoreCase("berserker")) {
+			return new Berserker(theName);
+		}
 		
 		throw new IllegalArgumentException("Illegal Argument Entered"); 
 	}

@@ -1,8 +1,14 @@
 package Model;
 
+import java.io.Serializable;
 import java.util.List;
 
-public class DungeonRoom {
+public class DungeonRoom implements Serializable{
+	
+	/**
+	 * 
+	 */
+	private static final long serialVersionUID = 1L;
 	
 	private List<Item> myItemsInRoom;
 	private char[][] myRoom;
@@ -11,16 +17,22 @@ public class DungeonRoom {
 	private final boolean mySouth;
 	private final boolean myWest;
 	private final boolean myEast;
-	private final boolean myFinalRoom;
+	private final boolean myEntrance;
+	private final boolean myExit;
+	private boolean myRoomChecked;
 	private static char[] PILLARS = new char[]{'A', 'E', 'I', 'P'};
 	
-	public DungeonRoom(final List<Item> theItemsInRoom, final Monster theMonster, final boolean theNorth, final boolean theSouth, final boolean theWest, final boolean theEast, final boolean theFinalRoom) {
+	public DungeonRoom(final List<Item> theItemsInRoom, final Monster theMonster, final boolean theNorth, final boolean theSouth, final boolean theWest, final boolean theEast, final boolean theExit, final boolean theEntrance, final boolean theRoomChecked) {
 		myItemsInRoom = theItemsInRoom;		
 		myMonster = theMonster;
 		myNorth = theNorth;
 		mySouth = theSouth;
 		myWest = theWest;
 		myEast = theEast;
+		myExit = theExit;
+		myEntrance = theEntrance;
+		myRoomChecked = theRoomChecked;
+		myRoom = createRoom();
 		myFinalRoom = theFinalRoom;
 		createRoom();
 		checkForMonster();
@@ -37,14 +49,18 @@ public class DungeonRoom {
 //		checkForMonster();
 		this(theItemsInRoom, theMonster, theNorth, theSouth, theWest, theEast, false);
 	}
-//	public void setRoom() {
-//		myRoom = createRoom();
-//	}
+	public void setRoom() {
+		myRoom = createRoom();
+	}
 	private void checkForMonster() {
 		if (this.isMonster()) {
 			myItemsInRoom.add(new Item('M', myMonster.getMonsterType(), false, false));
 		}
 	}
+	public void setRoomChecked(final boolean theRoomChecked) {
+		myRoomChecked = theRoomChecked;
+	}
+	
 	public Monster getMonster() {
 		return myMonster;
 	}
@@ -53,8 +69,12 @@ public class DungeonRoom {
 		return myItemsInRoom;
 	}
 	
-	public boolean isFinalRoom() {
-		return myFinalRoom;
+	public boolean isExit() {
+		return myExit;
+	}
+	
+	public boolean isEntrance() {
+		return myEntrance;
 	}
 	
 	public char[][] getRoom() {
@@ -78,49 +98,8 @@ public class DungeonRoom {
 		return myEast;
 	}
 	
-	public void addItem(final Item theItem) {
-		myItemsInRoom.add(theItem);
-	}
-	
-	public void removeItemsFromRoom(final Hero theHero) {	
-		for(Item item: getItemsInRoom()) {
-//			if(item.getType() == 'X') {
-//				theHero.useItem(item);
-//				System.out.println("You encoutered a trap!");
-//			}
-//			if (item.getType() == 'A' || item.getType() == 'I' || item.getType() == 'E' || item.getType() == 'P') {
-//				System.out.println("You obtained the " + item.getDescription() + "!");
-//				theHero.addItemToInventory(item);
-//				if(theHero.hasPillars()) {
-//					System.out.println("You have found all the pillars, now just make it to the exit!");
-//				}
-//			} 
-//			if(item.getType() == 'H') {
-//				System.out.println("You obtained a " + item.getDescription() + " potion");
-//				theHero.addItemToInventory(item);
-//			}
-			if (item.isCollectable()) {
-				theHero.addItemToInventory(item);
-				for (char i : PILLARS) {
-					if  (i == item.getType()) {
-						System.out.println("You obtained the " + item.getDescription() + "!");
-						break;
-					}
-					if (i == 'P') {
-						System.out.println("You obtained " + item.getDescription());
-					}
-				}
-			} else {
-				if (item.isUsable()) {
-					theHero.useItem(item);
-				}
-			}
-			if (theHero.hasPillars()) {
-				System.out.println("You have found all the pillars! Now just make it to the exit!");
-			}
-		}
-		myItemsInRoom.clear();
-		createRoom();
+	public boolean isChecked() {
+		return myRoomChecked;
 	}
 	
 	public boolean isMonster() {
@@ -131,6 +110,63 @@ public class DungeonRoom {
 		return true;
 	}
 	
+	public void setMonster(final Monster theMonster) {
+		myMonster = theMonster;
+	}
+	
+	public void addItem(final Item theItem) {
+		getItemsInRoom().add(theItem);
+		//update room representation after adding item
+		myRoom = createRoom();
+	}
+	
+	public boolean containsPillar() {
+		for(Item item: getItemsInRoom()) {
+			if(item.getType() == 'A' || item.getType() == 'I' || item.getType() == 'E' || item.getType() == 'P') {
+				return true;
+			}
+		}
+		
+		return false;
+	}
+	
+	public String removeItemsFromRoom(final Hero theHero) {		
+		StringBuilder sb = new StringBuilder();
+		
+		for(Item item: getItemsInRoom()) {
+			if(item.getType() == 'X') {
+				int currHeroHealth = theHero.getHitPoints();
+				theHero.useItem(item);				
+				sb.append("You encoutered a trap!\n");
+				sb.append("You lost " + (currHeroHealth - theHero.getHitPoints()) + " health to the trap.\n");
+			}
+			if (item.getType() == 'A' || item.getType() == 'I' || item.getType() == 'E' || item.getType() == 'P') {
+				sb.append("You obtained the " + item.getDescription() + "!\n");
+				theHero.addItemToInventory(item);
+				if(theHero.hasPillars()) {
+					sb.append("You have found all the pillars, now just make it to the exit!\n");
+				}
+			} 
+			if(item.getType() == 'H' || item.getType() == 'V') {
+			sb.append("You obtained a " + item.getDescription() + " potion\n");
+			theHero.addItemToInventory(item);
+			}
+			
+		}
+		
+		getItemsInRoom().clear();
+		setRoom();
+	
+	public boolean isMonster() {
+		if(getMonster() == null) {
+			return false;
+		}
+		
+		return sb.toString();
+	}
+	
+	
+	public char[][] createRoom() {
 	public void createRoom() {
 		char[][] room = new char[3][3];
 		
@@ -139,14 +175,19 @@ public class DungeonRoom {
 		room[0][2] = '*';
 		room[2][0] = '*';
 		room[2][2] = '*';
-			
-		//add what items are in the room
-		if(myItemsInRoom.size() == 1) {		
-			room[1][1] = myItemsInRoom.get(0).getType();
-		} else if(myItemsInRoom.size() == 0) {
-			room[1][1] = ' ';
-		} else {
-			room[1][1] = 'S';
+		if(isEntrance()) {
+			room[1][1] = 'I';
+		} else if(isExit()) {
+			room[1][1] = 'O';
+		} else {			
+			//add what items are in the room
+			if(getItemsInRoom().size() == 1) {		
+				room[1][1] = getItemsInRoom().get(0).getType();
+			} else if( getItemsInRoom().size() == 0) {
+				room[1][1] = ' ';
+			} else {
+				room[1][1] = 'M';
+			}
 		}
 		
 		//Add north wall or door

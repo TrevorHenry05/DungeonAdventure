@@ -6,6 +6,10 @@ public class ItemFactory {
 			return new Item('H', "Healing Potion", true, true);
 		}
 		
+		if(theItem.equalsIgnoreCase("vision")) {
+			return new Item('V', "Vision", true);
+		}
+		
 		if(theItem.equalsIgnoreCase("abstraction")) {
 			return new Item('A', "Pillar of Abstraction", false, true);
 		}

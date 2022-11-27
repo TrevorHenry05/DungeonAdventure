@@ -1,8 +1,15 @@
 package Model;
 
+import java.io.Serializable;
 
-public abstract class DungeonCharacter {
+public abstract class DungeonCharacter implements Serializable {
 	 
+
+
+	/**
+	 * 
+	 */
+	private static final long serialVersionUID = 1L;
 	private int myHitPoints;
 	private final double myChanceToHit;
 	private final int myMinDamage;
@@ -28,7 +35,11 @@ public abstract class DungeonCharacter {
 	}
 	
 	public void setHitPoints(final int theHitPoints) {
-		myHitPoints = theHitPoints;
+		if(theHitPoints < 0) {
+			myHitPoints = 0;
+		} else {
+			myHitPoints = theHitPoints;
+		}
 	}
 	
 	public double getChanceToHit() {
