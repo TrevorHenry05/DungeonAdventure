@@ -20,11 +20,12 @@ class DungeonTest {
 	void setUp() {
 		d = new Dungeon();
 		DungeonRoom[][] h = new DungeonRoom[2][2];
-		h[0][0] = new DungeonRoom(new ArrayList<Item>(), null, false, true, false, true);
-		h[0][1] = new DungeonRoom(new ArrayList<Item>(), null, false, true, true, false);
-		h[1][0] = new DungeonRoom(new ArrayList<Item>(), null, true, false, false, true);
-		h[1][1] = new DungeonRoom(new ArrayList<Item>(), null, true, false, true, false);
+		h[0][0] = new DungeonRoom(new ArrayList<Item>(), null, false, true, false, false, false, false, false);
+		h[0][1] = new DungeonRoom(new ArrayList<Item>(), null, false, true, true, false, false, false, false);
+		h[1][0] = new DungeonRoom(new ArrayList<Item>(), null, true, false, false, false, false, false, false);
+		h[1][1] = new DungeonRoom(new ArrayList<Item>(), null, true, false, true, false, false, false, false);
 		e = new Dungeon(h);
+		
 	}
 	@Test
 	void testGetDungeon() {
@@ -35,6 +36,10 @@ class DungeonTest {
 	void testToString() {
 		System.out.println(e.toString());
 		//assertEquals("******\r\n* || *\r\n*-**-*\r\n*-**-*\r\n* || *\r\n******", e.toString());
+	}
+	@Test
+	void testIsTraversable() {
+		
 	}
 
 }

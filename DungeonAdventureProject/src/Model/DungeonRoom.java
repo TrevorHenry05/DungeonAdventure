@@ -32,12 +32,10 @@ public class DungeonRoom implements Serializable{
 		myExit = theExit;
 		myEntrance = theEntrance;
 		myRoomChecked = theRoomChecked;
-		myRoom = createRoom();
-		myFinalRoom = theFinalRoom;
 		createRoom();
 		checkForMonster();
 	}
-	public DungeonRoom(final List<Item> theItemsInRoom, final Monster theMonster, final boolean theNorth, final boolean theSouth, final boolean theWest, final boolean theEast) {
+//	public DungeonRoom(final List<Item> theItemsInRoom, final Monster theMonster, final boolean theNorth, final boolean theSouth, final boolean theWest, final boolean theEast) {
 //		myItemsInRoom = theItemsInRoom;		
 //		myMonster = theMonster;
 //		myNorth = theNorth;
@@ -47,10 +45,10 @@ public class DungeonRoom implements Serializable{
 //		myFinalRoom = false;
 //		createRoom();
 //		checkForMonster();
-		this(theItemsInRoom, theMonster, theNorth, theSouth, theWest, theEast, false);
-	}
+//		this(theItemsInRoom, theMonster, theNorth, theSouth, theWest, theEast, false);
+//	}
 	public void setRoom() {
-		myRoom = createRoom();
+		createRoom();
 	}
 	private void checkForMonster() {
 		if (this.isMonster()) {
@@ -117,7 +115,7 @@ public class DungeonRoom implements Serializable{
 	public void addItem(final Item theItem) {
 		getItemsInRoom().add(theItem);
 		//update room representation after adding item
-		myRoom = createRoom();
+		createRoom();
 	}
 	
 	public boolean containsPillar() {
@@ -156,17 +154,10 @@ public class DungeonRoom implements Serializable{
 		
 		getItemsInRoom().clear();
 		setRoom();
-	
-	public boolean isMonster() {
-		if(getMonster() == null) {
-			return false;
-		}
-		
 		return sb.toString();
 	}
 	
 	
-	public char[][] createRoom() {
 	public void createRoom() {
 		char[][] room = new char[3][3];
 		

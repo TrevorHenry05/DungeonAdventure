@@ -3,6 +3,7 @@ package Model;
 import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Random;
 
 import Utility.Utility;
 
@@ -19,6 +20,9 @@ public class Dungeon implements Serializable {
 	
 	public Dungeon() {
 		myDungeon = createDungeon();
+	}
+	public Dungeon(final DungeonRoom[][] theDungeon) {
+		myDungeon = theDungeon;
 	}
 	
 	public DungeonRoom[][] getDungeon() {

@@ -18,23 +18,25 @@ class DungeonRoomTest {
 	private DungeonRoom a;
 	private DungeonRoom b;
 	private DungeonRoom c;
+	private DungeonRoom d;
 	private MonsterFactory m = new MonsterFactory();
-	private Hero d = new Warrior("John");
+	private Hero h = new Warrior("John");
 	private ItemFactory i = new ItemFactory();
 	@BeforeEach
 	void setUp() {
-		a = new DungeonRoom(new ArrayList<Item>(), null, false, false, false, false);
+		a = new DungeonRoom(new ArrayList<Item>(), null, false, false, false, false, false, false, false);
 		a.addItem(i.createItem("heal"));
-		b = new DungeonRoom(new ArrayList<Item>(), m.createMonster("ogre"), true, true, true, true, true);
-		c = new DungeonRoom(new ArrayList<Item>(), null, true, false, true, false, false);
+		b = new DungeonRoom(new ArrayList<Item>(), null, true, true, true, true, true, true, true);
+		c = new DungeonRoom(new ArrayList<Item>(), null, true, false, true, false, false, false, true);
 		c.addItem(i.createItem("trap"));
 		c.addItem(i.createItem("vision"));
 		c.addItem(i.createItem("abstraction"));
+		d = new DungeonRoom(new ArrayList<Item>(), m.createMonster("ogre"), false, true, false, true, false, false, false);
 	}
 	@Test
 	void testIsMonster() {
 		assertFalse(a.isMonster());
-		assertTrue(b.isMonster());
+		assertTrue(d.isMonster());
 		assertFalse(c.isMonster());
 	}
 	@Test
@@ -63,18 +65,18 @@ class DungeonRoomTest {
 		assertFalse(a.isEast());
 		assertTrue(b.isEast());
 	}
-	@Test
-	void testIsFinalRoom() {
-		assertFalse(a.isFinalRoom());
-		assertTrue(b.isFinalRoom());
-	}
+//	@Test
+//	void testIsFinalRoom() {
+//		assertFalse(a.isFinalRoom());
+//		assertTrue(b.isFinalRoom());
+//	}
 	@Test
 	void testToString() {
 		//a.addItem(new Item('H', "Heal", true));
 		//System.out.println(a.getItemsInRoom().get(0).getType());
 		assertEquals("***\r\n*H*\r\n***\r\n", a.toString());
-		assertEquals("*-*\r\n|M|\r\n*-*\r\n", b.toString());
-		assertEquals("*-*\r\n|S*\r\n***\r\n", c.toString());
+		assertEquals("*-*\r\n|I|\r\n*-*\r\n", b.toString());
+		assertEquals("*-*\r\n|M*\r\n***\r\n", c.toString());
 	}
 	@Test
 	void testGetRoom() {
@@ -92,9 +94,20 @@ class DungeonRoomTest {
 	}
 	@Test
 	void testRemoveItemFromRoom() {
-		c.removeItemsFromRoom(d);
+		c.removeItemsFromRoom(h);
 		assertEquals(0, c.getItemsInRoom().size());
-		assertEquals(2, d.getInventory().size());
+		assertEquals(2, h.getInventory().size());
+	}
+	@Test
+	void testIsChecked() {
+		assertFalse(a.isChecked());
+		assertTrue(b.isChecked());
+		assertTrue(c.isChecked());
+	}
+	@Test
+	void testContainsPillar() {
+		assertFalse(a.containsPillar());
+		assertTrue(c.containsPillar());
 	}
 
 }
