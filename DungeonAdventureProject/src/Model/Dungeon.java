@@ -16,7 +16,9 @@ public class Dungeon {
 		return myDungeon;
 	}
 	
-
+	public Dungeon(DungeonRoom[][] d) {
+		myDungeon = d;
+	}
 	public DungeonRoom[][] createDungeon() {
 		DungeonRoom[][] d = new DungeonRoom[5][5];
 		for (int i = 0; i < 5; i++) {
@@ -97,7 +99,9 @@ public class Dungeon {
 			sb.append(row2.toString());
 			sb.append(System.lineSeparator());
 			sb.append(row3.toString());
-			sb.append(System.lineSeparator());
+			if (i < myDungeon.length - 1) {
+				sb.append(System.lineSeparator());
+			}
 		}
 		
 		return sb.toString();
