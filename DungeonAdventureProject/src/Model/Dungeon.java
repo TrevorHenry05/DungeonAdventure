@@ -89,6 +89,8 @@ public class Dungeon implements Serializable {
 						west = isWestDoor(d,i,j);
 						room = new DungeonRoom(items, monster, north, south, west, east, true, false, false);
 					}
+
+
 				}
 					
 				d[i][j] = room;	
@@ -281,7 +283,9 @@ public class Dungeon implements Serializable {
 			sb.append(row2.toString());
 			sb.append(System.lineSeparator());
 			sb.append(row3.toString());
-			sb.append(System.lineSeparator());
+			if (i < myDungeon.length - 1) {
+				sb.append(System.lineSeparator());
+			}
 		}
 		
 		return sb.toString();

@@ -20,6 +20,7 @@ public class DungeonRoom implements Serializable{
 	private final boolean myEntrance;
 	private final boolean myExit;
 	private boolean myRoomChecked;
+	private static char[] PILLARS = new char[]{'A', 'E', 'I', 'P'};
 	
 	public DungeonRoom(final List<Item> theItemsInRoom, final Monster theMonster, final boolean theNorth, final boolean theSouth, final boolean theWest, final boolean theEast, final boolean theExit, final boolean theEntrance, final boolean theRoomChecked) {
 		myItemsInRoom = theItemsInRoom;		
@@ -32,12 +33,30 @@ public class DungeonRoom implements Serializable{
 		myEntrance = theEntrance;
 		myRoomChecked = theRoomChecked;
 		myRoom = createRoom();
+		myFinalRoom = theFinalRoom;
+		createRoom();
+		checkForMonster();
 	}
-	
+	public DungeonRoom(final List<Item> theItemsInRoom, final Monster theMonster, final boolean theNorth, final boolean theSouth, final boolean theWest, final boolean theEast) {
+//		myItemsInRoom = theItemsInRoom;		
+//		myMonster = theMonster;
+//		myNorth = theNorth;
+//		mySouth = theSouth;
+//		myWest = theWest;
+//		myEast = theEast;
+//		myFinalRoom = false;
+//		createRoom();
+//		checkForMonster();
+		this(theItemsInRoom, theMonster, theNorth, theSouth, theWest, theEast, false);
+	}
 	public void setRoom() {
 		myRoom = createRoom();
 	}
-	
+	private void checkForMonster() {
+		if (this.isMonster()) {
+			myItemsInRoom.add(new Item('M', myMonster.getMonsterType(), false, false));
+		}
+	}
 	public void setRoomChecked(final boolean theRoomChecked) {
 		myRoomChecked = theRoomChecked;
 	}
@@ -59,6 +78,7 @@ public class DungeonRoom implements Serializable{
 	}
 	
 	public char[][] getRoom() {
+		createRoom();
 		return myRoom;
 	}
 	
@@ -136,12 +156,18 @@ public class DungeonRoom implements Serializable{
 		
 		getItemsInRoom().clear();
 		setRoom();
+	
+	public boolean isMonster() {
+		if(getMonster() == null) {
+			return false;
+		}
 		
 		return sb.toString();
 	}
 	
 	
 	public char[][] createRoom() {
+	public void createRoom() {
 		char[][] room = new char[3][3];
 		
 		//add corners of room
@@ -149,9 +175,8 @@ public class DungeonRoom implements Serializable{
 		room[0][2] = '*';
 		room[2][0] = '*';
 		room[2][2] = '*';
-		
 		if(isEntrance()) {
-			room[1][1] = 'i';
+			room[1][1] = 'I';
 		} else if(isExit()) {
 			room[1][1] = 'O';
 		} else {			
@@ -193,15 +218,16 @@ public class DungeonRoom implements Serializable{
 			room[2][1] = '*';
 		}
 		
-		return room;
+		myRoom = room;
 	}
 	
 	public String toString() {
+		createRoom();
 		StringBuilder sb = new StringBuilder();
 		
-		for(int i = 0; i < getRoom().length; i++) {
-			for(int j = 0; j < getRoom()[i].length; j++) {
-				sb.append(getRoom()[i][j]);
+		for(int i = 0; i < myRoom.length; i++) {
+			for(int j = 0; j < myRoom[i].length; j++) {
+				sb.append(myRoom[i][j]);
 			}
 			sb.append(System.lineSeparator());
 		}
