@@ -6,14 +6,20 @@ import View.View;
 public class Thief extends Hero {
 	
 	/**
-	 * 
+	 * Serialization ID
 	 */
 	private static final long serialVersionUID = 1L;
-
+	/**
+	 * Constructor for the Thief class
+	 * @param theCharacterName
+	 */
 	public Thief(final String theCharacterName) {
 		super(75, 75, 20, 40, 0.8, 6, 0.4, "Thief", theCharacterName, 0);
 	}
-	
+	/**
+	 * The chance the thief lands a special attack
+	 * @param theMonster
+	 */
 	@Override
 	public boolean special(final DungeonCharacter  theMonster) {
 		int chance = Utility.randomNumberGen(0,100);

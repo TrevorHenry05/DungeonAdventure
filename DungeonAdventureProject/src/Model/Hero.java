@@ -8,19 +8,62 @@ import Utility.Utility;
 public abstract class Hero extends DungeonCharacter {
 	
 	/**
-	 * 
+	 * Serialization ID
 	 */
 	private static final long serialVersionUID = 1L;
-	
+	/**
+	 * @serial
+	 * Stores character name inputed by user
+	 */
 	private final String myCharacterName;
+	/**
+	 * Contains the chance for the user to block an attack
+	 * @serial
+	 */
 	private final double myBlockChance;
+	/**
+	 * Stores the name of the class that is selected by the user
+	 * @serial
+	 */
 	private final String myClassName;
+	/**
+	 * Stores the user's collected items and updates when new items are collected or collected items are used
+	 * @serial
+	 */
 	private List<Item> myInventory;
+	/**
+	 * Stores the current x value of the user in the 2D dungeon array and is updated when the user moves
+	 * @serial
+	 */
 	private int myCurrX;
+	/**
+	 * Stores the current y value of the user in the 2D dungeon array and is updated when the user moves
+	 * @serial
+	 */
 	private int myCurrY;
+	/**
+	 * Keeps track of the room represented by the 2d array that the user is currently in
+	 * @serial
+	 */
 	private DungeonRoom myCurrRoom;
+	/**
+	 * @serial
+	 */
 	private int myAttacks;
 	
+	/**
+	 * Constructor for Hero class
+	 * @param theHitPoints
+	 * @param theMaxHitPoints
+	 * @param theMinDamage
+	 * @param theMaxDamage
+	 * @param theChanceToHit
+	 * @param theAttackSpeed
+	 * @param theBlockChance
+	 * @param theClassName
+	 * @param theCharacterName
+	 * @param theAttacks
+	 */
 	public Hero(final int theHitPoints,final int theMaxHitPoints, final int theMinDamage, final int theMaxDamage, final double theChanceToHit, final int theAttackSpeed, final double theBlockChance, final String theClassName, final String theCharacterName, final int theAttacks) {
 		super(theHitPoints,theMaxHitPoints, theMinDamage, theMaxDamage, theChanceToHit, theAttackSpeed);
 		myCharacterName = theCharacterName;
@@ -32,60 +75,101 @@ public abstract class Hero extends DungeonCharacter {
 		myInventory = new ArrayList<Item>();
 		myCurrRoom = null;	
 	}
-	
+	/**
+	 * getter for the user's attacks
+	 * @return How many attacks the user has left per turn
+	 */
 	public int getAttacks() {
 		return myAttacks;
 	}
-	
+	/**
+	 * getter for the user's current inventory
+	 * @return The list of items the user currently has
+	 */
 	public List<Item> getInventory() {
 		return myInventory;
 	}
-	
+	/**
+	 * getter for the user's inputed name
+	 * @return The name the user had
+	 */
 	public String getCharacterName() {
-
 		return myCharacterName;
 }
-	
+	/**
+	 * getter for the percentage chance the character has to block an attack
+	 * @return Obtains the chance the user has to block the attack
+	 */
 	public double getBlockChance() {		
 		return myBlockChance;
 	}
-	
+	/**
+	 * getter for the class name that the user selected
+	 * @return The name of the class the user has selected
+	 */
 	public String getClassName() {
 		return myClassName;
 	}
-	
+	/**
+	 * getter for the user's current X value in the array
+	 * @return the current X position of the user
+	 */
 	public int getCurrX() {
 		return myCurrX;
 	}
-	
+	/**
+	 * getter for the user's current Y value in the array
+	 * @return the current Y position of the user
+	 */
 	public int getCurrY() {
 		return myCurrY;
 	}
-	
+	/**
+	 * getter for the user's current room in the dungeon array
+	 * @return the current room the user is in
+	 */
 	public DungeonRoom getCurrRoom() {
 		return myCurrRoom;
 	}
-	
+	/**
+	 * sets the user's X value and stores it in the current X
+	 * @param theCurrX
+	 */
 	public void setCurrX(final int theCurrX) {
 		myCurrX = theCurrX;
 	}
-	
+	/**
+	 * Sets the user's Y value and stores it in the current Y
+	 * @param theCurrY
+	 */
 	public void setCurrY(final int theCurrY) {
 		myCurrY = theCurrY;
 	}
-	
+	/**
+	 * Sets the current room the user is in
+	 * @param theCurrRoom
+	 */
 	public void setCurrRoom(final DungeonRoom theCurrRoom) {
 		myCurrRoom = theCurrRoom;
 	}
-	
+	/**
+	 * Sets the attacks the character has to use in the turn
+	 * @param theAttacks
+	 */
 	public void setAttacks(final int theAttacks) {
 		myAttacks = theAttacks;
 	}
-	
+	/**
+	 * adds the collected item to the inventory array
+	 * @param theItem
+	 */
 	public void addItemToInventory(final Item theItem) {
 		getInventory().add(theItem);
 	}
-	
+	/**
+	 * Uses string builder to generate a string to represent what items the user is currently holding
+	 * @return a text representation of the items the user is currently holding
+	 */
 	public String showInventory() {
 		StringBuilder sb = new StringBuilder();
 		for(Item item: getInventory()) {
@@ -95,7 +179,11 @@ public abstract class Hero extends DungeonCharacter {
 		
 		return sb.toString();
 	}
-	
+	/**
+	 * Updates inventory by removing items that are used
+	 * @param theItem
+	 * @return the used item
+	 */
 	public Item removeItemFromInventory(final String theItem) {
 		int i = 0;
 		
@@ -120,7 +208,11 @@ public abstract class Hero extends DungeonCharacter {
 		}
 		return item;
 	}
-	
+	/**
+	 * Performs the action of the item the user is currently using
+	 * @param theItem
+	 * @return the used item
+	 */
 	public boolean useItem(final Item theItem) {
 		if(theItem == null) {
 			return false;
@@ -145,7 +237,10 @@ public abstract class Hero extends DungeonCharacter {
 		
 		return false;
 	}
-	
+	/**
+	 * Checks if the room has a pillar in it
+	 * @return true or false
+	 */
 	public boolean hasPillars() {
 		int total = 0;
 		
@@ -161,7 +256,11 @@ public abstract class Hero extends DungeonCharacter {
 		
 		return false;
 	}
-	
+	/**
+	 * 
+	 * @param theMonster
+	 * @return if the attack was successful
+	 */
 	public boolean attack(final DungeonCharacter theMonster) {
 		
 		int chanceHit = Utility.randomNumberGen(0,100);
@@ -175,7 +274,9 @@ public abstract class Hero extends DungeonCharacter {
 	}
 	
 	public abstract boolean special(final DungeonCharacter theMonster);
-	
+	/**
+	 * Creates a string that represents the items in the room
+	 */
 	public String toString() {
 		StringBuilder sb = new StringBuilder();
 		StringBuilder pillars = new StringBuilder();
