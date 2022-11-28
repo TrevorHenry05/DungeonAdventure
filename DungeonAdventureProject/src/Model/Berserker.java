@@ -21,7 +21,6 @@ public class Berserker extends Hero{
 	 * The chance of the berserker's special ability being successful
 	 * @param theMonster
 	 */
-	
 	@Override
 	public boolean special(final DungeonCharacter  theMonster) {
 		int chance = Utility.randomNumberGen(0,100);  

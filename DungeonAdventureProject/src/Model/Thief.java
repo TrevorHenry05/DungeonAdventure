@@ -16,6 +16,7 @@ public class Thief extends Hero {
 	public Thief(final String theCharacterName) {
 		super(75, 75, 20, 40, 0.8, 6, 0.4, "Thief", theCharacterName, 0);
 	}
+	
 	/**
 	 * The chance the thief lands a special attack
 	 * @param theMonster

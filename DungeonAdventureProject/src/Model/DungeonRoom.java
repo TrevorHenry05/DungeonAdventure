@@ -73,12 +73,14 @@ public class DungeonRoom implements Serializable{
 		myRoomChecked = theRoomChecked;
 		myRoom = createRoom();
 	}
+	
 	/**
 	 * Creating the room
 	 */
 	public void setRoom() {
 		myRoom = createRoom();
 	}
+	
 	/**
 	 * Determines if the room has already been checked
 	 * @param theRoomChecked
@@ -86,6 +88,7 @@ public class DungeonRoom implements Serializable{
 	public void setRoomChecked(final boolean theRoomChecked) {
 		myRoomChecked = theRoomChecked;
 	}
+	
 	/**
 	 * getter for the monster
 	 * @return myMonster
@@ -93,6 +96,7 @@ public class DungeonRoom implements Serializable{
 	public Monster getMonster() {
 		return myMonster;
 	}
+	
 	/**
 	 * getter for the items in the room
 	 * @return myItemsInRoom
@@ -100,6 +104,7 @@ public class DungeonRoom implements Serializable{
 	public List<Item> getItemsInRoom() {
 		return myItemsInRoom;
 	}
+	
 	/**
 	 * Returns if the room is the exit
 	 * @return myExit
@@ -107,6 +112,7 @@ public class DungeonRoom implements Serializable{
 	public boolean isExit() {
 		return myExit;
 	}
+	
 	/**
 	 * Returns if the room is the entrance
 	 * @return myEntrance
@@ -114,6 +120,7 @@ public class DungeonRoom implements Serializable{
 	public boolean isEntrance() {
 		return myEntrance;
 	}
+	
 	/**
 	 * getter for the room method
 	 * @return myRoom
@@ -121,6 +128,7 @@ public class DungeonRoom implements Serializable{
 	public char[][] getRoom() {
 		return myRoom;
 	}
+	
 	/**
 	 * Returns if there is a door north
 	 * @return myNorth
@@ -128,6 +136,7 @@ public class DungeonRoom implements Serializable{
 	public boolean isNorth() {
 		return myNorth;
 	}
+	
 	/**
 	 * Returns if there is a door south
 	 * @return mySouth
@@ -135,6 +144,7 @@ public class DungeonRoom implements Serializable{
 	public boolean isSouth() {
 		return mySouth;
 	}
+	
 	/**
 	 * Returns if there is a door west
 	 * @return myWest
@@ -142,6 +152,7 @@ public class DungeonRoom implements Serializable{
 	public boolean isWest() {
 		return myWest;
 	}
+	
 	/**
 	 * Returns if there is a door east
 	 * @return myEast
@@ -149,6 +160,7 @@ public class DungeonRoom implements Serializable{
 	public boolean isEast() {
 		return myEast;
 	}
+	
 	/**
 	 * returns if room has been checked
 	 * @return myRoomChecked
@@ -156,6 +168,7 @@ public class DungeonRoom implements Serializable{
 	public boolean isChecked() {
 		return myRoomChecked;
 	}
+	
 	/**
 	 * Return if there is a monster in the room
 	 * @return true or false if there is a monster
@@ -167,6 +180,7 @@ public class DungeonRoom implements Serializable{
 		
 		return true;
 	}
+	
 	/**
 	 * Places monster in room
 	 * @param theMonster
@@ -174,6 +188,7 @@ public class DungeonRoom implements Serializable{
 	public void setMonster(final Monster theMonster) {
 		myMonster = theMonster;
 	}
+	
 	/**
 	 * Places item in the room
 	 * @param theItem
@@ -183,6 +198,7 @@ public class DungeonRoom implements Serializable{
 		//update room representation after adding item
 		myRoom = createRoom();
 	}
+	
 	/**
 	 * checks if a room contains any of the pillars
 	 * @return true or false
@@ -196,6 +212,7 @@ public class DungeonRoom implements Serializable{
 		
 		return false;
 	}
+	
 	/**
 	 * removes items from room if they have been collected by the user
 	 * @param theHero
@@ -289,6 +306,7 @@ public class DungeonRoom implements Serializable{
 		
 		return room;
 	}
+	
 	/**
 	 * String builder for the room layout and possible items, monsters or pillars in room
 	 */

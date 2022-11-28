@@ -15,10 +15,10 @@ import Model.Monster;
 import View.View;
 
 public class DungeonAdventure {
-/**
- * Contains main logic for the game. Entry point into the game that allows the user to play the game
- * @param args
- */
+	/**
+	 * Contains main logic for the game. Entry point into the game that allows the user to play the game
+	 * @param args
+	 */
 	public static void main(String[] args) {
 		
 		boolean keepPlaying = true, save = false;
@@ -107,6 +107,7 @@ public class DungeonAdventure {
 		
 		v.displayText("\nThanks for playing!");
 	}
+	
 	/**
 	 * Uses the user's current position to determine which room they are in
 	 * @param theHero
@@ -116,6 +117,7 @@ public class DungeonAdventure {
 	public static DungeonRoom getHeroCurrRoom(final Hero theHero, final Dungeon theDungeon) {
 		return theDungeon.getDungeon()[theHero.getCurrX()][theHero.getCurrY()];
 	}
+	
 	/**
 	 * Moves the hero in the direction the user selects
 	 * @param theHero
@@ -141,6 +143,7 @@ public class DungeonAdventure {
 			theHero.setCurrRoom(theDungeon.getDungeon()[theHero.getCurrX()][theHero.getCurrY()]);
 		} 
 	}
+	
 	/**
 	 * Constructor for the save game method, this method will save the game for the user
 	 * @param theDungeon
@@ -184,6 +187,7 @@ public class DungeonAdventure {
             System.out.println("IOException");
         }
 	}
+	
 	/**
 	 * The method to load a game that has been saved
 	 * @param theFile
@@ -215,6 +219,7 @@ public class DungeonAdventure {
 		
 		return dsg;
 	}
+	
 	/**
 	 * The main method to represent any encounters with the monsters the user comes across
 	 * @param theHero
