@@ -51,7 +51,7 @@ public class Dungeon implements Serializable {
 					
 					//add vision
 					chance = Utility.randomNumberGen(0, 100);			
-					if(chance < 10)  {
+					if(chance < 15)  {
 						items.add(If.createItem("vision"));
 					}
 					
@@ -72,6 +72,15 @@ public class Dungeon implements Serializable {
 					west = isWestDoor(d, i, j);
 					south = isSouthDoor(d, i, j);
 					east = isEastDoor(d, i, j);
+					
+					if(!(north) && !(west) && !(south) && !(east)) {
+						chance = Utility.randomNumberGen(0, 100);
+						if (chance < 50) {
+							south = true;
+						} else {
+							east = true;
+						}
+					}
 					
 					room = new DungeonRoom(items, monster, north, south, west, east, false, false, false);
 				} else {

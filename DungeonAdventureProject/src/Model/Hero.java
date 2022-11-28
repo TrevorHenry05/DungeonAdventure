@@ -7,11 +7,8 @@ import Utility.Utility;
 
 public abstract class Hero extends DungeonCharacter {
 	
-	/**
-	 * 
-	 */
+
 	private static final long serialVersionUID = 1L;
-	
 	private final String myCharacterName;
 	private final double myBlockChance;
 	private final String myClassName;
@@ -20,7 +17,7 @@ public abstract class Hero extends DungeonCharacter {
 	private int myCurrY;
 	private DungeonRoom myCurrRoom;
 	private int myAttacks;
-	
+
 	public Hero(final int theHitPoints,final int theMaxHitPoints, final int theMinDamage, final int theMaxDamage, final double theChanceToHit, final int theAttackSpeed, final double theBlockChance, final String theClassName, final String theCharacterName, final int theAttacks) {
 		super(theHitPoints,theMaxHitPoints, theMinDamage, theMaxDamage, theChanceToHit, theAttackSpeed);
 		myCharacterName = theCharacterName;
@@ -173,6 +170,7 @@ public abstract class Hero extends DungeonCharacter {
 			
 		return false;	
 	}
+	
 	
 	public abstract boolean special(final DungeonCharacter theMonster);
 	
