@@ -15,16 +15,27 @@ public class Dungeon implements Serializable {
 
 
 	private final DungeonRoom[][] myDungeon;
+	private final int myRows;
+	private final int myColumns;
 
-	public Dungeon() {
-		myDungeon = createDungeon();
+	public Dungeon(final int theRows, final int theColumns) {
+		myRows = theRows;
+		myColumns = theColumns;
+		myDungeon = createDungeon(theRows, theColumns);
 	}
 	
 	public DungeonRoom[][] getDungeon() {
 		return myDungeon;
 	}
+	
+	public int getRows() {
+		return myRows;
+	}
 
-
+	public int getColumns() {
+		return myColumns;
+	}
+	
 	/**
 	 *Builds a dungeon room by room from top left to bottom right, inserts potions, monsters, and pillars at random
 	 *through out the dungeon. Then checks if the maze is Traversable and you are able to obtain all the pillars, if not creates a new dungeons
@@ -32,8 +43,8 @@ public class Dungeon implements Serializable {
 	 * 
 	 * @return the created array that represents the dungeon
 	 */
-	private static DungeonRoom[][] createDungeon() {
-		DungeonRoom[][] d = new DungeonRoom[7][7];
+	private static DungeonRoom[][] createDungeon(final int theRows, final int theColumns) {
+		DungeonRoom[][] d = new DungeonRoom[theRows][theColumns];
 		MonsterFactory mf =  new MonsterFactory();
 		ItemFactory If = new ItemFactory();
 		
@@ -41,14 +52,14 @@ public class Dungeon implements Serializable {
 		Monster monster;
 		List<Item> items;
 		
-		for(int i = 0; i < d.length; i++) {
-			for(int j = 0; j < d[i].length; j++) {
+		for(int rows = 0; rows < d.length; rows++) {
+			for(int columns = 0; columns < d[rows].length; columns++) {
 				boolean north = false, west = false, east = false, south = false;				
 				monster = null;
 				items = new ArrayList<Item>();
 				room = null;
 				
-				if(!((i == 0 && j == 0) || ((i == (d.length - 1)) && (j == (d[i].length - 1))))) {
+				if(!((rows == 0 && columns == 0) || ((rows == (d.length - 1)) && (columns == (d[rows].length - 1))))) {
 					//add heals
 					int chance = Utility.randomNumberGen(0, 100);
 					if(chance < 10) {
@@ -77,10 +88,10 @@ public class Dungeon implements Serializable {
 						}
 					}
 					
-					north = isNorthDoor(d, i, j);
-					west = isWestDoor(d, i, j);
-					south = isSouthDoor(d, i, j);
-					east = isEastDoor(d, i, j);
+					north = isNorthDoor(d, rows, columns);
+					west = isWestDoor(d, rows, columns);
+					south = isSouthDoor(d, rows, columns);
+					east = isEastDoor(d, rows, columns);
 					
 					if(!(north) && !(west) && !(south) && !(east)) {
 						chance = Utility.randomNumberGen(0, 100);
@@ -93,19 +104,19 @@ public class Dungeon implements Serializable {
 					
 					room = new DungeonRoom(items, monster, north, south, west, east, false, false, false);
 				} else {
-					if(i == 0 && j == 0) {
-						south = isSouthDoor(d, i, j);
-						east = isEastDoor(d, i , j);
+					if(rows == 0 && columns == 0) {
+						south = isSouthDoor(d, rows, columns);
+						east = isEastDoor(d, rows , columns);
 						
 						room = new DungeonRoom(items, monster, north, south, west, east, false, true, false);
 					} else {
-						north = isNorthDoor(d, i, j);
-						west = isWestDoor(d,i,j);
+						north = isNorthDoor(d, rows, columns);
+						west = isWestDoor(d,rows,columns);
 						room = new DungeonRoom(items, monster, north, south, west, east, true, false, false);
 					}
 				}
 					
-				d[i][j] = room;	
+				d[rows][columns] = room;	
 			}
 		}
 		
@@ -115,7 +126,7 @@ public class Dungeon implements Serializable {
 			return d;
 		}
 
-		return createDungeon();
+		return createDungeon(theRows, theColumns);
 	}
 	/**
 	 * Determines if there is a door to the south in the room to the north of the current room
@@ -238,7 +249,7 @@ public class Dungeon implements Serializable {
 	 * @param theDungeon
 	 * @return Helper for isMazeTraversable method
 	 */
-	public static boolean isMazeTraversable (final DungeonRoom[][] theDungeon) {
+	public static boolean isMazeTraversable(final DungeonRoom[][] theDungeon) {
 		resetRoomsChecked(theDungeon);
 		return isMazeTraversable(theDungeon, 0, 0, "");
 	}
@@ -252,7 +263,7 @@ public class Dungeon implements Serializable {
 	 * @param theDir
 	 * @return true if the maze is able to go from start room to exit room, or false if the maze is unable to be completed
 	 */
-	public static boolean isMazeTraversable(final DungeonRoom[][] theDungeon, final int theX, final int theY, final String theDir) {
+	private static boolean isMazeTraversable(final DungeonRoom[][] theDungeon, final int theX, final int theY, final String theDir) {
 		DungeonRoom room = theDungeon[theX][theY];
 		boolean north = false, south = false, east = false, west = false;
 		

@@ -3,9 +3,6 @@ package Model;
 import java.io.Serializable;
 
 public abstract class DungeonCharacter implements Serializable {
-	 
-
-
 	/**
 	 * Serialization ID
 	 */
@@ -136,7 +133,7 @@ public abstract class DungeonCharacter implements Serializable {
 	 * @param theDamage
 	 */
 	public void takeDamage(final int theDamage) {
-		this.setHitPoints(this.getHitPoints() - theDamage);
+		setHitPoints(getHitPoints() - theDamage);
 	}
 	
 		

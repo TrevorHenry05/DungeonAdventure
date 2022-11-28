@@ -68,6 +68,7 @@ public class View {
 			  } 
 		}
 		
+		
 		System.out.println("\nEnter the name of a save you want to load:");
 		String save = INPUT.next();
 		save = saveGameDir + "\\" + save + ".ser";
@@ -106,6 +107,40 @@ public class View {
 		}
 		
 		return answer;
+	}
+	
+	public int displayRows() {
+		int rows;
+		
+		while(true) {
+		    try {
+		        System.out.println("\nHow many rows do you want the dungeon to be: ");
+		        rows = Integer.parseInt(INPUT.next());
+		        break;
+		    }
+		    catch(NumberFormatException e) {
+		        System.out.println("You have not entered an Integer");
+		    }
+		}
+		
+		return rows;
+	}
+	
+	public int displayColumns() {
+		int cols;
+		
+		while(true) {
+		    try {
+		        System.out.println("\nHow many columns do you want the dungeon to be: ");
+		        cols = Integer.parseInt(INPUT.next());
+		        break;
+		    }
+		    catch(NumberFormatException e) {
+		        System.out.println("You have not entered an Integer");
+		    }
+		}
+		
+		return cols;
 	}
 	
 	/**
@@ -196,6 +231,7 @@ public class View {
 		 
 		 return getMoveOption(theRoom, options);
 	}
+	
 	/**
 	 * Prompts the user by asking which way they would like to travel
 	 * 
@@ -238,6 +274,7 @@ public class View {
 	public boolean displayOptions(final Hero theHero, final Dungeon theDungeon) {
 		System.out.println("\nWould you like move on(move), or View inventory(inventory), or Save game and exit(save):");
 		String choice = INPUT.next();
+		
 		
 		if(choice.equalsIgnoreCase("inventory")) {
 			System.out.println(theHero.toString());
@@ -292,7 +329,7 @@ public class View {
 					int heroHealth = theHero.getHitPoints();
 					if(theHero.useItem(useItem)) {
 						System.out.println("\nAfter using the vision potion you are able to see the surrounding rooms.");
-						v.displayDungeonNearHero(theDungeon, theHero);
+						System.out.println(theHero.displayDungeonNearHero(theDungeon));
 						displayInventory(theHero, theDungeon);
 					} else {
 						System.out.println("The heal potion healed you for " + (theHero.getHitPoints() - heroHealth) + " . Current health is " + theHero.getHitPoints() + "\n");
@@ -328,65 +365,9 @@ public class View {
 			answer = INPUT.next();
 		}
 		
-		if(answer.equalsIgnoreCase("restart")) {
-			return true;
-		}
-		
-		return false;
+		return answer.equalsIgnoreCase("restart");
 	}
 	
-	/**
-	 * Displays where the hero is on the map currently and updates when the user moves
-	 * @param theDungeon
-	 * @param theHero
-	 */
-	public void displayDungeonNearHero(final Dungeon theDungeon, final Hero theHero) {
-		StringBuilder sb = new StringBuilder();
-		int x, y;
-		if((theHero.getCurrX() - 1) >= 0) {
-			x = theHero.getCurrX() - 1;
-		} else {
-			x = 0;
-		}
-		
-		if((theHero.getCurrY() - 1) >= 0) {
-			y = theHero.getCurrY() - 1;
-		} else {
-			y = 0;
-		}
-		
-		for(int i = x; ((i < theDungeon.getDungeon().length) && (i < theHero.getCurrX() + 2)); i ++) {
-			StringBuilder row1 = new StringBuilder();
-			StringBuilder row2 = new StringBuilder();
-			StringBuilder row3 = new StringBuilder();
-			for(int j = y; ((j < theDungeon.getDungeon()[i].length) && (j < theHero.getCurrY() + 2)); j++) {
-				row1.append(theDungeon.getDungeon()[i][j].getRoom()[0][0]);
-				row1.append(theDungeon.getDungeon()[i][j].getRoom()[0][1]);
-				row1.append(theDungeon.getDungeon()[i][j].getRoom()[0][2]);
-				if((i == theHero.getCurrX()) && (j == theHero.getCurrY())) {
-					row2.append(theDungeon.getDungeon()[i][j].getRoom()[1][0]);
-					row2.append(theDungeon.getDungeon()[i][j].getRoom()[1][1]);
-					row2.append(theDungeon.getDungeon()[i][j].getRoom()[1][2]);
-				} else {
-					row2.append(theDungeon.getDungeon()[i][j].getRoom()[1][0]);
-					row2.append(theDungeon.getDungeon()[i][j].getRoom()[1][1]);
-					row2.append(theDungeon.getDungeon()[i][j].getRoom()[1][2]);
-				}
-				
-				row3.append(theDungeon.getDungeon()[i][j].getRoom()[2][0]);
-				row3.append(theDungeon.getDungeon()[i][j].getRoom()[2][1]);
-				row3.append(theDungeon.getDungeon()[i][j].getRoom()[2][2]);				
-			}
-			
-			sb.append(row1.toString());
-			sb.append(System.lineSeparator());
-			sb.append(row2.toString());
-			sb.append(System.lineSeparator());
-			sb.append(row3.toString());
-			sb.append(System.lineSeparator());
-		}
-		
-		System.out.println(sb.toString());
-	}
+
 	
 }
