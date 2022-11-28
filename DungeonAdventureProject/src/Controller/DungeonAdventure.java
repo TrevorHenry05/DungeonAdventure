@@ -15,7 +15,10 @@ import Model.Monster;
 import View.View;
 
 public class DungeonAdventure {
-
+/**
+ * Contains main logic for the game. Entry point into the game that allows the user to play the game
+ * @param args
+ */
 	public static void main(String[] args) {
 		
 		boolean keepPlaying = true, save = false;
@@ -104,11 +107,21 @@ public class DungeonAdventure {
 		
 		v.displayText("\nThanks for playing!");
 	}
-	
+	/**
+	 * Uses the user's current position to determine which room they are in
+	 * @param theHero
+	 * @param theDungeon
+	 * @return HeroCurrRoom
+	 */
 	public static DungeonRoom getHeroCurrRoom(final Hero theHero, final Dungeon theDungeon) {
 		return theDungeon.getDungeon()[theHero.getCurrX()][theHero.getCurrY()];
 	}
-
+	/**
+	 * Moves the hero in the direction the user selects
+	 * @param theHero
+	 * @param theDungeon
+	 * @param theDirection
+	 */
 	public static void moveHero(final Hero theHero, final Dungeon theDungeon, final String theDirection) {
 		
 		if(theDirection.equalsIgnoreCase("up")) {
@@ -128,7 +141,12 @@ public class DungeonAdventure {
 			theHero.setCurrRoom(theDungeon.getDungeon()[theHero.getCurrX()][theHero.getCurrY()]);
 		} 
 	}
-	
+	/**
+	 * Constructor for the save game method, this method will save the game for the user
+	 * @param theDungeon
+	 * @param theHero
+	 * @param theFileName
+	 */
 	public static void saveGame(final Dungeon theDungeon, final Hero theHero, final String theFileName) {
 		DungeonSaveGame dsg = new DungeonSaveGame(theDungeon, theHero);
 		String currDirectory = System.getProperty("user.dir");
@@ -166,7 +184,11 @@ public class DungeonAdventure {
             System.out.println("IOException");
         }
 	}
-	
+	/**
+	 * The method to load a game that has been saved
+	 * @param theFile
+	 * @return dsg
+	 */
 	public static DungeonSaveGame loadSaveGame(final String theFile) {
 		DungeonSaveGame dsg = null;
 		
@@ -193,7 +215,11 @@ public class DungeonAdventure {
 		
 		return dsg;
 	}
-	
+	/**
+	 * The main method to represent any encounters with the monsters the user comes across
+	 * @param theHero
+	 * @param theMonster
+	 */
 	public static void encounter(final Hero theHero, final Monster theMonster) {
 		double attacks = theHero.getAttackSpeed() / theMonster.getAttackSpeed();	
 		View v = new View();
