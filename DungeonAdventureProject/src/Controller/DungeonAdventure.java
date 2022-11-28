@@ -22,44 +22,44 @@ public class DungeonAdventure {
 	public static void main(String[] args) {
 		
 		boolean keepPlaying = true, save = false;
-		View v = new View();
+		View view = new View();
 		while(keepPlaying) {
-			v.displayHowToPlay();
+			view.displayHowToPlay();
 			Hero hero = null;
 			Dungeon dungeon = null;
 			
 			
-			if(v.displayMainMenu()) {
+			if(view.displayMainMenu()) {
 				//display hero creation prompt
-				hero = v.heroName();
+				hero = view.heroName();
 				//create dungeon
-				dungeon = new Dungeon();
+				dungeon = new Dungeon(view.displayRows(),view.displayColumns());
 				//set heros current room
 				hero.setCurrRoom(getHeroCurrRoom(hero,dungeon));
 			} else {
 				//get save object
-				DungeonSaveGame dsg = loadSaveGame(v.displayLoadSave());
+				DungeonSaveGame dsg = loadSaveGame(view.displayLoadSave());
 				//hero form save game
 				hero = dsg.getHero();
 				//dungeon from save game
 				dungeon = dsg.getDungeon();
 			}
-			v.displayText(dungeon.toString());
+			//v.displayText(dungeon.toString());
 			
 			//display hero info
-			v.displayText("Hello " + hero.getCharacterName() + " the " + hero.getClassName() + ", are you ready to adventure the dungeon?");
+			view.displayText("Hello " + hero.getCharacterName() + " the " + hero.getClassName() + ", are you ready to adventure the dungeon?");
 			
 			while(hero.isAlive() && (!(getHeroCurrRoom(hero,dungeon).isExit()) || !(hero.hasPillars()))) {
 				DungeonRoom currRoom = getHeroCurrRoom(hero,dungeon);
 				
-				v.displayCurrRoom(hero);
+				view.displayCurrRoom(hero);
 				
 				if(hero.getCurrRoom().isExit()) {
-					v.displayText("You have found the exit, but you need to go back and find the other pillars of OO");
+					view.displayText("You have found the exit, but you need to go back and find the other pillars of OO");
 				}
 				
 				
-				v.displayText(currRoom.removeItemsFromRoom(hero));		
+				view.displayText(currRoom.removeItemsFromRoom(hero));		
 				if(!hero.isAlive()) {
 					break;
 				} 
@@ -67,45 +67,45 @@ public class DungeonAdventure {
 				
 				if(currRoom.isMonster()) {
 					Monster monster = currRoom.getMonster();
-					v.displayText("The room you entered contains a " + monster.getMonsterType() + "\n");
+					view.displayText("The room you entered contains a " + monster.getMonsterType() + "\n");
 					while(monster.isAlive() && hero.isAlive()) {
 						encounter(hero, monster);
 					}
 					
 					if(!monster.isAlive()) {
-						v.displayText("You have slain the " + monster.getMonsterType() + "\n");
+						view.displayText("You have slain the " + monster.getMonsterType() + "\n");
 						currRoom.setMonster(null);
 					} else if(!hero.isAlive()) {
 						break;
 					}
 				}
 				
-				if(v.displayOptions(hero, dungeon)) {
-					saveGame(dungeon,hero,v.displaySaveGame());
+				if(view.displayOptions(hero, dungeon)) {
+					saveGame(dungeon,hero,view.displaySaveGame());
 					save = true;
 					break;
 				}
 				
-				moveHero(hero,dungeon, v.displayMoveOptions(getHeroCurrRoom(hero,dungeon)));
+				moveHero(hero,dungeon, view.displayMoveOptions(getHeroCurrRoom(hero,dungeon)));
 						
 			}
 			
-			if(save == true) {
+			if(save) {
 				break;
 			}
 	
 			if(!hero.isAlive()) {
-				v.displayText("\nYou have died....");
+				view.displayText("\nYou have died....");
 			} else {
-				v.displayText("\nGood job on obtaining the pillars of OO and escaping the dungeon");
+				view.displayText("\nGood job on obtaining the pillars of OO and escaping the dungeon");
 			}
 			
-			v.displayText("\n\nEntire Dungeon:\n" + dungeon.toString());
+			view.displayText("\n\nEntire Dungeon:\n" + dungeon.toString());
 			
-			keepPlaying = v.displayKeepPlayingOptions();
+			keepPlaying = view.displayKeepPlayingOptions();
 		}
 		
-		v.displayText("\nThanks for playing!");
+		view.displayText("\nThanks for playing!");
 	}
 	
 	/**
@@ -227,7 +227,7 @@ public class DungeonAdventure {
 	 */
 	public static void encounter(final Hero theHero, final Monster theMonster) {
 		double attacks = theHero.getAttackSpeed() / theMonster.getAttackSpeed();	
-		View v = new View();
+		View view = new View();
 		
 		//figure out number of hero attacks
 		int heroAttacks = (int) Math.round(attacks);
@@ -240,24 +240,24 @@ public class DungeonAdventure {
 		//Hero attacks
 		while(theHero.getAttacks() > 0) {
 			//Get type of attack user wants
-			String attack = v.displayHeroAttacks();
+			String attack = view.displayHeroAttacks();
 			
 			//if User wants a normal attack
 			int monsterHealth = theMonster.getHitPoints();
 			if(attack.equalsIgnoreCase("normal")) {
 				//if normal succeeded
 				if(theHero.attack(theMonster)) {
-					v.displayText("The attack succeeded and you dealt " + (monsterHealth - theMonster.getHitPoints()) + " damage. Monsters current health " + theMonster.getHitPoints());
+					view.displayText("The attack succeeded and you dealt " + (monsterHealth - theMonster.getHitPoints()) + " damage. Monsters current health " + theMonster.getHitPoints());
 					monsterHealth = theMonster.getHitPoints();
 					if(theMonster.isAlive()) {
 						theMonster.heal();
-						v.displayText("The monster attempted to heal and healed " + (theMonster.getHitPoints() - monsterHealth) + " health points. Monsters current health " + theMonster.getHitPoints() + "\n");
+						view.displayText("The monster attempted to heal and healed " + (theMonster.getHitPoints() - monsterHealth) + " health points. Monsters current health " + theMonster.getHitPoints() + "\n");
 					} else {
 						return;
 					}
 				//if normal failed
 				} else {
-					v.displayText("Your normal attack failed to land\n");
+					view.displayText("Your normal attack failed to land\n");
 				}
 			}
 			
@@ -267,24 +267,24 @@ public class DungeonAdventure {
 				if(theHero.getClassName().equalsIgnoreCase("priestess")) {
 					int heroHealth = theHero.getHitPoints();
 					theHero.special(theHero);
-					v.displayText("Your heal succeeded in healing " + (theHero.getHitPoints() - heroHealth) + " health points. Your current health is " + theHero.getHitPoints());				
+					view.displayText("Your heal succeeded in healing " + (theHero.getHitPoints() - heroHealth) + " health points. Your current health is " + theHero.getHitPoints());				
 				//else if hero is a thief
 				}  else {
 					//if special succeeded
 					if(theHero.special(theMonster)) {
-						v.displayText("The special attack succeeded and you dealt " + (monsterHealth - theMonster.getHitPoints()) + " damage. Monsters current health " + theMonster.getHitPoints());
+						view.displayText("The special attack succeeded and you dealt " + (monsterHealth - theMonster.getHitPoints()) + " damage. Monsters current health " + theMonster.getHitPoints());
 						monsterHealth = theMonster.getHitPoints();
 						//if monster still alive try heal
 						if(theMonster.isAlive()) {
 							theMonster.heal();
-							v.displayText("The monster attempted to heal and healed " + (theMonster.getHitPoints() - monsterHealth) + " health points. Monsters current health " + theMonster.getHitPoints() + "\n");
+							view.displayText("The monster attempted to heal and healed " + (theMonster.getHitPoints() - monsterHealth) + " health points. Monsters current health " + theMonster.getHitPoints() + "\n");
 						//else dead so return
 						} else {
 							return;
 						}
 					//else special failed
 					} else {
-						v.displayText("Your special attack failed to land");
+						view.displayText("Your special attack failed to land");
 					}
 				}
 			}
@@ -293,15 +293,15 @@ public class DungeonAdventure {
 		}
 		
 		//monsters attack
-		v.displayText("\nIts the " + theMonster.getMonsterType() + " turn to attack");
+		view.displayText("\nIts the " + theMonster.getMonsterType() + " turn to attack");
 		int heroHealth = theHero.getHitPoints();
 		//if attack succeeded
 		if(theMonster.attack(theHero)) {
-			v.displayText("The " + theMonster.getMonsterType() + " succesfuly landed an attack.");
-			v.displayText("You lost " + (heroHealth - theHero.getHitPoints()) + " health points. Your current health " + theHero.getHitPoints() + "\n");
+			view.displayText("The " + theMonster.getMonsterType() + " succesfuly landed an attack.");
+			view.displayText("You lost " + (heroHealth - theHero.getHitPoints()) + " health points. Your current health " + theHero.getHitPoints() + "\n");
 		//else attack failed
 		} else {
-			v.displayText("The " + theMonster.getMonsterType() + " failed in landing an attack\n");
+			view.displayText("The " + theMonster.getMonsterType() + " failed in landing an attack\n");
 		}	
 	}
 

@@ -209,6 +209,61 @@ public abstract class Hero extends DungeonCharacter {
 	}
 	
 	/**
+	 * Uses a StringBuilder to build and Return a text representation of the rooms that are surrounding the room the hero is currently in.
+	 * 
+	 * @param theDungeon
+	 * @return text representation of the rooms surrounding the room the hero is currently in
+	 */
+	public String displayDungeonNearHero(final Dungeon theDungeon) {
+		StringBuilder sb = new StringBuilder();
+		int x, y;
+		if((getCurrX() - 1) >= 0) {
+			x = getCurrX() - 1;
+		} else {
+			x = 0;
+		}
+		
+		if((getCurrY() - 1) >= 0) {
+			y = getCurrY() - 1;
+		} else {
+			y = 0;
+		}
+		
+		for(int i = x; ((i < theDungeon.getDungeon().length) && (i < getCurrX() + 2)); i++) {
+			StringBuilder row1 = new StringBuilder();
+			StringBuilder row2 = new StringBuilder();
+			StringBuilder row3 = new StringBuilder();
+			for(int j = y; ((j < theDungeon.getDungeon()[i].length) && (j < getCurrY() + 2)); j++) {
+				row1.append(theDungeon.getDungeon()[i][j].getRoom()[0][0]);
+				row1.append(theDungeon.getDungeon()[i][j].getRoom()[0][1]);
+				row1.append(theDungeon.getDungeon()[i][j].getRoom()[0][2]);
+				if((i == getCurrX()) && (j == getCurrY())) {
+					row2.append(theDungeon.getDungeon()[i][j].getRoom()[1][0]);
+					row2.append(theDungeon.getDungeon()[i][j].getRoom()[1][1]);
+					row2.append(theDungeon.getDungeon()[i][j].getRoom()[1][2]);
+				} else {
+					row2.append(theDungeon.getDungeon()[i][j].getRoom()[1][0]);
+					row2.append(theDungeon.getDungeon()[i][j].getRoom()[1][1]);
+					row2.append(theDungeon.getDungeon()[i][j].getRoom()[1][2]);
+				}
+				
+				row3.append(theDungeon.getDungeon()[i][j].getRoom()[2][0]);
+				row3.append(theDungeon.getDungeon()[i][j].getRoom()[2][1]);
+				row3.append(theDungeon.getDungeon()[i][j].getRoom()[2][2]);				
+			}
+			
+			sb.append(row1.toString());
+			sb.append(System.lineSeparator());
+			sb.append(row2.toString());
+			sb.append(System.lineSeparator());
+			sb.append(row3.toString());
+			sb.append(System.lineSeparator());
+		}
+		
+		return sb.toString();
+	}
+	
+	/**
 	 * Updates inventory by removing items that are used
 	 * 
 	 * @param theItem

@@ -21,6 +21,6 @@ public class HeroFactory {
 			return new Berserker(theName);
 		}
 		
-		throw new IllegalArgumentException("Illegal Argument Entered"); 
+		throw new IllegalArgumentException("Illegal Argument Entered in CreateHero method");
 	}
 }
