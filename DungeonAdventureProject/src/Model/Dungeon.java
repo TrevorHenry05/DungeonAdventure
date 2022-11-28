@@ -13,6 +13,7 @@ public class Dungeon implements Serializable {
 	 */
 	private static final long serialVersionUID = 1L;
 
+
 	private final DungeonRoom[][] myDungeon;
 
 	public Dungeon() {
@@ -169,8 +170,7 @@ public class Dungeon implements Serializable {
 		int chance = Utility.randomNumberGen(0, 100);
 		if(chance < 70) {
 			return true;
-		}
-		
+		}	
 		return false;
 	}
 	/**
