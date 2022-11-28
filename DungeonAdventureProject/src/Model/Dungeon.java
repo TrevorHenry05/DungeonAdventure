@@ -3,6 +3,7 @@ package Model;
 import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.List;
+import Utility.Utility;
 
 public class Dungeon implements Serializable {
 	
@@ -31,97 +32,84 @@ public class Dungeon implements Serializable {
 		Monster monster;
 		List<Item> items;
 		
-		monster = null;
-		items = new ArrayList<Item>();
-		room = new DungeonRoom(items, monster, false, true, false, true, false, true, false);
-		d[0][0] = room;
+		for(int i = 0; i < d.length; i++) {
+				for(int j = 0; j<d[i].length; j++) {
+					boolean north, west, east, south;
+					
+					
+					monster = null;
+					items = new ArrayList<Item>();
+					room = null;
+			int chance = Utility.randomNumberGen(0, 100);		
+					if(chance<10) {
+						items.add(If.createItem("heal")); 
+					} else if(chance >= 10) {
+						items.add(If.createItem("heal")); 
+						items.add(If.createItem("heal")); 
+					}
+					
+					chance = Utility.randomNumberGen(0, 100);
+					if(chance< 10) {
+						items.add(If.createItem("vision")); 
+				
+						
+					
+					}
+					chance = Utility.randomNumberGen(0, 100);
+					if(chance< 5) {
+						chance = Utility.randomNumberGen(0, 100);
+						if(chance<33) {
+						monster=mf.createMonster("ogre"); 
+				}else if(chance >= 33 && chance < 66) {
+					monster=mf.createMonster("skeleton");
+				} else {
+					monster=mf.createMonster("gremlin");
+			}
+		}	
+	}
+}	
+	
+			
+			
 		
-		items = new ArrayList<Item>();
-		monster = mf.createMonster("Ogre");
-		items.add(If.createItem("heal")); 
-		room = new DungeonRoom(items, monster, true, false, false, true, false, false, false);
-		d[1][0] = room;
-		
-		monster = null;
-		items = new ArrayList<Item>();
-		items.add(If.createItem("heal"));
-		room = new DungeonRoom(items, monster, false, true, false, true, false, false, false);
-		d[2][0] = room;
-		
-		items = new ArrayList<Item>();
-		items.add(If.createItem("heal"));
-		items.add(If.createItem("encapsulation"));
-		room = new DungeonRoom(items, monster, true, false, false, true, false, false, false);
-		d[3][0] = room;
-		
-		items = new ArrayList<Item>();
-		monster = mf.createMonster("gremlin");
-		room = new DungeonRoom(items, monster, false, false, true, true, false, false, false);
-		d[0][1] = room;
-		
-		items = new ArrayList<Item>();
-		items.add(If.createItem("heal"));
-		monster = null;
-		room = new DungeonRoom(items, monster, false, true, true, true, false, false, false);
-		d[1][1] = room;
-		
-		items = new ArrayList<Item>();
-		items.add(If.createItem("heal"));
-		monster = null;
-		room = new DungeonRoom(items, monster, true,  false, true, true, false, false, false);
-		d[2][1] = room;
-		
-		items = new ArrayList<Item>();
-		room = new DungeonRoom(items, monster, false, false, true, true, false, false, false);
-		d[3][1] = room;
-		
-		items = new ArrayList<Item>();
-		room = new DungeonRoom(items, monster, false, true, true, true, false, false, false);
-		d[0][2] = room;
-		
-		items = new ArrayList<Item>();
-		items.add(If.createItem("trap"));
-		room = new DungeonRoom(items, monster, true, false, true, true, false, false, false);
-		d[1][2] = room;
-		
-		items = new ArrayList<Item>();
-		items.add(If.createItem("vision"));
-		room = new DungeonRoom(items, monster, false, false, true, true, false, false, false);
-		d[2][2] = room;
-		
-		//second to last
-		items = new ArrayList<Item>();
-		room = new DungeonRoom(items, monster, false, false, true, true, false, false, false);
-		d[3][2] = room;
-		
-		items = new ArrayList<Item>();
-		monster = mf.createMonster("skeleton");
-		items.add(If.createItem("inheritance"));
-		items.add(If.createItem("heal"));
-		
-		room = new DungeonRoom(items, monster, false, false, true, false, false, false, false);
-		d[0][3] = room;
-		
-		items = new ArrayList<Item>();
-		monster = mf.createMonster("skeleton");
-		items.add(If.createItem("polymorphism"));
-		room = new DungeonRoom(items, monster, false, false, true, false, false, false, false);
-		d[1][3] = room;
-		//above last
-		monster = null;
-		items = new ArrayList<Item>();
-		items.add(If.createItem("abstraction"));
-		room = new DungeonRoom(items, monster, false, true, true, false, false, false, false);
-		d[2][3] = room;
-		
-		monster = null;
-		items = new ArrayList<Item>();
-		room = new DungeonRoom(items, monster, true, false, true, false, true, false, false);
-		d[3][3] = room;
-		
+	
 
 		return d;
 
+	}
+	
+	private static boolean isNorthDoor(final DungeonRoom[][] theDungeon, final int theI, final int theJ) {
+		if(theI < 1) {
+					return false;
+		}
+	
+		return theDungeon[theI-1][theJ].isSouth();
+	
+	}
+	
+	private static boolean isWestDoor(final DungeonRoom[][] theDungeon, final int theI, final int theJ) {
+		if(theJ < 1) {
+					return false;
+		}
+		return theDungeon[theI-1][theJ].isEast();
+	}
+	private static boolean isEastDoor(final DungeonRoom[][] theDungeon, final int theI, final int theJ) {
+			if(theJ < 1) {
+						return false;
+			}
+			int chance = Utility.randomNumberGen(0,  100);
+			if(chance < 70) {
+				return true;
+			}
+	}
+	private static boolean isSouthDoor(final DungeonRoom[][] theDungeon, final int theI, final int theJ) {
+		if(theI > theDungeon.length -2) {
+					return false;
+		}
+		int chance = Utility.randomNumberGen(0,  100);
+		if(chance < 70) {
+			return true;
+		}
 }
 	
   public static boolean isMazeTraversible(final DungeonRoom[][] theDungeon) {
@@ -192,3 +180,4 @@ public class Dungeon implements Serializable {
 		return sb.toString();
 	}
 }
+
