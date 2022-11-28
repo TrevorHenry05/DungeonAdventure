@@ -7,6 +7,7 @@ import Utility.Utility;
 
 public abstract class Hero extends DungeonCharacter {
 	
+
 	/**
 	 * Serialization ID
 	 */
@@ -15,6 +16,7 @@ public abstract class Hero extends DungeonCharacter {
 	 * @serial
 	 * Stores character name inputed by user
 	 */
+
 	private final String myCharacterName;
 	/**
 	 * Contains the chance for the user to block an attack
@@ -64,6 +66,7 @@ public abstract class Hero extends DungeonCharacter {
 	 * @param theCharacterName
 	 * @param theAttacks
 	 */
+
 	public Hero(final int theHitPoints,final int theMaxHitPoints, final int theMinDamage, final int theMaxDamage, final double theChanceToHit, final int theAttackSpeed, final double theBlockChance, final String theClassName, final String theCharacterName, final int theAttacks) {
 		super(theHitPoints,theMaxHitPoints, theMinDamage, theMaxDamage, theChanceToHit, theAttackSpeed);
 		myCharacterName = theCharacterName;
@@ -272,6 +275,7 @@ public abstract class Hero extends DungeonCharacter {
 			
 		return false;	
 	}
+	
 	
 	public abstract boolean special(final DungeonCharacter theMonster);
 	/**
