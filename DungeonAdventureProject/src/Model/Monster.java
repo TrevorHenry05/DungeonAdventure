@@ -49,37 +49,46 @@ public class Monster extends DungeonCharacter {
 		myHealMax = theHealMax;
 		myMonsterType = theMonsterType;
 	}
+	
 	/**
 	 * Getter for the heal chance
+	 * 
 	 * @return myHealChance
 	 */
 	public double getHealChance() {
 		return myHealChance;
 	}
+	
 	/**
 	 * Getter for the minimum heal amount
+	 * 
 	 * @return myHealMin
 	 */
 	public int getHealMin() {
 		return myHealMin;
-	}	
+	}
+	
 	/**
 	 * Getter for the maximum heal amount
+	 * 
 	 * @return myHealax
 	 */
-	
 	public int getHealMax() {
 		return myHealMax;
 	}
+	
 	/**
 	 * Getter for the type of monster
+	 * 
 	 * @return myMonsterType
 	 */
 	public String getMonsterType() {
 		return myMonsterType;
 	}
+	
 	/**
 	 * Chance for monster to heal. Returns true if the heal is successful and false if the heal fails
+	 * 
 	 * @return true or false
 	 */
 	public boolean heal() {
@@ -97,8 +106,10 @@ public class Monster extends DungeonCharacter {
 		
 		return false;
 	}
+	
 	/**
 	 * The percentage chance for the attack to land
+	 * 
 	 * @param theHero
 	 * @return true or false
 	 */

@@ -20,6 +20,7 @@ public class DungeonSaveGame implements Serializable {
 		myDungeon = theDungeon;
 		myHero = theHero;
 	}
+	
 	/**
 	 * getter for the created dungeon class of saved game
 	 * @return myDungeon
@@ -27,6 +28,7 @@ public class DungeonSaveGame implements Serializable {
 	public Dungeon getDungeon() {
 		return myDungeon;
 	}
+	
 	/**
 	 * getter for the hero of saved game
 	 * @return myHero

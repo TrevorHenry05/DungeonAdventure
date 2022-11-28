@@ -58,6 +58,7 @@ public abstract class DungeonCharacter implements Serializable {
 		myChanceToHit = theChanceToHit;
 		myAttackSpeed = theAttackSpeed;
 	}
+	
 	/**
 	 * returns the specific character's current hit points
 	 * @return myHitPoints
@@ -65,6 +66,7 @@ public abstract class DungeonCharacter implements Serializable {
 	public int getHitPoints() {
 		return myHitPoints;
 	}
+	
 	/**
 	 * Gets the max amount of hit points the specific character can have
 	 * @return MaxHitPoints
@@ -72,6 +74,7 @@ public abstract class DungeonCharacter implements Serializable {
 	public int getMaxHitPoints() {
 		return myMaxHitPoints;
 	}
+	
 	/**
 	 * Sets the character's current hit points but does not allow hit points to go below zero
 	 * @param theHitPoints
@@ -83,6 +86,7 @@ public abstract class DungeonCharacter implements Serializable {
 			myHitPoints = theHitPoints;
 		}
 	}
+	
 	/**
 	 * Returns the chance to land a normal attack
 	 * @return myChancetoHit
@@ -90,6 +94,7 @@ public abstract class DungeonCharacter implements Serializable {
 	public double getChanceToHit() {
 		return myChanceToHit;
 	}
+	
 	/**
 	 * Returns the max amount of damage a character can deal
 	 * @return myMaxDamage
@@ -97,6 +102,7 @@ public abstract class DungeonCharacter implements Serializable {
 	public int getMaxDamage() {
 		return myMaxDamage;
 	}
+	
 	/**
 	 * Returns the minimum amount of damage a character can deal
 	 * @return myMinDamage
@@ -104,6 +110,7 @@ public abstract class DungeonCharacter implements Serializable {
 	public int getMinDamage() {
 		return myMinDamage;
 	}
+	
 	/**
 	 * Returns the characters attack speed for a turn
 	 * @return myAttackSpeed
@@ -111,6 +118,7 @@ public abstract class DungeonCharacter implements Serializable {
 	public int getAttackSpeed() {
 		return myAttackSpeed;
 	}
+	
 	/**
 	 * 
 	 * @return true or false if the character is alive
@@ -122,6 +130,7 @@ public abstract class DungeonCharacter implements Serializable {
 		
 		return true;
 	}
+	
 	/**
 	 * The amount of damage taken in the turn
 	 * @param theDamage

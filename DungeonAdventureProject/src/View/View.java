@@ -49,6 +49,7 @@ public class View {
 		
 		return false;
 	}
+	
 	/**
 	 * Display's the loaded save game files that exist and prompts the user to select a game
 	 * @return save
@@ -81,6 +82,7 @@ public class View {
 		
 		return save;
 	}
+	
 	/**
 	 * User will enter what they want their save to be named
 	 * @return SaveGame
@@ -89,6 +91,7 @@ public class View {
 		System.out.println("\nWhat do you want the name of the save to be?");
 		return INPUT.next();
 	}
+	
 	/**
 	 * User has the option to overwrite file if they have entered a new name that already exists
 	 * @return OverWrite
@@ -104,9 +107,10 @@ public class View {
 		
 		return answer;
 	}
+	
 	/**
-	 * User will enter the name of their hero
-	 * @return heroName
+	 * User will enter the name of their hero, then calls the hero selection that obtains the class type they want to be.
+	 * @return Hero that the user has created
 	 */
 	public Hero heroName() {
 		System.out.println("What do you want your hero's name to be:");
@@ -115,9 +119,9 @@ public class View {
 		return heroSelection(name);	
 	}
 	/**
-	 * User enters the name of the class they wish to select and the class is taken from the HeroFactory database
-	 * @param theName
-	 * @return
+	 * User enters the name of the class they wish to select and the Hero is created using the HeroFactory
+	 * @param theName character name that the user wants to be called
+	 * @return Hero that the user has created
 	 */
 	public static Hero heroSelection(final String theName) {
 		System.out.println("What hero class do you want to be (Warrior, Thief, berserker, or Priestess):");
@@ -137,8 +141,9 @@ public class View {
 		
 		return hero;
 	}
+	
 	/**
-	 * Displays the room the user is currently in
+	 * Displays the text representation of the room the user is currently in
 	 * @param theHero
 	 */
 	public void displayCurrRoom(final Hero theHero) {
@@ -146,7 +151,9 @@ public class View {
 		System.out.println(theHero.getCurrRoom().toString());
 	}
 	/**
-	 * Prompts the user with the only possible directions they can travel in the current room
+	 * Prompts the user with the only possible directions they can travel in the current room and calls the method that asks for 
+	 * which direction they wish to move
+	 * 
 	 * @param theRoom
 	 * @return getMoveOption
 	 */
@@ -191,6 +198,7 @@ public class View {
 	}
 	/**
 	 * Prompts the user by asking which way they would like to travel
+	 * 
 	 * @param theRoom
 	 * @param theOptions
 	 * @return direction
@@ -210,14 +218,23 @@ public class View {
 		return direction;
 		
 	}
+	
 	/**
 	 * Displays the options the user has which includes moving, viewing inventory and saving game and exiting
+	 * 
 	 * @param theString
 	 */
 	public void displayText(final String theString) {
 		System.out.println(theString);
 	}
 	
+	/**
+	 * 
+	 * 
+	 * @param theHero
+	 * @param theDungeon
+	 * @return
+	 */
 	public boolean displayOptions(final Hero theHero, final Dungeon theDungeon) {
 		System.out.println("\nWould you like move on(move), or View inventory(inventory), or Save game and exit(save):");
 		String choice = INPUT.next();
@@ -238,8 +255,10 @@ public class View {
 			return displayOptions(theHero, theDungeon);
 		}
 	}
+	
 	/**
 	 * The options for the hero to attack
+	 * 
 	 * @return
 	 */
 	public String displayHeroAttacks() {
@@ -252,8 +271,10 @@ public class View {
 
 		return attack;
 	}
+	
 	/**
 	 * Displays the current inventory of items the user has
+	 * 
 	 * @param theHero
 	 * @param theDungeon
 	 */
@@ -292,8 +313,10 @@ public class View {
 			displayInventory(theHero, theDungeon);
 		}
 	}
+	
 	/**
 	 * User can type whether they would like to quit the game or restart the game
+	 * 
 	 * @return true or false
 	 */
 	public boolean displayKeepPlayingOptions() {
@@ -311,6 +334,7 @@ public class View {
 		
 		return false;
 	}
+	
 	/**
 	 * Displays where the hero is on the map currently and updates when the user moves
 	 * @param theDungeon

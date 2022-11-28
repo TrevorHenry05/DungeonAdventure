@@ -17,6 +17,7 @@ public class Warrior extends Hero{
 	public Warrior(final String theCharacterName) {
 		super(125,125,35,60, 0.8, 4, 0.2, "Warrior", theCharacterName, 0);
 	}
+	
 	/**
 	 * The chance the warrior's special attack lands
 	 * @param theMonster

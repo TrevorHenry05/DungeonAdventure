@@ -31,6 +31,7 @@ public class Item implements Serializable {
 	public char getType() {
 		return myType;
 	}
+	
 	/**
 	 * The item's description
 	 * @return myDescription
@@ -38,6 +39,7 @@ public class Item implements Serializable {
 	public String getDescription() {
 		return myDescription;
 	}
+	
 	/**
 	 * Determines if the item is usable
 	 * @return myItemUsable
