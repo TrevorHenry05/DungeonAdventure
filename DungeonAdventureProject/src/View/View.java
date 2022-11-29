@@ -256,9 +256,9 @@ public class View {
 	}
 	
 	/**
-	 * Displays the options the user has which includes moving, viewing inventory and saving game and exiting
+	 * Display the String that it is given to the console
 	 * 
-	 * @param theString
+	 * @param theString a String that will be displayed to the user in the console
 	 */
 	public void displayText(final String theString) {
 		System.out.println(theString);
@@ -275,22 +275,23 @@ public class View {
 		System.out.println("\nWould you like move on(move), or View inventory(inventory), or Save game and exit(save):");
 		String choice = INPUT.next();
 		
+		while(!(choice.equalsIgnoreCase("move") || choice.equalsIgnoreCase("dungeon") || choice.equalsIgnoreCase("inventory") || choice.equalsIgnoreCase("save"))) {
+			System.out.println("\nNot a valid option. Please enter a valid option\n");
+			choice = INPUT.next();
+		}
 		
 		if(choice.equalsIgnoreCase("inventory")) {
 			System.out.println(theHero.toString());
 			displayInventory(theHero, theDungeon);
-			return false;
+			return displayOptions(theHero, theDungeon);
 		} else if(choice.equalsIgnoreCase("dungeon")) {
 			System.out.println("\nDungeon:\n" + theDungeon.toString());
 			return displayOptions(theHero, theDungeon);
 		} else if(choice.equalsIgnoreCase("move")) {
 			return false;
-		} else if(choice.equalsIgnoreCase("save")) {
-			return true;
 		} else {
-			System.out.println("\nNot a valid option. Please enter a valid option\n");
-			return displayOptions(theHero, theDungeon);
-		}
+			return true;
+		} 
 	}
 	
 	/**
@@ -318,7 +319,11 @@ public class View {
 	public static void displayInventory(final Hero theHero, final Dungeon theDungeon) {		
 		System.out.println("\nWould you like to use an item(use) or go back to options(options):");
 		String choice = INPUT.next();
-		View v = new View();
+		
+		while(!(choice.equalsIgnoreCase("use") || choice.equalsIgnoreCase("options"))) {
+			System.out.println("\nNot a valid option. Please enter a valid option\n");
+			choice = INPUT.next();
+		}
 		
 		if(choice.equalsIgnoreCase("use")) {
 			System.out.println("\nWould you like to use a heal potion(heal) or a vision potion(vision):");
@@ -343,12 +348,7 @@ public class View {
 				System.out.println("\nEnter a valid item to use");
 				displayInventory(theHero, theDungeon);
 			}
-		} else if(choice.equalsIgnoreCase("options")) {	
-			v.displayOptions(theHero, theDungeon);
-		} else {
-			System.out.println("\nNot a valid option. Please enter a valid option\n");
-			displayInventory(theHero, theDungeon);
-		}
+		} 
 	}
 	
 	/**
