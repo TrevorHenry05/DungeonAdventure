@@ -39,7 +39,7 @@ public class DungeonAdventureGUI {
 				//dungeon from save game
 				dungeon = dsg.getDungeon();
 			}
-			
+			v.displayHero(hero.getClassName());
 			v.addTexttoTextArea("Hello " + hero.getCharacterName() + " the " + hero.getClassName() + ", are you ready to adventure the dungeon?");
 			
 			while(hero.isAlive() && (!(getHeroCurrRoom(hero,dungeon).isExit()) || !(hero.hasPillars()))) {
@@ -61,16 +61,19 @@ public class DungeonAdventureGUI {
 				if(currRoom.isMonster()) {
 					Monster monster = currRoom.getMonster();
 					v.displayText("The room you entered contains a " + monster.getMonsterType(), 1);
-					//v.displayMonster(monster.getMonsterType());
+					v.displayMonster(monster.getMonsterType());
 					while(monster.isAlive() && hero.isAlive()) {
 						encounter(hero, monster, v);
 					}
+					v.resetPanel1();
+					v.displayHero(hero.getClassName());
 					if(!monster.isAlive()) {
 						v.addTexttoTextArea("You have slain the " + monster.getMonsterType());
 						currRoom.setMonster(null);
 					} else if(!hero.isAlive()) {
 						break;
 					}
+					
 				}
 				
 				v.updateTextArea();

@@ -3,7 +3,9 @@ package View;
 import java.awt.BorderLayout;
 import java.awt.Dimension;
 import java.awt.EventQueue;
+import java.awt.FlowLayout;
 import java.awt.GridBagLayout;
+import java.awt.Image;
 import java.awt.Toolkit;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
@@ -198,7 +200,7 @@ public class ViewGUI extends JFrame {
         
         
         
-        getPanel1().setLayout(new BoxLayout(getPanel1(), BoxLayout.PAGE_AXIS));
+        getPanel1().setLayout(new FlowLayout());
         getPanel2().setLayout(new BoxLayout(getPanel2(), BoxLayout.PAGE_AXIS));
         getPanel3().setLayout(new GridBagLayout());
         getPanel4().setLayout(new BoxLayout(getPanel4(), BoxLayout.PAGE_AXIS));
@@ -600,20 +602,74 @@ public class ViewGUI extends JFrame {
 	}
 	
 	public void displayMonster(final String theType) {
-		if(theType.equalsIgnoreCase("ogre")) {
-	    	getPanel1().add(createMonsterPic("ogre"));
-		}
+	    if(theType.equalsIgnoreCase("ogre")) {
+	         getPanel1().add(createMonsterPic("ogre")); }
+	    else if(theType.equalsIgnoreCase("skeleton")){
+	         getPanel1().add(createMonsterPic("skeleton"));
+	    }
+	    else if(theType.equalsIgnoreCase("gremlin")){
+	         getPanel1().add(createMonsterPic("gremlin"));
+	    }
+
+	    pack();
+
+	}
+	/**
+	* Creates the monster picture based off of the monster in the dungeon room
+	* @param theString
+	* @return b
+	*/
+	private static JButton createMonsterPic(final String theString) {
+		JButton b = new JButton();
+
+		String currDirectory = System.getProperty("user.dir");
+		String image = currDirectory + "\\images\\" + theString + ".png";
+		ImageIcon pic = new ImageIcon(image);
+		Image icon = pic.getImage();
+		Image real = icon.getScaledInstance(75, 75, java.awt.Image.SCALE_SMOOTH);
+		pic = new ImageIcon(real);
+		b.setIcon(pic);
+
+		return b;
 	}
 	
-	private static JButton createMonsterPic(final String theString) {
+	public void displayHero(final String heroType) {
+        if(heroType.equalsIgnoreCase("warrior")) {
+             getPanel1().add(createHeroPic("warrior")); }
+        else if(heroType.equalsIgnoreCase("priestess")){
+             getPanel1().add(createHeroPic("priestess"));
+        }
+        else if(heroType.equalsIgnoreCase("thief")){
+             getPanel1().add(createHeroPic("thief"));
+        }
+        else if(heroType.equalsIgnoreCase("berserker")){
+             getPanel1().add(createHeroPic("berserker"));
+        }
+
+        pack();
+
+    }
+	
+	/**
+	* Creates the monster picture based off of the monster in the dungeon room
+    * @param theString
+    * @return b
+    */
+	private static JButton createHeroPic(final String theString) {
+		JButton b = new JButton();
+
 		String currDirectory = System.getProperty("user.dir");
-    	String image = currDirectory + "\\images\\" + theString + ".png";
-    	JButton button = new JButton();
-    	
-    	//button.setIcon();
-    	
-    	return button;
+		String image = currDirectory + "\\images\\" + theString + ".png";
+		ImageIcon pic = new ImageIcon(image);
+		Image icon = pic.getImage();
+		Image real = icon.getScaledInstance(75, 75, java.awt.Image.SCALE_SMOOTH);
+		pic = new ImageIcon(real);
+		b.setIcon(pic);
+
+		return b;
 	}
+	    
+	    
 
 	/**
 	 * User can type whether they would like to quit the game or restart the game
