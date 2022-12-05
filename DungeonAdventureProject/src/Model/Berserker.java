@@ -1,12 +1,17 @@
 package Model;
 
 import Utility.Utility;
-import View.View;
+
+
 /**
  * Class that creates a new berserker hero for the user
  * @author Riley Stevenson, Trevor Henry, Colton Wickens
  * @version 1.0
  */
+
+import View.ViewGUI;
+
+
 public class Berserker extends Hero{
 
 	/**
@@ -29,7 +34,7 @@ public class Berserker extends Hero{
 	@Override
 	public boolean special(final DungeonCharacter  theMonster) {
 		int chance = Utility.randomNumberGen(0,100);  
-		View v = new View();
+		ViewGUI view = new ViewGUI();
 		
 		if(chance < 20) {
 			theMonster.takeDamage(Utility.randomNumberGen(50, 90)); 
@@ -38,9 +43,9 @@ public class Berserker extends Hero{
 			int heroHealth = getHitPoints(); 
 			theMonster.takeDamage(Utility.randomNumberGen(60, 100)); 
 			setAttacks(getAttacks() + 1);
-			v.displayText("Your special has rewarded you an extra attack in the turn! But you have taken damage because of it.");
+			view.addTexttoTextArea("Your special has rewarded you an extra attack in the turn! But you have taken damage because of it.");
 			takeDamage(Utility.randomNumberGen(10, 20));
-			v.displayText("You lost " + (heroHealth - getHitPoints()) + " health points from your special. Your current health " + getHitPoints() + "\n");
+			view.addTexttoTextArea("You lost " + (heroHealth - getHitPoints()) + " health points from your special. Your current health " + getHitPoints() + "\n");
 			return true;
 		}
 		
