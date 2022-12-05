@@ -1,15 +1,12 @@
-/**
- * Class that creates a new berserker hero for the user
- * @author Riley Stevenson, Trevor Hnery, Colton Wickens
- * @version 1.0
- */
-
-
 package Model;
 
 import Utility.Utility;
 import View.View;
-
+/**
+ * Class that creates a new berserker hero for the user
+ * @author Riley Stevenson, Trevor Henry, Colton Wickens
+ * @version 1.0
+ */
 public class Berserker extends Hero{
 
 	/**
