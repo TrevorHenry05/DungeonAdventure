@@ -109,7 +109,7 @@ public class DungeonAdventure {
 	}
 	
 	/**
-	 * Uses the user's current position to determine which room they are in
+	 * Uses the user's current x and y position within the array to determine which room they are in
 	 * @param theHero
 	 * @param theDungeon
 	 * @return HeroCurrRoom
@@ -119,7 +119,8 @@ public class DungeonAdventure {
 	}
 	
 	/**
-	 * Moves the hero in the direction the user selects
+	 * Moves the hero in the direction the user selects. The user can enter "up" "down" "left" or "right" and the hero will move in that direction to the next array
+	 * position
 	 * @param theHero
 	 * @param theDungeon
 	 * @param theDirection
@@ -145,7 +146,7 @@ public class DungeonAdventure {
 	}
 	
 	/**
-	 * Constructor for the save game method, this method will save the game for the user
+	 * Constructor for the save game method, this method will save the game for the user by creating a .ser file and uses serialization
 	 * @param theDungeon
 	 * @param theHero
 	 * @param theFileName

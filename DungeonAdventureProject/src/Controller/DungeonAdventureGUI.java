@@ -147,7 +147,7 @@ public class DungeonAdventureGUI {
 	}
 	
 	/**
-	 * The method to load a game that has been saved by opening the saved file which stores the full progess the user has made
+	 * The method to load a game that has been saved by opening the saved file which stores the full progress the user has made
 	 * @param theFile
 	 * @return dsg
 	 */
