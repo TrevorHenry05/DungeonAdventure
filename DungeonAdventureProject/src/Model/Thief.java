@@ -1,7 +1,7 @@
 package Model;
 
 import Utility.Utility;
-import View.View;
+import View.ViewGUI;
 
 public class Thief extends Hero {
 	
@@ -25,7 +25,7 @@ public class Thief extends Hero {
 	@Override
 	public boolean special(final DungeonCharacter  theMonster) {
 		int chance = Utility.randomNumberGen(0,100);
-		View v = new View();
+		ViewGUI v = new ViewGUI();
 		
 		if(chance < 40) {
 			theMonster.takeDamage(Utility.randomNumberGen(getMinDamage(), getMaxDamage()));
@@ -33,7 +33,7 @@ public class Thief extends Hero {
 		} else if(chance >= 40 && chance < 80) {
 			theMonster.takeDamage(Utility.randomNumberGen(getMinDamage(), getMaxDamage()));
 			setAttacks(getAttacks() + 1);
-			v.displayText("Your special has rewarded you an extra attack in the turn!");
+			v.addTexttoTextArea("Your special has rewarded you an extra attack in the turn!");
 			return true;
 		}
 		
