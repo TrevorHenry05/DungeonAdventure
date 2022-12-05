@@ -118,27 +118,36 @@ public class ViewGUI extends JFrame {
     public void resetText() {
     	myTextField.setText("");
     }
-    
+    /**
+     * Resets the text field after any change in method
+     */
     public void resetTextField() {
     	myTextField = new JTextField(20);
     	resetPanel3();
     	getPanel3().add(getTextField());;
         getPanel3().setBorder(BorderFactory.createEmptyBorder(10, 10, 10, 10));
     }
-    
+    /**
+     * Adds text to the textarea panel by taking any theString object and displaying it
+     * @param theString
+     */
     public void addTexttoTextArea(final String theString) {
     	getTextArea().append("\n" + theString);
     	getTextArea().validate();
     	JScrollBar vertical = getScrollPane().getVerticalScrollBar();
     	vertical.setValue(vertical.getMaximum());
     }
-    
+  /**
+   * Scrolls so the window moves automatically  
+   */
     public void updateTextArea() {
     	getScrollPane().validate();
     	JScrollBar vertical = getScrollPane().getVerticalScrollBar();
     	vertical.setValue(vertical.getMaximum());
     }
-    
+  /**
+   * Resets panel1   
+   */
     public void resetPanel1() {
     	myJPanel1.removeAll();
     	EventQueue.invokeLater(() -> {
@@ -146,7 +155,9 @@ public class ViewGUI extends JFrame {
     	});
     	pack();
     }
-    
+    /**
+     * Resets panel2
+     */
     public void resetPanel2() {
     	myJPanel2.removeAll();
     	EventQueue.invokeLater(() -> {
@@ -154,7 +165,9 @@ public class ViewGUI extends JFrame {
     	});
     	pack();
     }
-    
+    /**
+     * Resets panel3
+     */
     public void resetPanel3() {
     	myJPanel3.removeAll();
     	EventQueue.invokeLater(() -> {
@@ -162,7 +175,9 @@ public class ViewGUI extends JFrame {
     	});
     	pack();
     }
-    
+    /**
+     * Resets panel4
+     */
     public void resetPanel4() {
     	myJPanel4.removeAll();
     	EventQueue.invokeLater(() -> {
@@ -170,7 +185,9 @@ public class ViewGUI extends JFrame {
     	});
     	pack();
     }
-    
+    /**
+     * Resets panel5
+     */
     public void resetPanel5() {
     	myJPanel5.removeAll();
     	EventQueue.invokeLater(() -> {
@@ -178,7 +195,9 @@ public class ViewGUI extends JFrame {
     	});
     	pack();
     }
-    
+    /**
+     * Clears all panels
+     */
     public void resetAllPanels() {
     	resetPanel1();
     	resetPanel2();
@@ -187,7 +206,9 @@ public class ViewGUI extends JFrame {
     	resetPanel5();
     	pack();
     }
-    
+    /**
+     * The start method for the game, opens up a new window for the user and stores all panel information
+     */
     public void start() {
     	String currDirectory = System.getProperty("user.dir");
     	String image = currDirectory + "\\images\\Dunicon.jfif";
@@ -225,7 +246,9 @@ public class ViewGUI extends JFrame {
         pack();
         setVisible(true);
     }
-    
+  /**
+   * Displays the how to play text in the panels  
+   */
     public void displayHowToPlay() {
     	addTexttoTextArea("~~ Welcome to our Dungeon Adventure ~~\n" + 
     			"How to Play: Every time you enter a room you will be shown the items you picked up from the room or if there was a trap in the room.\n"
@@ -241,7 +264,11 @@ public class ViewGUI extends JFrame {
     	pack();
     	
     }
-    
+    /**
+     * The main menu for the game, prompts the user to create a new save file or load a saved file
+     * @return
+     * @throws InterruptedException
+     */
     public boolean displayMainMenu() throws InterruptedException {
     	addTexttoTextArea("Would you like to create a new game(create) or load a save game(load):");
     	pack();
@@ -300,7 +327,11 @@ public class ViewGUI extends JFrame {
 		resetText();
 		return hero;
 	}
-	
+/**
+ * Takes in how many rows the user wants to be in the dungeon and stores it in the rows variable	
+ * @return rows
+ * @throws InterruptedException
+ */
 	public int displayRows() throws InterruptedException {
 		int rows;
 		addTexttoTextArea("How many rows do you want the dungeon to be: ");
@@ -310,7 +341,11 @@ public class ViewGUI extends JFrame {
 		resetText();
 		return rows;
 	}
-	
+	/**
+	 * Takes in how many columns the user wants to be in the dungeon and stores it in the cols variable	
+	 * @return cols
+	 * @throws InterruptedException
+	 */	
 	public int displayColumns() throws InterruptedException {
 		int cols;
 		addTexttoTextArea("How many columns do you want the dungeon to be: ");
@@ -322,7 +357,7 @@ public class ViewGUI extends JFrame {
 	}
 	
 	/**
-	 * Display's the loaded save game files that exist and prompts the user to select a game
+	 * Display's the loaded save game files that exist and prompts the user to select a game save
 	 * @return save
 	 * @throws InterruptedException 
 	 */
@@ -373,7 +408,11 @@ public class ViewGUI extends JFrame {
 		sb.append(theHero.getCurrRoom().toString());
 		addTexttoTextArea(sb.toString());
 	}
-	
+	/**
+	 * Displays the given text for the user to read in any given panel
+	 * @param theString
+	 * @param thePanel
+	 */
 	public void displayText(final String theString, final int thePanel) {
 		JLabel jlab = new JLabel(theString);
 		switch(thePanel) {
@@ -391,8 +430,8 @@ public class ViewGUI extends JFrame {
 	}
 	
 	/**
-	 * The options for the hero to attack
-	 * 
+	 * The options for the hero to attack. The user can enter either "normal" or "special" for the attacks. If neither are entered, then the user will 
+	 * see the "please enter valid attack option"
 	 * @return
 	 * @throws InterruptedException 
 	 */
@@ -448,7 +487,7 @@ public class ViewGUI extends JFrame {
 	}
 	
 	/**
-	 * Displays the current inventory of items the user has
+	 * Displays the current inventory of items the user has. User is prompted if they would like to use the items as well
 	 * 
 	 * @param theHero
 	 * @param theDungeon
@@ -577,7 +616,7 @@ public class ViewGUI extends JFrame {
 	}
 	
 	/**
-	 * Prompts the user by asking which way they would like to travel
+	 * Prompts the user by asking which way they would like to travel.
 	 * 
 	 * @param theRoom
 	 * @param theOptions
@@ -600,7 +639,10 @@ public class ViewGUI extends JFrame {
 		return direction;
 		
 	}
-	
+	/**
+	 * Creates the string for the specific monster in the room to be later stored in the createmonsterpic method
+	 * @param theType
+	 */
 	public void displayMonster(final String theType) {
 	    if(theType.equalsIgnoreCase("ogre")) {
 	         getPanel1().add(createMonsterPic("ogre")); }
@@ -632,7 +674,10 @@ public class ViewGUI extends JFrame {
 
 		return b;
 	}
-	
+	/**
+	 * Creates the string for the specific hero the user selected to be later stored in the createheropic method
+	 * @param theType
+	 */	
 	public void displayHero(final String heroType) {
         if(heroType.equalsIgnoreCase("warrior")) {
              getPanel1().add(createHeroPic("warrior")); }
@@ -651,7 +696,7 @@ public class ViewGUI extends JFrame {
     }
 	
 	/**
-	* Creates the monster picture based off of the monster in the dungeon room
+	* Creates the hero picture based off of hero class the user selects at the beginning of the game
     * @param theString
     * @return b
     */
@@ -689,7 +734,12 @@ public class ViewGUI extends JFrame {
 		resetText();
 		return answer.equalsIgnoreCase("restart");
 	}
-    
+	  /**
+	   * The method for the empty textfield for the user to enter a string
+	   * @param theTextField
+	   * @return answer
+	   * @throws InterruptedException
+	   */
     private static String makeJTextFieldHoldForString(final JTextField theTextField) throws InterruptedException {
     	final List<String> holder = new LinkedList<String>();
     	theTextField.addActionListener(new ActionListener() {
@@ -713,7 +763,12 @@ public class ViewGUI extends JFrame {
             return answer;
         }
     }
-    
+  /**
+   * The method for the empty textfield for the user to enter an int
+   * @param theTextField
+   * @return answer
+   * @throws InterruptedException
+   */
     private static int makeJTextFieldHoldForInt(final JTextField theTextField) throws InterruptedException {
     	final List<Integer> holder = new LinkedList<Integer>();
     	theTextField.addActionListener(new ActionListener() {

@@ -108,7 +108,11 @@ public class View {
 		
 		return answer;
 	}
-	
+	/**
+	 * Takes in how many rows the user wants to be in the dungeon and stores it in the rows variable	
+	 * @return rows
+	 * @throws InterruptedException
+	 */	
 	public int displayRows() {
 		int rows;
 		
@@ -125,7 +129,11 @@ public class View {
 		
 		return rows;
 	}
-	
+	/**
+	 * Takes in how many columns the user wants to be in the dungeon and stores it in the cols variable	
+	 * @return cols
+	 * @throws InterruptedException
+	 */		
 	public int displayColumns() {
 		int cols;
 		

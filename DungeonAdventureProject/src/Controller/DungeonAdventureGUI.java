@@ -14,6 +14,11 @@ import Model.Hero;
 import Model.Monster;
 import View.ViewGUI;
 
+/**
+ * Contains main logic for the game. Entry point into the game that allows the user to play the game
+ * @param args
+
+ */
 public class DungeonAdventureGUI {
 	public static void main(String[] args) throws InterruptedException {
 		boolean keepPlaying = true, save = false;
@@ -115,7 +120,8 @@ public class DungeonAdventureGUI {
 	}
 	
 	/**
-	 * Moves the hero in the direction the user selects
+	 * Moves the hero in the direction the user selects. The user can enter "up" "down" "left" or "right" and the hero will move in that direction to the next array
+	 * position
 	 * @param theHero
 	 * @param theDungeon
 	 * @param theDirection
@@ -141,7 +147,7 @@ public class DungeonAdventureGUI {
 	}
 	
 	/**
-	 * The method to load a game that has been saved
+	 * The method to load a game that has been saved by opening the saved file which stores the full progess the user has made
 	 * @param theFile
 	 * @return dsg
 	 */
@@ -219,7 +225,7 @@ public class DungeonAdventureGUI {
 	}
 	
 	/**
-	 * The main method to represent any encounters with the monsters the user comes across
+	 * The method to represent any encounters with the monsters the user comes across. Keeps track of the turns and takes in the attacks from the monster and hero
 	 * @param theHero
 	 * @param theMonster
 	 * @throws InterruptedException 
