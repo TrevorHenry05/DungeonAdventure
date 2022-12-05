@@ -32,11 +32,16 @@ import Model.Hero;
 import Model.HeroFactory;
 import Model.Item;
 
-
+/**
+ * A Class that builds a GUI and uses it to prompt and collect input from the user.
+ * 
+ * @author Trevor Henry, Riley Stevenson, and Colton Wickens
+ * @version 1.0
+ */
 public class ViewGUI extends JFrame {
 
 	/**
-	 * 
+	 * Serialization ID
 	 */
 	private static final long serialVersionUID = 1L;
 	
@@ -64,13 +69,22 @@ public class ViewGUI extends JFrame {
      * JPanel for JButtons on the WEST part of the Frame.
      */
     private final JPanel myJPanel5;
-    
+    /**
+     * JTextArea for the user to be prompted on
+     */
     private final JTextArea myTextArea;
-    
+    /**
+     * JTextField for the User to specify input after being prompted
+     */
     private JTextField myTextField;
-    
+    /**
+     * JScrollPane that is the container for the JTextArea so you can scroll and view current and past prompts
+     */
     private final JScrollPane myScroll;
     
+    /**
+     * Constructor for the ViewGUI
+     */
     public ViewGUI() {
     	super("Dungeon Adventure");
     	myJPanel1 = new JPanel();
@@ -83,43 +97,78 @@ public class ViewGUI extends JFrame {
         myScroll = new JScrollPane(myTextArea);
     }
     
+    /**
+     * Getter for the JPanel for the North side
+     * @return JPanel1
+     */
     public JPanel getPanel1() {
     	return myJPanel1;
     }
     
+    /**
+     * Getter for the JPanel for the CENTER
+     * @return JPanel2
+     */
     public JPanel getPanel2() {
     	return myJPanel2;
     }
     
+    /**
+     * Getter for the JPanel for the SOUTH side
+     * @return JPanel3
+     */
     public JPanel getPanel3() {
     	return myJPanel3;
     }
     
+    /**
+     * Getter for the JPanel for the WEST side
+     * @return JPanel4
+     */
     public JPanel getPanel4() {
     	return myJPanel4;
     }
     
+    /**
+     * Getter for the JPanel for the EAST side
+     * @return JPanel5
+     */
     public JPanel getPanel5() {
     	return myJPanel5;
     }
     
+    /**
+     * Getter for the JTextField for user input
+     * @return JTextField
+     */
     public JTextField getTextField() {
     	return myTextField;
     }
     
+    /**
+     * Getter for JTextArea for the prompts to the user
+     * @return JPanel1
+     */
     public JTextArea getTextArea() {
     	return myTextArea;
     }
     
+    /**
+     * Getter for the JScrollPane for the container of the JTextArea
+     * @return JPanel1
+     */
     public JScrollPane getScrollPane() {
     	return myScroll;
     }
     
+    /**
+     * Resets the Text of the JTextField
+     */
     public void resetText() {
     	myTextField.setText("");
     }
     /**
-     * Resets the text field after any change in method
+     * Removes the JTextField from the JPanel3 and creates adds a new one
      */
     public void resetTextField() {
     	myTextField = new JTextField(20);
@@ -129,7 +178,7 @@ public class ViewGUI extends JFrame {
     }
     /**
      * Adds text to the textarea panel by taking any theString object and displaying it
-     * @param theString
+     * @param theString text that should be put to the JTextArea
      */
     public void addTexttoTextArea(final String theString) {
     	getTextArea().append("\n" + theString);
@@ -138,15 +187,16 @@ public class ViewGUI extends JFrame {
     	vertical.setValue(vertical.getMaximum());
     }
   /**
-   * Scrolls so the window moves automatically  
+   * Makes JScrollPane scroll to bottom after text is added 
    */
     public void updateTextArea() {
     	getScrollPane().validate();
     	JScrollBar vertical = getScrollPane().getVerticalScrollBar();
     	vertical.setValue(vertical.getMaximum());
     }
-  /**
-   * Resets panel1   
+    
+   /**
+   * Resets JPanel1 by removing all contents  
    */
     public void resetPanel1() {
     	myJPanel1.removeAll();
@@ -155,8 +205,9 @@ public class ViewGUI extends JFrame {
     	});
     	pack();
     }
+    
     /**
-     * Resets panel2
+     * Resets JPanel2 by removing all contents  
      */
     public void resetPanel2() {
     	myJPanel2.removeAll();
@@ -165,8 +216,9 @@ public class ViewGUI extends JFrame {
     	});
     	pack();
     }
+    
     /**
-     * Resets panel3
+     * Resets JPanel3 by removing all contents  
      */
     public void resetPanel3() {
     	myJPanel3.removeAll();
@@ -175,8 +227,9 @@ public class ViewGUI extends JFrame {
     	});
     	pack();
     }
+    
     /**
-     * Resets panel4
+     * Resets JPanel4 by removing all contents  
      */
     public void resetPanel4() {
     	myJPanel4.removeAll();
@@ -185,8 +238,9 @@ public class ViewGUI extends JFrame {
     	});
     	pack();
     }
+    
     /**
-     * Resets panel5
+     * Resets JPanel5 by removing all contents  
      */
     public void resetPanel5() {
     	myJPanel5.removeAll();
@@ -195,8 +249,9 @@ public class ViewGUI extends JFrame {
     	});
     	pack();
     }
+    
     /**
-     * Clears all panels
+     * Resets All JPanels by removing all contents  
      */
     public void resetAllPanels() {
     	resetPanel1();
@@ -206,8 +261,9 @@ public class ViewGUI extends JFrame {
     	resetPanel5();
     	pack();
     }
+    
     /**
-     * The start method for the game, opens up a new window for the user and stores all panel information
+     * Setup for the JFrame by adding all the needed content for the start of the game to it
      */
     public void start() {
     	String currDirectory = System.getProperty("user.dir");
@@ -246,8 +302,9 @@ public class ViewGUI extends JFrame {
         pack();
         setVisible(true);
     }
+    
   /**
-   * Displays the how to play text in the panels  
+   * Displays the how to play text to the JTextArea 
    */
     public void displayHowToPlay() {
     	addTexttoTextArea("~~ Welcome to our Dungeon Adventure ~~\n" + 
@@ -264,9 +321,10 @@ public class ViewGUI extends JFrame {
     	pack();
     	
     }
+    
     /**
      * The main menu for the game, prompts the user to create a new save file or load a saved file
-     * @return
+     * @return a boolean, true if user picks create and false for load
      * @throws InterruptedException
      */
     public boolean displayMainMenu() throws InterruptedException {
@@ -286,7 +344,7 @@ public class ViewGUI extends JFrame {
     
     /**
 	 * User will enter the name of their hero, then calls the hero selection that obtains the class type they want to be.
-	 * @return Hero that the user has created
+	 * @return Hero object that the user has created
      * @throws InterruptedException 
 	 */
 	public Hero heroName() throws InterruptedException {
@@ -299,7 +357,7 @@ public class ViewGUI extends JFrame {
 	/**
 	 * User enters the name of the class they wish to select and the Hero is created using the HeroFactory
 	 * @param theName character name that the user wants to be called
-	 * @return Hero that the user has created
+	 * @return Hero object that the user has created
 	 * @throws InterruptedException 
 	 */
 	public Hero heroSelection(final String theName) throws InterruptedException {
@@ -327,11 +385,12 @@ public class ViewGUI extends JFrame {
 		resetText();
 		return hero;
 	}
-/**
- * Takes in how many rows the user wants to be in the dungeon and stores it in the rows variable	
- * @return rows
- * @throws InterruptedException
- */
+	
+	/**
+	 * Takes in how many rows the user wants to be in the dungeon and stores it in the rows variable	
+	 * @return the user chosen  number of rows that the dungeon will have
+	 * @throws InterruptedException
+	 */
 	public int displayRows() throws InterruptedException {
 		int rows;
 		addTexttoTextArea("How many rows do you want the dungeon to be: ");
@@ -341,9 +400,10 @@ public class ViewGUI extends JFrame {
 		resetText();
 		return rows;
 	}
+	
 	/**
 	 * Takes in how many columns the user wants to be in the dungeon and stores it in the cols variable	
-	 * @return cols
+	 * @return the user chosen number of columns the dungeon will have
 	 * @throws InterruptedException
 	 */	
 	public int displayColumns() throws InterruptedException {
@@ -357,8 +417,8 @@ public class ViewGUI extends JFrame {
 	}
 	
 	/**
-	 * Display's the loaded save game files that exist and prompts the user to select a game save
-	 * @return save
+	 * Display's the save game files that exist and prompts the user to enter a save game until they have entered a valid one.
+	 * @return A string that represents the file the user wants to load
 	 * @throws InterruptedException 
 	 */
 	public String displayLoadSave() throws InterruptedException {
@@ -400,7 +460,7 @@ public class ViewGUI extends JFrame {
 	
 	/**
 	 * Displays the text representation of the room the user is currently in
-	 * @param theHero
+	 * @param theHero object
 	 */
 	public void displayCurrRoom(final Hero theHero) {
 		StringBuilder sb = new StringBuilder();
@@ -408,9 +468,10 @@ public class ViewGUI extends JFrame {
 		sb.append(theHero.getCurrRoom().toString());
 		addTexttoTextArea(sb.toString());
 	}
+	
 	/**
-	 * Displays the given text for the user to read in any given panel
-	 * @param theString
+	 * Displays the given text to the specified panel by creating a JLabel with the text and adding it to the specified Panel
+	 * @param theString text to be displayed
 	 * @param thePanel
 	 */
 	public void displayText(final String theString, final int thePanel) {
@@ -431,8 +492,8 @@ public class ViewGUI extends JFrame {
 	
 	/**
 	 * The options for the hero to attack. The user can enter either "normal" or "special" for the attacks. If neither are entered, then the user will 
-	 * see the "please enter valid attack option"
-	 * @return
+	 * see the "please enter valid attack option" and be prompted to enter another option
+	 * @return a string representation of the attack that the user has specified
 	 * @throws InterruptedException 
 	 */
 	public String displayHeroAttacks() throws InterruptedException {
@@ -451,11 +512,11 @@ public class ViewGUI extends JFrame {
 	}
 	
 	/**
+	 * Displays the options menu with the options "move", "inventory", and "save" and after the user specifies which option they want directs them to the prompt they want
 	 * 
-	 * 
-	 * @param theHero
-	 * @param theDungeon
-	 * @return
+	 * @param theHero object
+	 * @param theDungeon object
+	 * @return a boolean, false if user entered move and true if user entered save
 	 * @throws InterruptedException 
 	 */
 	public boolean displayOptions(final Hero theHero, final Dungeon theDungeon) throws InterruptedException {
@@ -487,10 +548,10 @@ public class ViewGUI extends JFrame {
 	}
 	
 	/**
-	 * Displays the current inventory of items the user has. User is prompted if they would like to use the items as well
+	 * Displays the current inventory of items the Hero has. User is prompted if they would like to use the a item or go back to options menu.
 	 * 
-	 * @param theHero
-	 * @param theDungeon
+	 * @param theHero object
+	 * @param theDungeon object
 	 * @throws InterruptedException 
 	 */
 	public void displayInventory(final Hero theHero, final Dungeon theDungeon) throws InterruptedException {		
@@ -535,8 +596,8 @@ public class ViewGUI extends JFrame {
 	}
 	
 	/**
-	 * User will enter what they want their save to be named
-	 * @return SaveGame
+	 * Prompts user for a file name for the save and gets file name.
+	 * @return String representation of the name of the save file the user specified
 	 * @throws InterruptedException 
 	 */
 	public String displaySaveGame() throws InterruptedException {
@@ -548,8 +609,8 @@ public class ViewGUI extends JFrame {
 	}
 	
 	/**
-	 * User has the option to overwrite file if they have entered a new name that already exists
-	 * @return OverWrite
+	 * User has the option to overwrite file if they have entered a save file that already exists
+	 * @return yes or no based of if the user wanted to overwrite the current file or not
 	 * @throws InterruptedException 
 	 */
 	public String displayOverWrite() throws InterruptedException {
@@ -571,8 +632,8 @@ public class ViewGUI extends JFrame {
 	 * Prompts the user with the only possible directions they can travel in the current room and calls the method that asks for 
 	 * which direction they wish to move
 	 * 
-	 * @param theRoom
-	 * @return getMoveOption
+	 * @param theRoom object the Hero is in
+	 * @return  a string representing the direction the user specified they wanted to move
 	 * @throws InterruptedException 
 	 */
 	public String displayMoveOptions(final DungeonRoom theRoom) throws InterruptedException {
@@ -616,11 +677,11 @@ public class ViewGUI extends JFrame {
 	}
 	
 	/**
-	 * Prompts the user by asking which way they would like to travel.
+	 * Prompts the user until a valid move option for the current room is entered.
 	 * 
-	 * @param theRoom
-	 * @param theOptions
-	 * @return direction
+	 * @param theRoom object the Hero is in
+	 * @param theOptions a String array of the only move options available for the current room
+	 * @return direction string of the direction the user specifies to move
 	 * @throws InterruptedException 
 	 */
 	public String getMoveOption(final DungeonRoom theRoom, final String[] theOptions) throws InterruptedException {
@@ -639,9 +700,10 @@ public class ViewGUI extends JFrame {
 		return direction;
 		
 	}
+	
 	/**
-	 * Creates the string for the specific monster in the room to be later stored in the createmonsterpic method
-	 * @param theType
+	 * Creates a JButton with a .png in it of the monster specified and adds it to JPanel1
+	 * @param theType of monster that is currently in the room
 	 */
 	public void displayMonster(final String theType) {
 	    if(theType.equalsIgnoreCase("ogre")) {
@@ -656,10 +718,11 @@ public class ViewGUI extends JFrame {
 	    pack();
 
 	}
+	
 	/**
 	* Creates the monster picture based off of the monster in the dungeon room
-	* @param theString
-	* @return b
+	* @param theString the type of monster in the current room
+	* @return JButton containing the .png of the monster in the room
 	*/
 	private static JButton createMonsterPic(final String theString) {
 		JButton b = new JButton();
@@ -674,10 +737,11 @@ public class ViewGUI extends JFrame {
 
 		return b;
 	}
+	
 	/**
-	 * Creates the string for the specific hero the user selected to be later stored in the createheropic method
-	 * @param theType
-	 */	
+	 * Creates a JButton with a .png in it of the Hero specified and adds it to JPanel1
+	 * @param theType of Hero that the user selected
+	 */
 	public void displayHero(final String heroType) {
         if(heroType.equalsIgnoreCase("warrior")) {
              getPanel1().add(createHeroPic("warrior")); }
@@ -696,10 +760,10 @@ public class ViewGUI extends JFrame {
     }
 	
 	/**
-	* Creates the hero picture based off of hero class the user selects at the beginning of the game
-    * @param theString
-    * @return b
-    */
+	* Creates a JButton with  picture of the Hero the user has selected
+	* @param theString the type of Hero the user selected
+	* @return JButton containing the .png of the Hero the user selected
+	*/
 	private static JButton createHeroPic(final String theString) {
 		JButton b = new JButton();
 
@@ -719,7 +783,7 @@ public class ViewGUI extends JFrame {
 	/**
 	 * User can type whether they would like to quit the game or restart the game
 	 * 
-	 * @return true or false
+	 * @return true if they wish to continue or false if they wish to quit
 	 * @throws InterruptedException 
 	 */
 	public boolean displayKeepPlayingOptions() throws InterruptedException {
@@ -734,12 +798,13 @@ public class ViewGUI extends JFrame {
 		resetText();
 		return answer.equalsIgnoreCase("restart");
 	}
-	  /**
-	   * The method for the empty textfield for the user to enter a string
-	   * @param theTextField
-	   * @return answer
-	   * @throws InterruptedException
-	   */
+	
+	 /**
+	  * Makes the program wait for user to enter a String response in the JTextField
+	  * @param theTextField that we wish to get input from the user from
+	  * @return the string the user entered in to the JTextField
+	  * @throws InterruptedException
+	  */
     private static String makeJTextFieldHoldForString(final JTextField theTextField) throws InterruptedException {
     	final List<String> holder = new LinkedList<String>();
     	theTextField.addActionListener(new ActionListener() {
@@ -763,12 +828,13 @@ public class ViewGUI extends JFrame {
             return answer;
         }
     }
-  /**
-   * The method for the empty textfield for the user to enter an int
-   * @param theTextField
-   * @return answer
-   * @throws InterruptedException
-   */
+    
+    /**
+	  * Makes the program wait for user to enter a Integer response in the JTextField
+	  * @param theTextField that we wish to get input from the user from
+	  * @return the Int the user entered in to the JTextField
+	  * @throws InterruptedException
+	  */
     private static int makeJTextFieldHoldForInt(final JTextField theTextField) throws InterruptedException {
     	final List<Integer> holder = new LinkedList<Integer>();
     	theTextField.addActionListener(new ActionListener() {

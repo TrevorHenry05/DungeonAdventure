@@ -15,11 +15,16 @@ import Model.Monster;
 import View.ViewGUI;
 
 /**
- * Contains main logic for the game. Entry point into the game that allows the user to play the game
- * @param args
-
+ * A class that is the main logic of the dungeonAdventure game
+ * 
+ * @author Trevor Henry, Riley Stevenson, and Colton Wickens
+ * @version 1.0
  */
 public class DungeonAdventureGUI {
+	/**
+	 * Contains main logic for the game. Entry point into the game that allows the user to play the game
+	 * @param args
+	 */
 	public static void main(String[] args) throws InterruptedException {
 		boolean keepPlaying = true, save = false;
 		
@@ -110,21 +115,21 @@ public class DungeonAdventureGUI {
 	
 
 	/**
-	 * Uses the user's current position to determine which room they are in
+	 * Uses the user's current x and y position within the array to determine which room they are in
 	 * @param theHero
 	 * @param theDungeon
-	 * @return HeroCurrRoom
+	 * @return the DungeonRoom object the user is currently in
 	 */
 	public static DungeonRoom getHeroCurrRoom(final Hero theHero, final Dungeon theDungeon) {
 		return theDungeon.getDungeon()[theHero.getCurrX()][theHero.getCurrY()];
 	}
 	
 	/**
-	 * Moves the hero in the direction the user selects. The user can enter "up" "down" "left" or "right" and the hero will move in that direction to the next array
+	 * Moves the hero in the direction the user selects. The user can enter "up" "down" "left" or "right" and the hero will move in that direction to the next DungeonRoom in that array
 	 * position
-	 * @param theHero
-	 * @param theDungeon
-	 * @param theDirection
+	 * @param theHero users hero object
+	 * @param theDungeon dungeon object that is currently being used
+	 * @param theDirection the direction the user specified to move in
 	 */
 	public static void moveHero(final Hero theHero, final Dungeon theDungeon, final String theDirection) {
 		
@@ -147,9 +152,9 @@ public class DungeonAdventureGUI {
 	}
 	
 	/**
-	 * The method to load a game that has been saved by opening the saved file which stores the full progress the user has made
-	 * @param theFile
-	 * @return dsg
+	 * Takes in the a user specified name of a save game they want to load, and loads the DungeonSaveGame state form the .ser file into a new DungeonSaveGame object.
+	 * @param theFile use specified file name to load
+	 * @return a DungeonSaveGame object that contains the Hero and Dungeon to be used
 	 */
 	public static DungeonSaveGame loadSaveGame(final String theFile) {
 		DungeonSaveGame dsg = null;
@@ -225,10 +230,9 @@ public class DungeonAdventureGUI {
 	}
 	
 	/**
-	 * The method to represent any encounters with the monsters the user comes across. Keeps track of the turns and takes in the attacks from the monster and hero
-	 * @param theHero
-	 * @param theMonster
-	 * @throws InterruptedException 
+	 * Takes in a Hero object/Monster object and simulates a encounter between the Hero and Monster using User input until one is Dead
+	 * @param theHero object the user is using
+	 * @param theMonster object the user is fighting
 	 */
 	public static void encounter(final Hero theHero, final Monster theMonster, final ViewGUI theView) throws InterruptedException {
 		double attacks = theHero.getAttackSpeed() / theMonster.getAttackSpeed();	
