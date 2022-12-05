@@ -1,3 +1,10 @@
+/**
+ * Class that creates a new berserker hero for the user
+ * @author Riley Stevenson, Trevor Hnery, Colton Wickens
+ * @version 1.0
+ */
+
+
 package Model;
 
 import Utility.Utility;
@@ -10,7 +17,8 @@ public class Berserker extends Hero{
 	 */
 	private static final long serialVersionUID = 1L;
 	/**
-	 * Constructor for the Berserker class
+	 * Constructor for the Berserker class that stores, the max health, maximum and minimum damage the character can deal, the chance to land an attack, the chance 
+	 * to block an attack and the names of both the hero and the user.
 	 * @param theCharacterName
 	 */
 	public Berserker(final String theCharacterName) {
@@ -18,7 +26,7 @@ public class Berserker extends Hero{
 	}
 	
 	/**
-	 * The chance of the berserker's special ability being successful
+	 * The chance of the berserker's special ability being successful and the textual representation of the process of the special attack
 	 * @param theMonster
 	 */
 	@Override

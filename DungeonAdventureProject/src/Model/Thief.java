@@ -10,7 +10,8 @@ public class Thief extends Hero {
 	 */
 	private static final long serialVersionUID = 1L;
 	/**
-	 * Constructor for the Thief class
+	 * Constructor for the Thief class that stores, the max health, maximum and minimum damage the character can deal, the chance to land an attack, the chance 
+	 * to block an attack and the names of both the hero and the user.
 	 * @param theCharacterName
 	 */
 	public Thief(final String theCharacterName) {
@@ -18,7 +19,7 @@ public class Thief extends Hero {
 	}
 	
 	/**
-	 * The chance the thief lands a special attack
+	 * The chance of the thief's special ability being successful and the textual representation of the process of the special attack
 	 * @param theMonster
 	 */
 	@Override

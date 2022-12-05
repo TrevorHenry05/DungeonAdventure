@@ -58,7 +58,7 @@ public abstract class DungeonCharacter implements Serializable {
 	
 	/**
 	 * returns the specific character's current hit points
-	 * @return myHitPoints
+	 * @return The amount of health the hero has at any given moment 
 	 */
 	public int getHitPoints() {
 		return myHitPoints;
@@ -66,7 +66,7 @@ public abstract class DungeonCharacter implements Serializable {
 	
 	/**
 	 * Gets the max amount of hit points the specific character can have
-	 * @return MaxHitPoints
+	 * @return the max amount of health the hero can have 
 	 */
 	public int getMaxHitPoints() {
 		return myMaxHitPoints;
@@ -86,7 +86,7 @@ public abstract class DungeonCharacter implements Serializable {
 	
 	/**
 	 * Returns the chance to land a normal attack
-	 * @return myChancetoHit
+	 * @return the percentage chance for the user to land a normal attack
 	 */
 	public double getChanceToHit() {
 		return myChanceToHit;
@@ -94,7 +94,7 @@ public abstract class DungeonCharacter implements Serializable {
 	
 	/**
 	 * Returns the max amount of damage a character can deal
-	 * @return myMaxDamage
+	 * @return the maximum amount of damage the user could deal when they use a normal attack
 	 */
 	public int getMaxDamage() {
 		return myMaxDamage;
@@ -102,7 +102,7 @@ public abstract class DungeonCharacter implements Serializable {
 	
 	/**
 	 * Returns the minimum amount of damage a character can deal
-	 * @return myMinDamage
+	 * @return the minimum amount of damage the user could deal when they use a normal attack
 	 */
 	public int getMinDamage() {
 		return myMinDamage;
@@ -110,14 +110,14 @@ public abstract class DungeonCharacter implements Serializable {
 	
 	/**
 	 * Returns the characters attack speed for a turn
-	 * @return myAttackSpeed
+	 * @return the attack speed the user has for the turn. The amount of times the user can attack in a turn
 	 */
 	public int getAttackSpeed() {
 		return myAttackSpeed;
 	}
 	
 	/**
-	 * 
+	 * Checks to see if the user is alive which is determined by if the hero's health is above 0
 	 * @return true or false if the character is alive
 	 */
 	public boolean isAlive() {
@@ -130,7 +130,7 @@ public abstract class DungeonCharacter implements Serializable {
 	
 	/**
 	 * The amount of damage taken in the turn
-	 * @param theDamage
+	 * @param the amount of damage taken from an attack
 	 */
 	public void takeDamage(final int theDamage) {
 		setHitPoints(getHitPoints() - theDamage);

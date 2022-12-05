@@ -91,7 +91,7 @@ public class DungeonRoom implements Serializable{
 	
 	/**
 	 * getter for the monster
-	 * @return myMonster
+	 * @return the monster in the room
 	 */
 	public Monster getMonster() {
 		return myMonster;
@@ -99,7 +99,7 @@ public class DungeonRoom implements Serializable{
 	
 	/**
 	 * getter for the items in the room
-	 * @return myItemsInRoom
+	 * @return the items in the room
 	 */
 	public List<Item> getItemsInRoom() {
 		return myItemsInRoom;
@@ -107,7 +107,7 @@ public class DungeonRoom implements Serializable{
 	
 	/**
 	 * Returns if the room is the exit
-	 * @return myExit
+	 * @return true if the room is the exit or false if the room is not the exit
 	 */
 	public boolean isExit() {
 		return myExit;
@@ -115,7 +115,7 @@ public class DungeonRoom implements Serializable{
 	
 	/**
 	 * Returns if the room is the entrance
-	 * @return myEntrance
+	 * @return true if the room is the entrance or false if the room is not the entrance
 	 */
 	public boolean isEntrance() {
 		return myEntrance;
@@ -123,7 +123,7 @@ public class DungeonRoom implements Serializable{
 	
 	/**
 	 * getter for the room method
-	 * @return myRoom
+	 * @return the created room with the generated objects inside of the room
 	 */
 	public char[][] getRoom() {
 		return myRoom;

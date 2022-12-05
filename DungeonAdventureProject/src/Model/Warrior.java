@@ -11,7 +11,8 @@ public class Warrior extends Hero{
 	private static final long serialVersionUID = 1L;
 
 	/**
-	 * Constructor for the Warrior class
+	 * Constructor for the Warrior class that stores, the max health, maximum and minimum damage the character can deal, the chance to land an attack, the chance 
+	 * to block an attack and the names of both the hero and the user.
 	 * @param theCharacterName
 	 */
 	public Warrior(final String theCharacterName) {
@@ -19,7 +20,7 @@ public class Warrior extends Hero{
 	}
 	
 	/**
-	 * The chance the warrior's special attack lands
+	 * The chance of the warrior's special ability being successful and the textual representation of the process of the special attack
 	 * @param theMonster
 	 */
 	@Override

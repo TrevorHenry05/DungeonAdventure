@@ -9,7 +9,8 @@ public class Priestess extends Hero {
 	 */
 	private static final long serialVersionUID = 1L;
 	/**
-	 * Constructor for the Priestess class
+	 * Constructor for the Priestess class that stores, the max health, maximum and minimum damage the character can deal, the chance to land an attack, the chance 
+	 * to block an attack and the names of both the hero and the user.
 	 * @param theCharacterName
 	 */
 	public Priestess(final String theCharacterName) {
@@ -17,8 +18,7 @@ public class Priestess extends Hero {
 	}
 	
 	/**
-	 * The chance for the priestess to heal
-	 * 
+	 * The chance of the priestess's special ability being successful and the textual representation of the process of the special heal
 	 * @param theCharacter
 	 */
 	@Override

@@ -17,28 +17,41 @@ public class Dungeon implements Serializable {
 	private final DungeonRoom[][] myDungeon;
 	private final int myRows;
 	private final int myColumns;
-
+	/**
+	 * Constructor for the dungeon class, stores the entered rows and columns for the dungeon
+	 * @param theRows
+	 * @param theColumns
+	 */
 	public Dungeon(final int theRows, final int theColumns) {
 		myRows = theRows;
 		myColumns = theColumns;
 		myDungeon = createDungeon(theRows, theColumns);
 	}
-	
+	/**
+	 * getter for the dungeon room
+	 * @return the created dungeon layout for X rows and Y columns
+	 */
 	public DungeonRoom[][] getDungeon() {
 		return myDungeon;
 	}
-	
+	/**
+	 * getter for the amount of rows in the dungeon
+	 * @return the amount of rows that are in the dungeon
+	 */
 	public int getRows() {
 		return myRows;
 	}
-
+	/**
+	 * getter for the amount of coulmns in the dungeon
+	 * @return the amount of columns that are in the dungeon
+	 */
 	public int getColumns() {
 		return myColumns;
 	}
 	
 	/**
 	 *Builds a dungeon room by room from top left to bottom right, inserts potions, monsters, and pillars at random
-	 *through out the dungeon. Then checks if the maze is Traversable and you are able to obtain all the pillars, if not creates a new dungeons
+	 *through out the dungeon. Then checks if the maze is traversable and you are able to obtain all the pillars, if not creates a new dungeons
 	 *until both are true
 	 * 
 	 * @return the created array that represents the dungeon
@@ -130,7 +143,6 @@ public class Dungeon implements Serializable {
 	}
 	/**
 	 * Determines if there is a door to the south in the room to the north of the current room
-	 * 
 	 * @param theDungeon
 	 * @param theI
 	 * @param theJ
@@ -146,7 +158,6 @@ public class Dungeon implements Serializable {
 	
 	/**
 	 * Determines if there is a door to the east of the room to the west of the current room
-	 * 
 	 * @param theDungeon
 	 * @param theI
 	 * @param theJ
@@ -162,7 +173,6 @@ public class Dungeon implements Serializable {
 	
 	/**
 	 * Decides whether the current room should have a door to the east at a 70% chance
-	 * 
 	 * @param theDungeon
 	 * @param theI
 	 * @param theJ
@@ -183,7 +193,6 @@ public class Dungeon implements Serializable {
 	
 	/**
 	 * Determines whether the current room should have a door to the south at a 70% chance
-	 * 
 	 * @param theDungeon
 	 * @param theI
 	 * @param theJ
@@ -355,7 +364,6 @@ public class Dungeon implements Serializable {
 	
 	/**
 	 * Builds a text representation of a dungeon instance using string builder.
-	 * 
 	 * @return the text representation of a dungeon instance
 	 */
 	public String toString() {
