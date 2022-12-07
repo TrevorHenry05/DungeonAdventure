@@ -21,7 +21,6 @@ import javax.swing.JButton;
 import javax.swing.JFrame;
 import javax.swing.JLabel;
 import javax.swing.JPanel;
-import javax.swing.JScrollBar;
 import javax.swing.JScrollPane;
 import javax.swing.JTextArea;
 import javax.swing.JTextField;
@@ -62,15 +61,6 @@ public class ViewGUI extends JFrame {
     private final JPanel myJPanel3;
     
     /**
-     * JPanel for JButtons on the East part of the Frame.
-     */
-    private final JPanel myJPanel4;
-    
-    /**
-     * JPanel for JButtons on the WEST part of the Frame.
-     */
-    private final JPanel myJPanel5;
-    /**
      * JTextArea for the user to be prompted on
      */
     private final JTextArea myTextArea;
@@ -91,8 +81,6 @@ public class ViewGUI extends JFrame {
     	myJPanel1 = new JPanel();
         myJPanel2 = new JPanel();
         myJPanel3 = new JPanel();
-        myJPanel4 = new JPanel();
-        myJPanel5 = new JPanel();
         myTextArea = new JTextArea();
         myTextField = new JTextField(20);
         myScroll = new JScrollPane(myTextArea);
@@ -122,21 +110,7 @@ public class ViewGUI extends JFrame {
     	return myJPanel3;
     }
     
-    /**
-     * Getter for the JPanel for the WEST side
-     * @return JPanel4
-     */
-    public JPanel getPanel4() {
-    	return myJPanel4;
-    }
-    
-    /**
-     * Getter for the JPanel for the EAST side
-     * @return JPanel5
-     */
-    public JPanel getPanel5() {
-    	return myJPanel5;
-    }
+
     
     /**
      * Getter for the JTextField for user input
@@ -183,19 +157,8 @@ public class ViewGUI extends JFrame {
      */
     public void addTexttoTextArea(final String theString) {
     	getTextArea().append("\n" + theString);
-    	getTextArea().validate();
-    	JScrollBar vertical = getScrollPane().getVerticalScrollBar();
-    	vertical.setValue(vertical.getMaximum());
     }
-  /**
-   * Makes JScrollPane scroll to bottom after text is added 
-   */
-    public void updateTextArea() {
-    	getScrollPane().validate();
-    	JScrollBar vertical = getScrollPane().getVerticalScrollBar();
-    	vertical.validate();
-    	vertical.setValue(vertical.getMaximum());
-    }
+  
     
    /**
    * Resets JPanel1 by removing all contents  
@@ -230,27 +193,6 @@ public class ViewGUI extends JFrame {
     	pack();
     }
     
-    /**
-     * Resets JPanel4 by removing all contents  
-     */
-    public void resetPanel4() {
-    	myJPanel4.removeAll();
-    	EventQueue.invokeLater(() -> {
-    	    myJPanel4.updateUI();
-    	});
-    	pack();
-    }
-    
-    /**
-     * Resets JPanel5 by removing all contents  
-     */
-    public void resetPanel5() {
-    	myJPanel5.removeAll();
-    	EventQueue.invokeLater(() -> {
-    	    myJPanel5.updateUI();
-    	});
-    	pack();
-    }
     
     /**
      * Resets All JPanels by removing all contents  
@@ -259,8 +201,6 @@ public class ViewGUI extends JFrame {
     	resetPanel1();
     	resetPanel2();
     	resetPanel3();
-    	resetPanel4();
-    	resetPanel5();
     	pack();
     }
     
@@ -277,15 +217,9 @@ public class ViewGUI extends JFrame {
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
         setLocationRelativeTo(null);
         
-        
-        
         getPanel1().setLayout(new FlowLayout());
         getPanel2().setLayout(new BoxLayout(getPanel2(), BoxLayout.PAGE_AXIS));
         getPanel3().setLayout(new GridBagLayout());
-        getPanel4().setLayout(new BoxLayout(getPanel4(), BoxLayout.PAGE_AXIS));
-        getPanel5().setLayout(new BoxLayout(getPanel5(), BoxLayout.PAGE_AXIS));
-        
-
         
         getPanel3().add(getTextField());;
         getPanel3().setBorder(BorderFactory.createEmptyBorder(10, 10, 10, 10));
@@ -301,8 +235,6 @@ public class ViewGUI extends JFrame {
         add(getPanel2(), BorderLayout.CENTER);
 
         add(getPanel3(), BorderLayout.SOUTH);
-        add(getPanel4(), BorderLayout.EAST);
-        add(getPanel5(), BorderLayout.WEST);
         
         pack();
         setVisible(true);
@@ -487,10 +419,6 @@ public class ViewGUI extends JFrame {
 			case 2: getPanel2().add(jlab);
 					break;
 			case 3: getPanel3().add(jlab);
-					break;
-			case 4: getPanel4().add(jlab);
-					break;
-			case 5: getPanel5().add(jlab);
 					break;
 		}
 	}
