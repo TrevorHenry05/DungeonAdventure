@@ -56,18 +56,15 @@ public class DungeonAdventureGUI {
 				DungeonRoom currRoom = getHeroCurrRoom(hero,dungeon);
 				
 				v.displayCurrRoom(hero);
-				v.updateTextArea();
 				if(hero.getCurrRoom().isExit()) {
 					v.addTexttoTextArea("You have found the exit, but you need to go back and find the other pillars of OO");
 				}
 				
-				v.updateTextArea();
 				v.addTexttoTextArea(currRoom.removeItemsFromRoom(hero));		
 				if(!hero.isAlive()) {
 					break;
 				} 
 				
-				v.updateTextArea();
 				if(currRoom.isMonster()) {
 					Monster monster = currRoom.getMonster();
 					v.displayText("The room you entered contains a " + monster.getMonsterType(), 1);
@@ -86,28 +83,24 @@ public class DungeonAdventureGUI {
 					
 				}
 				
-				v.updateTextArea();
 				if(v.displayOptions(hero, dungeon)) {
 					saveGame(dungeon,hero,v.displaySaveGame(), v);
 					save = true;
 					break;
 				}
 				
-				v.updateTextArea();
 				moveHero(hero,dungeon, v.displayMoveOptions(getHeroCurrRoom(hero,dungeon)));
 			}
 			if(save) {
 				break;
 			}
 			
-			v.updateTextArea();
 			if(!hero.isAlive()) {
 				v.addTexttoTextArea("\nYou have died....");
 			} else {
 				v.addTexttoTextArea("\nGood job on obtaining the pillars of OO and escaping the dungeon");
 			}
 			
-			v.updateTextArea();
 			v.addTexttoTextArea("\n\nEntire Dungeon:\n" + dungeon.toString());
 			keepPlaying = v.displayKeepPlayingOptions();
 		}
