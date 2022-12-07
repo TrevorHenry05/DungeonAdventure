@@ -3,6 +3,11 @@ package Model;
 import Utility.Utility;
 import View.ViewGUI;
 
+/**
+ * A class that creates a new thief hero and stores the special ability of the thief class
+ * @author Trevor Henry, Riley Stevenson, and Colton Wickens
+ * @version 1.0
+ */
 public class Thief extends Hero {
 	
 	/**

@@ -1,7 +1,11 @@
 package Model;
 
 import Utility.Utility;
-
+/**
+ * A class that creates a new warrior hero and stores the special ability of the warrior class
+ * @author Trevor Henry, Riley Stevenson, and Colton Wickens
+ * @version 1.0
+ */
 public class Warrior extends Hero{
 
 	

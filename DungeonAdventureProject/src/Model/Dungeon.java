@@ -5,7 +5,12 @@ import java.util.ArrayList;
 import java.util.List;
 
 import Utility.Utility;
-
+/**
+ * A class that uses serialization to store the contents of the dungeon. The dungeon will be randomly generated based off of the user's input for the rows and collumns
+ * and there will be monsters and items randomly inserted into each dungeon room
+ * @author Trevor Henry, Riley Stevenson, and Colton Wickens
+ * @version 1.0
+ */
 public class Dungeon implements Serializable {
 	
 	/**

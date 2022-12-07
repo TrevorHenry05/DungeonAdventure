@@ -10,8 +10,11 @@ import Utility.Utility;
  */
 
 import View.ViewGUI;
-
-
+/**
+ * A class that creates a new berserker hero and stores the special ability of the berserker class
+ * @author Trevor Henry, Riley Stevenson, and Colton Wickens
+ * @version 1.0
+ */
 public class Berserker extends Hero{
 
 	/**

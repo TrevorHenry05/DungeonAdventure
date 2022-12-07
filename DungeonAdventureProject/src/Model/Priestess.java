@@ -2,6 +2,11 @@ package Model;
 
 import Utility.Utility;
 
+/**
+ * A class that creates a new priestess hero and stores the special ability of the priestess class
+ * @author Trevor Henry, Riley Stevenson, and Colton Wickens
+ * @version 1.0
+ */
 public class Priestess extends Hero {
 	
 	/**
