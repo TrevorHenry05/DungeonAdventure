@@ -25,6 +25,7 @@ import javax.swing.JScrollBar;
 import javax.swing.JScrollPane;
 import javax.swing.JTextArea;
 import javax.swing.JTextField;
+import javax.swing.text.DefaultCaret;
 
 import Model.Dungeon;
 import Model.DungeonRoom;
@@ -192,6 +193,7 @@ public class ViewGUI extends JFrame {
     public void updateTextArea() {
     	getScrollPane().validate();
     	JScrollBar vertical = getScrollPane().getVerticalScrollBar();
+    	vertical.validate();
     	vertical.setValue(vertical.getMaximum());
     }
     
@@ -284,9 +286,12 @@ public class ViewGUI extends JFrame {
         getPanel5().setLayout(new BoxLayout(getPanel5(), BoxLayout.PAGE_AXIS));
         
 
+        
         getPanel3().add(getTextField());;
         getPanel3().setBorder(BorderFactory.createEmptyBorder(10, 10, 10, 10));
 
+        DefaultCaret caret = (DefaultCaret)getTextArea().getCaret();
+        caret.setUpdatePolicy(DefaultCaret.ALWAYS_UPDATE);
         getTextArea().setEditable(false);
         getPanel2().add(getScrollPane());
         
