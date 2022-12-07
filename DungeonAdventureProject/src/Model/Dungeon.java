@@ -90,7 +90,7 @@ public class Dungeon implements Serializable {
 					
 					//add monster
 					chance = Utility.randomNumberGen(0, 100);
-					if(chance < 15) {
+					if(chance < 20) {
 						chance = Utility.randomNumberGen(0, 100);
 						if(chance < 33) {
 							monster = mf.createMonster("ogre");

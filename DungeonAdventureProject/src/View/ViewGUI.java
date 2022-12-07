@@ -271,7 +271,7 @@ public class ViewGUI extends JFrame {
     	ImageIcon imageIcon = new ImageIcon(image);
     	Dimension screenSize = Toolkit.getDefaultToolkit().getScreenSize();
 		setIconImage(imageIcon.getImage());
-		setPreferredSize(new Dimension(screenSize.width * 1 / 3, screenSize.height * 1 / 3));
+		setPreferredSize(new Dimension(screenSize.width * 1 / 2, screenSize.height * 1 / 2));
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
         setLocationRelativeTo(null);
         
@@ -536,6 +536,7 @@ public class ViewGUI extends JFrame {
 			addTexttoTextArea(theHero.toString());
 			displayInventory(theHero, theDungeon);
 			resetPanel1();
+			displayHero(theHero.getClassName());
 			return displayOptions(theHero, theDungeon);
 		} else if(choice.equalsIgnoreCase("dungeon")) {
 			addTexttoTextArea("Dungeon:\n" + theDungeon.toString());
