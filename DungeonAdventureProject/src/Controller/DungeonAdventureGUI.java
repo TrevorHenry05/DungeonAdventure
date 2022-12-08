@@ -104,6 +104,7 @@ public class DungeonAdventureGUI {
 			
 			v.addTexttoTextArea("\n\nEntire Dungeon:\n" + dungeon.toString());
 			keepPlaying = v.displayKeepPlayingOptions();
+			v.dispose();
 		}
 	}
 	

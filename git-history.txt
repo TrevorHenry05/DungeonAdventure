@@ -1,0 +1,218 @@
+* dd6bc65 moved sound to utility
+* d811f90 Music and java docs
+*   0072f85 Merge branch 'TrevorGUI' of https://github.com/TrevorHenry05/DungeonAdventure into TrevorGUI
+|\  
+| * 86500ac Got rid of not used things
+| * 7afafce autoscroll for TextArea
+| * 766afae project demo game
+* | 1165f55 Java docs
+|/  
+*   1d575a3 Merge branch 'TrevorGUI' of https://github.com/TrevorHenry05/DungeonAdventure into TrevorGUI
+|\  
+| * ad6d29e remove View and DungeonAdventure
+* | 13d6160 Update Berserker.java
+|/  
+*   e7796da Merge branch 'TrevorGUI' of https://github.com/TrevorHenry05/DungeonAdventure into TrevorGUI
+|\  
+| * 64c00c2 jeva docs for view and dungeon adventure for both GUII and Console
+* | 8b1139f java docs
+|/  
+* bbc5013 java docs
+* cb26620 Java docs and images
+| * 1032329 Delete gitlog.html
+| | * a6ab4a3 java docs for console based
+| | * 8d27443 feat: mock object
+| | | * c113036 images and java docs
+| |_|/  
+|/| |   
+* | | e232c68 feat: display hero and monster pics
+* | | 4674b2b feat: start on GUI
+* | | a6e2905 feat: part of gui
+|/ /  
+* | 2ff05ff Merge pull request #36 from TrevorHenry05/Trevor2
+|\| 
+| * a9b5fc5 fix: remove recursion from view
+* | fa3b399 Merge pull request #35 from TrevorHenry05/Trevor2
+|\| 
+| * 71da4bd feat: pick size of dungeon
+* | 072f6af Merge pull request #34 from TrevorHenry05/Trevor2
+|\| 
+| * 841d666 fix: some of the java docs
+* | 5a5a40a Merge pull request #33 from TrevorHenry05/Trevor2
+|\| 
+| *   df6fee0 Merge branch 'Trevor2' of https://github.com/TrevorHenry05/DungeonAdventure into Trevor2
+| |\  
+| * | a46d60c fix: no room will have no doors
+* | |   1cea824 Merge pull request #32 from TrevorHenry05/Trevor2
+|\ \ \  
+| | |/  
+| |/|   
+| * |   e2c6527 Merge branch 'main' into Trevor2
+| |\ \  
+| |/ /  
+|/| |   
+* | | 059ccb8 Delete Driver.java
+| * | 879235f Java docs
+| |/  
+| | * e555cb9 Update Dungeon.java
+| | * 7a88ccc Delete mapgenerator.java
+| | *   9ce42e8 Merge branch 'Riley' of https://github.com/TrevorHenry05/DungeonAdventure into Riley
+| | |\  
+| | | *   33be28a Merge pull request #26 from TrevorHenry05/main
+| | | |\  
+| | * | | ed870fd Create .project
+| | |/ /  
+| | * |   fdc5b24 Merge branch 'Riley' of https://github.com/TrevorHenry05/DungeonAdventure into Riley
+| | |\ \  
+| | | * \   8726480 Merge pull request #22 from TrevorHenry05/main
+| | | |\ \  
+| | * | | | 5cff353 Update mapgenerator.java
+| | |/ / /  
+| | * | |   7f03d9a Merge pull request #12 from TrevorHenry05/main
+| | |\ \ \  
+| | | | | | * 7eb7be6 Implemented tests for new Dungeon/DungeonRoom tests, did regression testing
+| | | | | | *   20f8486 Merge pull request #30 from TrevorHenry05/DracoBranch2
+| | | | | | |\  
+| | | | | | | *   a176542 Merge branch 'DracoBranch' into DracoBranch2
+| | | | | | | |\  
+| | | | | | | |/  
+| | | | | | |/|   
+| | | | | | * | 4c1f173 Implemented JUnit tests for Dungeon, DungeonRoom. Updated DungeonRoom to properly update its string form
+| | | | | | * | b8145b0 Commiting changes made. Trying to get JUnit to work
+| | | | | | * |   3f85057 Merge pull request #20 from TrevorHenry05/DracoBranch2
+| | | | | | |\ \  
+| | | | | | | | * 59d9faa Merge pull request #29 from TrevorHenry05/main
+| | | | | | | |/| 
+| |_|_|_|_|_|_|/  
+|/| | | | | | |   
+* | | | | | | |   cb3268d Merge branch 'DracoBranch2' into main
+|\ \ \ \ \ \ \ \  
+| | |_|_|_|_|_|/  
+| |/| | | | | |   
+| * | | | | | |   df2284f Merge branch 'DracoBranch' into DracoBranch2
+| |\ \ \ \ \ \ \  
+| | | |_|_|_|_|/  
+| | |/| | | | |   
+| | * | | | | | cbc40e8 Update DungeonRoom.java
+| | * | | | | | 0da554c Created a basic dungeon to test outputting the dungeon to the console
+* | | | | | | |   5ec1832 Merge pull request #28 from TrevorHenry05/Trevor2
+|\ \ \ \ \ \ \ \  
+| | |_|/ / / / /  
+| |/| | | | | |   
+| * | | | | | | 5d99da1 feat: add berserker class, fix: thief special and other specials
+* | | | | | | | 6c8877f Merge pull request #27 from TrevorHenry05/Trevor2
+|\| | | | | | | 
+| |_|_|_|_|_|/  
+|/| | | | | |   
+| * | | | | | 0dde943 feat: create dungeon
+* | | | | | | 223e3d3 Merge pull request #25 from TrevorHenry05/Trevor2
+|\| | | | | | 
+| * | | | | | 4948596 fix: thief special
+* | | | | | | 6118850 Merge pull request #24 from TrevorHenry05/Trevor2
+|\| | | | | | 
+| * | | | | | 77d9c27 feat: serialization to save and load games
+|/ / / / / /  
+* | | | | |   ccf8b83 Merge pull request #23 from TrevorHenry05/Trevor
+|\ \ \ \ \ \  
+| |_|_|_|_|/  
+|/| | | | |   
+| | | | | | *   aacac76 On Trevor: !!GitHub_Desktop<Trevor>
+| | | | | | |\  
+| | | | | | | * 79ba872 index on Trevor: 2dd170b Revert "feat: Option to restart game"
+| | | | | | |/  
+| | | | | | * 2dd170b Revert "feat: Option to restart game"
+| | | | | | * 0dceee0 Revert "Merge branch 'Trevor' of https://github.com/TrevorHenry05/DungeonAdventure into Trevor"
+| | | | | | *   fe3883a Merge branch 'Trevor' of https://github.com/TrevorHenry05/DungeonAdventure into Trevor
+| | | | | | |\  
+| | |_|_|_|_|/  
+| |/| | | | |   
+| * | | | | |   71b3118 Merge branch 'main' into Trevor
+| |\ \ \ \ \ \  
+| |/ / / / / /  
+|/| | | | | |   
+* | | | | | |   6902040 Merge pull request #21 from TrevorHenry05/Trevor
+|\ \ \ \ \ \ \  
+| |_|/ / / / /  
+|/| | | | | |   
+* | | | | | |   9ecfe8b Merge pull request #18 from TrevorHenry05/Trevor
+|\ \ \ \ \ \ \  
+* | | | | | | | 6918a0c Delete Room.java
+* | | | | | | | 3ff3701 Delete mapgenerator.java
+* | | | | | | | fbea047 Delete Window.java
+| |_|_|_|_|/ /  
+|/| | | | | |   
+* | | | | | |   4ccce03 Merge branch 'Riley' into main
+|\ \ \ \ \ \ \  
+| | |_|_|_|/ /  
+| |/| | | | |   
+| * | | | | | a2f6812 Update mapgenerator.java
+| * | | | | | 0c201e1 Working on dungeon generator
+| * | | | | |   e2dc7ec Merge branch 'Riley' of https://github.com/TrevorHenry05/DungeonAdventure into Riley
+| |\ \ \ \ \ \  
+| | * \ \ \ \ \   f5cfb92 Merge pull request #10 from TrevorHenry05/main
+| | |\ \ \ \ \ \  
+| * | | | | | | | 1736a9f Array generator for the map
+| |/ / / / / / /  
+| * | | | | | |   983c552 Merge pull request #8 from TrevorHenry05/main
+| |\ \ \ \ \ \ \  
+| * | | | | | | | 53a909c Temp algorithm for dungeon generator
+| * | | | | | | |   457bff3 Merge pull request #6 from TrevorHenry05/main
+| |\ \ \ \ \ \ \ \  
+* | \ \ \ \ \ \ \ \   10b9e2f Merge pull request #15 from TrevorHenry05/Trevor
+|\ \ \ \ \ \ \ \ \ \  
+* \ \ \ \ \ \ \ \ \ \   b3fc1c1 Merge pull request #13 from TrevorHenry05/Trevor
+|\ \ \ \ \ \ \ \ \ \ \  
+| |_|_|_|_|_|_|_|_|/ /  
+|/| | | | | | | | | |   
+* | | | | | | | | | |   0e0dba1 Merge pull request #11 from TrevorHenry05/Trevor
+|\ \ \ \ \ \ \ \ \ \ \  
+| |_|_|_|_|_|/ / / / /  
+|/| | | | | | | | | |   
+* | | | | | | | | | |   7bb4b04 Merge pull request #9 from TrevorHenry05/Trevor
+|\ \ \ \ \ \ \ \ \ \ \  
+| |_|_|_|_|_|/ / / / /  
+|/| | | | | | | | | |   
+* | | | | | | | | | |   fd334ff Merge pull request #7 from TrevorHenry05/Trevor
+|\ \ \ \ \ \ \ \ \ \ \  
+| |_|_|_|_|_|/ / / / /  
+|/| | | | | | | | | |   
+* | | | | | | | | | |   49a4753 Merge pull request #5 from TrevorHenry05/Trevor
+|\ \ \ \ \ \ \ \ \ \ \  
+| |_|_|_|_|_|/ / / / /  
+|/| | | | | | | | | |   
+* | | | | | | | | | |   3e37bd4 Merge pull request #4 from TrevorHenry05/Trevor
+|\ \ \ \ \ \ \ \ \ \ \  
+| | | | | | | | | | | * 2c5cfba feat: Option to restart game
+| | | | | | | | | | |/  
+| | | | | | | | | | * c679b52 Added How to play text and IsMazeTraversible
+| | | | | | | | | |/  
+| | | | | | | | | * d945de4 Monster encounters, and added exit/entrance Booleans to each room
+| | | | | | | | |/  
+| | | | | | | | * e98da3e got a start on the view and controller, added maxhitpoints to dungeon chracters, fixed heal methods.
+| | | | | | | |/  
+| | | | | | | * 13a4200 MonsterDB/monster factory, and beggining of controller/view code
+| | | | | | |/  
+| | | | | | * e8e6708 Room/Hero inventory, Hero use item, and displaydungeon aorund hero
+| | | | | |/  
+| | | | | * 5e02461 Dungeon toString
+| | | | |/  
+| | | | * 7762510 Hero/Item Factory, Rough specials for  hero classes,  Dungeon Room createRoom and toString Methods
+| | | |/  
+| | | * e837ee3 Items class basics Dungeon room creation
+| | |/  
+| | * bb11579 Added Monster Heal
+| |/  
+| * c1f6506 Created Basic for classes
+| *   6bccd03 Merge pull request #3 from TrevorHenry05/main
+| |\  
+| |/  
+|/|   
+* | 6d73cba Merge pull request #2 from TrevorHenry05/Trevor
+|\| 
+| *   586416f Merge pull request #1 from TrevorHenry05/main
+| |\  
+| |/  
+|/|   
+* | 75ee126 First Commit
+|/  
+* 9fc3f98 Initial commit
