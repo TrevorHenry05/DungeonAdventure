@@ -31,7 +31,7 @@ import Model.DungeonRoom;
 import Model.Hero;
 import Model.HeroFactory;
 import Model.Item;
-import View.Sound;
+import Utility.Sound;
 
 /**
  * A Class that builds a GUI and uses it to prompt and collect input from the user.
