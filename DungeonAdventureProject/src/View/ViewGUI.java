@@ -31,6 +31,7 @@ import Model.DungeonRoom;
 import Model.Hero;
 import Model.HeroFactory;
 import Model.Item;
+import View.Sound;
 
 /**
  * A Class that builds a GUI and uses it to prompt and collect input from the user.
@@ -208,6 +209,13 @@ public class ViewGUI extends JFrame {
      * Setup for the JFrame by adding all the needed content for the start of the game to it
      */
     public void start() {
+    	
+    	
+    	try {
+			Sound.RunMusic("Music/dungeonsong.wav");
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
     	String currDirectory = System.getProperty("user.dir");
     	String image = currDirectory + "\\images\\Dunicon.jfif";
     	ImageIcon imageIcon = new ImageIcon(image);

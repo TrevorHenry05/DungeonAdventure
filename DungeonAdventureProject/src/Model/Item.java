@@ -1,7 +1,12 @@
 package Model;
 
 import java.io.Serializable;
-
+/**
+ * This is the item class in which the type of item, description and what the item does is stored in a method
+ * 
+ * @author Trevor Henry, Riley Stevenson, and Colton Wickens
+ * @version 1.0
+ */
 public class Item implements Serializable {
 	
 	/**

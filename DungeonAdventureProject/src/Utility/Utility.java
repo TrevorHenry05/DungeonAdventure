@@ -1,7 +1,12 @@
 package Utility;
 
 import java.util.Random;
-
+/**
+ * Class that has the universal random number generator that is used in every class
+ * 
+ * @author Trevor Henry, Riley Stevenson, and Colton Wickens
+ * @version 1.0
+ */
 public class Utility {
 	/**
 	 * Universal random number generator

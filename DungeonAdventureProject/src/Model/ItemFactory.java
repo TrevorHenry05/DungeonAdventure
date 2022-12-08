@@ -1,5 +1,10 @@
 package Model;
-
+/**
+ * Class for the item factory that will return which item the user collects
+ * 
+ * @author Trevor Henry, Riley Stevenson, and Colton Wickens
+ * @version 1.0
+ */
 public class ItemFactory {
 	
 	/**

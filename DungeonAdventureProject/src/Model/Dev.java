@@ -2,6 +2,12 @@ package Model;
 
 import Utility.Utility;
 
+/**
+ * A class that creates a new dev hero and stores the special ability of the dev class. The dev class is used for the developers to quickly navigate through the game
+ * 
+ * @author Trevor Henry, Riley Stevenson, and Colton Wickens
+ * @version 1.0
+ */
 public class Dev extends Hero {
 	/**
 	 * Serialization ID

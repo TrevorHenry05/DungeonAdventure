@@ -1,5 +1,10 @@
 package Model;
-
+/**
+ * Class for the hero factory that will return which hero the user selects
+ * 
+ * @author Trevor Henry, Riley Stevenson, and Colton Wickens
+ * @version 1.0
+ */
 public class HeroFactory {
 	/**
 	 * Creates the hero based off of the selected class

@@ -15,7 +15,8 @@ import Model.Monster;
 import View.ViewGUI;
 
 /**
- * A class that is the main logic of the dungeonAdventure game
+ * A class that is the main logic for the dungeonAdventure game. This is the controller class that allows inputs from the user to control the game.
+ * Uses all created methods and classes to allow the game to be playable. 
  * 
  * @author Trevor Henry, Riley Stevenson, and Colton Wickens
  * @version 1.0

@@ -1,7 +1,12 @@
 package Model;
 
 import java.io.Serializable;
-
+/**
+ * Uses serialization to save a .ser file that stores the user's current progress in the dungeon
+ * 
+ * @author Trevor Henry, Riley Stevenson, and Colton Wickens
+ * @version 1.0
+ */
 public class DungeonSaveGame implements Serializable {
 	
 	/**

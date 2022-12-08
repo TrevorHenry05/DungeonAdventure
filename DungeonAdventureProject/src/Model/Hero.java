@@ -4,7 +4,12 @@ import java.util.ArrayList;
 import java.util.List;
 
 import Utility.Utility;
-
+/**
+ * This is the hero class that will store the name, class and inventory throughout the game
+ * 
+ * @author Trevor Henry, Riley Stevenson, and Colton Wickens
+ * @version 1.0
+ */
 public abstract class Hero extends DungeonCharacter {
 	
 

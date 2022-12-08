@@ -1,7 +1,12 @@
 package Model;
 
 import Utility.Utility;
-
+/**
+ * Class for monsters and will store the monster's heal chance, damage, health and the monster's attack speed
+ * 
+ * @author Trevor Henry, Riley Stevenson, and Colton Wickens
+ * @version 1.0
+ */
 public class Monster extends DungeonCharacter {
 	
 	/**

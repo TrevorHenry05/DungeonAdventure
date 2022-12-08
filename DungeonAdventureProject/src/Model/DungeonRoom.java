@@ -2,7 +2,13 @@ package Model;
 
 import java.io.Serializable;
 import java.util.List;
-
+/**
+ * Class for each dungeon room. Constructor to store the doors, monsters and items in the room. Will also track whether or not the room is an exit or an 
+ * entrance
+ * 
+ * @author Trevor Henry, Riley Stevenson, and Colton Wickens
+ * @version 1.0
+ */
 public class DungeonRoom implements Serializable{
 	
 	/**

@@ -1,7 +1,12 @@
 package Model;
 
 import java.io.Serializable;
-
+/**
+ * Class for the constructor for all dugenon character classes. Stores the health, damage and attack speed
+ * 
+ * @author Trevor Henry, Riley Stevenson, and Colton Wickens
+ * @version 1.0
+ */
 public abstract class DungeonCharacter implements Serializable {
 	/**
 	 * Serialization ID

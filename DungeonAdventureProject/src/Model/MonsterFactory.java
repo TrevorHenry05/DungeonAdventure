@@ -6,7 +6,12 @@ import java.sql.SQLException;
 import java.sql.Statement;
 
 import org.sqlite.SQLiteDataSource;
-
+/**
+ * Class for the monster factory that will return which monster the user encounters in the dungeon
+ * 
+ * @author Trevor Henry, Riley Stevenson, and Colton Wickens
+ * @version 1.0
+ */
 public class MonsterFactory {
 	/**
 	 * Constructor for the monster
