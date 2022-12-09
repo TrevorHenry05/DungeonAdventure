@@ -221,9 +221,9 @@ public class DungeonAdventure {
 	}
 	
 	/**
-	 * The main method to represent any encounters with the monsters the user comes across
-	 * @param theHero
-	 * @param theMonster
+	 * Takes in a Hero and Monster and simulates a battle between the two until one it dead.
+	 * @param theHero user current hero object
+	 * @param theMonster object that the hero is currently fighting
 	 */
 	private static void encounter(final Hero theHero, final Monster theMonster) {
 		double attacks = theHero.getAttackSpeed() / theMonster.getAttackSpeed();	
@@ -248,6 +248,12 @@ public class DungeonAdventure {
 		monsterAttack(theHero, theMonster, view);
 	}
 	
+	/**
+	 * Takes in a Hero object/Monster object and gets the user input for what type of attack they wish to perform and then calls the given method for that attack
+	 * @param theHero object the user is using
+	 * @param theMonster object the user is fighting
+	 * @param theView current View object
+	 */
 	private static void heroAttacks(final Hero theHero, final Monster theMonster, final View theView) {
 		//Get type of attack user wants
 		String attack = theView.displayHeroAttacks();
@@ -265,6 +271,13 @@ public class DungeonAdventure {
 		theHero.setAttacks(theHero.getAttacks() - 1);	
 	}
 	
+	/**
+	 * Takes in a Hero object/Monster object and performs a normal attack and displays to the view if the attack hit or not, how much damage it did, and if it did hit gives the monster a chance 
+	 * to heal and displays to the view how much.
+	 * @param theHero object the user is using
+	 * @param theMonster object the user is fighting
+	 * @param theView current View object
+	 */
 	private static void heroNormalAttack(final Hero theHero, final Monster theMonster, final View theView) {
 		int monsterHealth = theMonster.getHitPoints();
 		//if normal succeeded
@@ -283,6 +296,13 @@ public class DungeonAdventure {
 		}
 	}
 	
+	/**
+	 * Takes in a Hero object/Monster object and performs a special and based off the type of hero displays the correct information whether you healed or damaged the monster \
+	 * and if it damaged the monster the monster has a chance to heal to the view.
+	 * @param theHero object the user is using
+	 * @param theMonster object the user is fighting
+	 * @param theView current View object
+	 */
 	private static void heroSpecialAttack(final Hero theHero, final Monster theMonster, final View theView) {
 		int monsterHealth = theMonster.getHitPoints();
 		//if the hero is a priestess
@@ -311,6 +331,12 @@ public class DungeonAdventure {
 		}
 	}
 	
+	/**
+	 * Takes in a Hero object/Monster object and lets the monster perform an attack and displays to the view if it hit or not, and how much damage it did.
+	 * @param theHero object the user is using
+	 * @param theMonster object the user is fighting
+	 * @param theView current View object
+	 */
 	private static void monsterAttack(final Hero theHero, final Monster theMonster, final View theView) {
 				//monsters attack
 				theView.displayText("\nIts the " + theMonster.getMonsterType() + " turn to attack");
