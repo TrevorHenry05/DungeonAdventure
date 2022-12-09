@@ -20,9 +20,6 @@ public class HeroFactory {
 		if(theHero.equalsIgnoreCase("berserker")) {
 			return new Berserker(theName);
 		}
-		if(theHero.equalsIgnoreCase("mock")) {
-			return new Mock(theName);
-		}
 		
 		throw new IllegalArgumentException("Illegal Argument Entered in CreateHero method");
 	}
