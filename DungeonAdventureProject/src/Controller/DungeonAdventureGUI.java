@@ -115,7 +115,7 @@ public class DungeonAdventureGUI {
 	 * @param theDungeon
 	 * @return the DungeonRoom object the user is currently in
 	 */
-	public static DungeonRoom getHeroCurrRoom(final Hero theHero, final Dungeon theDungeon) {
+	private static DungeonRoom getHeroCurrRoom(final Hero theHero, final Dungeon theDungeon) {
 		return theDungeon.getDungeon()[theHero.getCurrX()][theHero.getCurrY()];
 	}
 	
@@ -126,7 +126,7 @@ public class DungeonAdventureGUI {
 	 * @param theDungeon dungeon object that is currently being used
 	 * @param theDirection the direction the user specified to move in
 	 */
-	public static void moveHero(final Hero theHero, final Dungeon theDungeon, final String theDirection) {
+	private static void moveHero(final Hero theHero, final Dungeon theDungeon, final String theDirection) {
 		
 		if(theDirection.equalsIgnoreCase("up")) {
 			theHero.setCurrX(theHero.getCurrX() - 1);
@@ -151,7 +151,7 @@ public class DungeonAdventureGUI {
 	 * @param theFile use specified file name to load
 	 * @return a DungeonSaveGame object that contains the Hero and Dungeon to be used
 	 */
-	public static DungeonSaveGame loadSaveGame(final String theFile) {
+	private static DungeonSaveGame loadSaveGame(final String theFile) {
 		DungeonSaveGame dsg = null;
 		
 		try
@@ -187,7 +187,7 @@ public class DungeonAdventureGUI {
 	 * @param theFileName the file name the user wanted
 	 * @throws InterruptedException 
 	 */
-	public static void saveGame(final Dungeon theDungeon, final Hero theHero, final String theFileName, final ViewGUI theView) throws InterruptedException {
+	private static void saveGame(final Dungeon theDungeon, final Hero theHero, final String theFileName, final ViewGUI theView) throws InterruptedException {
 		DungeonSaveGame dsg = new DungeonSaveGame(theDungeon, theHero);
 		String currDirectory = System.getProperty("user.dir");
 		String saveGameDir = currDirectory + "\\SaveGames";
@@ -228,8 +228,10 @@ public class DungeonAdventureGUI {
 	 * Takes in a Hero object/Monster object and simulates a encounter between the Hero and Monster using User input until one is Dead
 	 * @param theHero object the user is using
 	 * @param theMonster object the user is fighting
+	 * @param theView current ViewGUI object the game is on
+	 * @throws InterruptedException 
 	 */
-	public static void encounter(final Hero theHero, final Monster theMonster, final ViewGUI theView) throws InterruptedException {
+	private static void encounter(final Hero theHero, final Monster theMonster, final ViewGUI theView) throws InterruptedException {
 		double attacks = theHero.getAttackSpeed() / theMonster.getAttackSpeed();	
 		
 		//figure out number of hero attacks
@@ -242,59 +244,107 @@ public class DungeonAdventureGUI {
 		
 		//Hero attacks
 		while(theHero.getAttacks() > 0) {
-			//Get type of attack user wants
-			String attack = theView.displayHeroAttacks();
-			//if User wants a normal attack
-			int monsterHealth = theMonster.getHitPoints();
-			if(attack.equalsIgnoreCase("normal")) {
-				//if normal succeeded
-				if(theHero.attack(theMonster)) {
-					theView.addTexttoTextArea("The attack succeeded and you dealt " + (monsterHealth - theMonster.getHitPoints()) + " damage. Monsters current health " + theMonster.getHitPoints());
-					monsterHealth = theMonster.getHitPoints();
-					if(theMonster.isAlive()) {
-						theMonster.heal();
-						theView.addTexttoTextArea("The monster attempted to heal and healed " + (theMonster.getHitPoints() - monsterHealth) + " health points. Monsters current health " + theMonster.getHitPoints());
-					} else {
-						return;
-					}
-				//if normal failed
-				} else {
-					theView.addTexttoTextArea("Your normal attack failed to land");
-				}
+			heroAttack(theHero, theMonster, theView);
+			//check if monster is alive return if not
+			if(!theMonster.isAlive()) {
+				return;
 			}
-			
-			//if user wants a special attack
-			if(attack.equalsIgnoreCase("special")) {
-				//if the hero is a priestess
-				if(theHero.getClassName().equalsIgnoreCase("priestess")) {
-					int heroHealth = theHero.getHitPoints();
-					theHero.special(theHero);
-					theView.addTexttoTextArea("Your heal succeeded in healing " + (theHero.getHitPoints() - heroHealth) + " health points. Your current health is " + theHero.getHitPoints());				
-				//else if hero is a thief
-				}  else {
-					//if special succeeded
-					if(theHero.special(theMonster)) {
-						theView.addTexttoTextArea("The special attack succeeded and you dealt " + (monsterHealth - theMonster.getHitPoints()) + " damage. Monsters current health " + theMonster.getHitPoints());
-						monsterHealth = theMonster.getHitPoints();
-						//if monster still alive try heal
-						if(theMonster.isAlive()) {
-							theMonster.heal();
-							theView.addTexttoTextArea("The monster attempted to heal and healed " + (theMonster.getHitPoints() - monsterHealth) + " health points. Monsters current health " + theMonster.getHitPoints());
-						//else dead so return
-						} else {
-							return;
-						}
-					//else special failed
-					} else {
-						theView.addTexttoTextArea("Your special attack failed to land");
-					}
-				}
-			}
-			
-			theHero.setAttacks(theHero.getAttacks() - 1);			
 		}
 		
 		//monsters attack
+		monsterAttack(theHero, theMonster, theView);		
+	}
+	
+	/**
+	 * Takes in a Hero object/Monster object and asks the user what type of attack they would like to perform and then calls the method pertaining to the type of attack performed.
+	 * @param theHero object the user is using
+	 * @param theMonster object the user is fighting
+	 * @param theView current ViewGUI object the game is on
+	 */
+	private static void heroAttack(final Hero theHero, final Monster theMonster, final ViewGUI theView) throws InterruptedException {
+		//Get type of attack user wants
+		String attack = theView.displayHeroAttacks();
+		//if User wants a normal attack
+		if(attack.equalsIgnoreCase("normal")) {
+			heroNormalAttack(theHero, theMonster, theView);
+		}
+		
+		//if user wants a special attack
+		if(attack.equalsIgnoreCase("special")) {
+			heroSpecialAttack(theHero, theMonster, theView);
+		}
+		
+		theHero.setAttacks(theHero.getAttacks() - 1);			
+	
+	}
+	
+	/**
+	 * Takes in a Hero object/Monster object and performs a normal attack on the monster and displays whether it hit or not, how much damage it did, and if it did hit it will give the 
+	 * monster a chance to heal and display for how much to the view.
+	 * @param theHero object the user is using
+	 * @param theMonster object the user is fighting
+	 * @param theView current ViewGUI object the game is on
+	 */
+	private static void heroNormalAttack(final Hero theHero, final Monster theMonster, final ViewGUI theView) {
+		int monsterHealth = theMonster.getHitPoints();
+		//if normal succeeded
+		if(theHero.attack(theMonster)) {
+			theView.addTexttoTextArea("The attack succeeded and you dealt " + (monsterHealth - theMonster.getHitPoints()) + " damage. Monsters current health " + theMonster.getHitPoints());
+			monsterHealth = theMonster.getHitPoints();
+			if(theMonster.isAlive()) {
+				theMonster.heal();
+				theView.addTexttoTextArea("The monster attempted to heal and healed " + (theMonster.getHitPoints() - monsterHealth) + " health points. Monsters current health " + theMonster.getHitPoints());
+			} else {
+				return;
+			}
+		//if normal failed
+		} else {
+			theView.addTexttoTextArea("Your normal attack failed to land");
+		}
+	}
+	
+	/**
+	 * Takes in a Hero object/Monster object and performs a special and based off the type of hero displays the correct information whether you healed or damaged the monster \
+	 * and if it damaged the monster the monster has a chance to heal to the view.
+	 * @param theHero object the user is using
+	 * @param theMonster object the user is fighting
+	 * @param theView current ViewGUI object the game is on
+	 */
+	private static void heroSpecialAttack(final Hero theHero, final Monster theMonster, final ViewGUI theView) {
+		int monsterHealth = theMonster.getHitPoints();
+		//if the hero is a priestess
+		if(theHero.getClassName().equalsIgnoreCase("priestess")) {
+			int heroHealth = theHero.getHitPoints();
+			theHero.special(theHero);
+			theView.addTexttoTextArea("Your heal succeeded in healing " + (theHero.getHitPoints() - heroHealth) + " health points. Your current health is " + theHero.getHitPoints());				
+		//else if hero is a thief
+		}  else {
+			//if special succeeded
+			if(theHero.special(theMonster)) {
+				theView.addTexttoTextArea("The special attack succeeded and you dealt " + (monsterHealth - theMonster.getHitPoints()) + " damage. Monsters current health " + theMonster.getHitPoints());
+				monsterHealth = theMonster.getHitPoints();
+				//if monster still alive try heal
+				if(theMonster.isAlive()) {
+					theMonster.heal();
+					theView.addTexttoTextArea("The monster attempted to heal and healed " + (theMonster.getHitPoints() - monsterHealth) + " health points. Monsters current health " + theMonster.getHitPoints());
+				//else dead so return
+				} else {
+					return;
+				}
+			//else special failed
+			} else {
+				theView.addTexttoTextArea("Your special attack failed to land");
+			}
+		}
+	}
+	
+	/**
+	 * Takes in a Hero object/Monster object and lets the monster perform an attack on the hero and displays the information of the attack and if it missed or not and how much damage it did to the view
+	 * @param theHero object the user is using
+	 * @param theMonster object the user is fighting
+	 * @param theView current ViewGUI object the game is on
+	 */
+	private static void monsterAttack(final Hero theHero, final Monster theMonster, final ViewGUI theView) {
 		theView.addTexttoTextArea("\nIts the " + theMonster.getMonsterType() + " turn to attack");
 		int heroHealth = theHero.getHitPoints();
 		//if attack succeeded
@@ -305,7 +355,5 @@ public class DungeonAdventureGUI {
 		} else {
 			theView.addTexttoTextArea("The " + theMonster.getMonsterType() + " failed in landing an attack");
 		}
-		
-		
 	}
 }
