@@ -114,7 +114,7 @@ public class DungeonAdventure {
 	 * @param theDungeon
 	 * @return HeroCurrRoom
 	 */
-	public static DungeonRoom getHeroCurrRoom(final Hero theHero, final Dungeon theDungeon) {
+	private static DungeonRoom getHeroCurrRoom(final Hero theHero, final Dungeon theDungeon) {
 		return theDungeon.getDungeon()[theHero.getCurrX()][theHero.getCurrY()];
 	}
 	
@@ -124,7 +124,7 @@ public class DungeonAdventure {
 	 * @param theDungeon
 	 * @param theDirection
 	 */
-	public static void moveHero(final Hero theHero, final Dungeon theDungeon, final String theDirection) {
+	private static void moveHero(final Hero theHero, final Dungeon theDungeon, final String theDirection) {
 		
 		if(theDirection.equalsIgnoreCase("up")) {
 			theHero.setCurrX(theHero.getCurrX() - 1);
@@ -150,7 +150,7 @@ public class DungeonAdventure {
 	 * @param theHero
 	 * @param theFileName
 	 */
-	public static void saveGame(final Dungeon theDungeon, final Hero theHero, final String theFileName) {
+	private static void saveGame(final Dungeon theDungeon, final Hero theHero, final String theFileName) {
 		DungeonSaveGame dsg = new DungeonSaveGame(theDungeon, theHero);
 		String currDirectory = System.getProperty("user.dir");
 		String saveGameDir = currDirectory + "\\SaveGames";
@@ -193,7 +193,7 @@ public class DungeonAdventure {
 	 * @param theFile
 	 * @return dsg
 	 */
-	public static DungeonSaveGame loadSaveGame(final String theFile) {
+	private static DungeonSaveGame loadSaveGame(final String theFile) {
 		DungeonSaveGame dsg = null;
 		
 		try
@@ -225,7 +225,7 @@ public class DungeonAdventure {
 	 * @param theHero
 	 * @param theMonster
 	 */
-	public static void encounter(final Hero theHero, final Monster theMonster) {
+	private static void encounter(final Hero theHero, final Monster theMonster) {
 		double attacks = theHero.getAttackSpeed() / theMonster.getAttackSpeed();	
 		View view = new View();
 		
@@ -239,70 +239,90 @@ public class DungeonAdventure {
 		
 		//Hero attacks
 		while(theHero.getAttacks() > 0) {
-			//Get type of attack user wants
-			String attack = view.displayHeroAttacks();
-			
-			//if User wants a normal attack
-			int monsterHealth = theMonster.getHitPoints();
-			if(attack.equalsIgnoreCase("normal")) {
-				//if normal succeeded
-				if(theHero.attack(theMonster)) {
-					view.displayText("The attack succeeded and you dealt " + (monsterHealth - theMonster.getHitPoints()) + " damage. Monsters current health " + theMonster.getHitPoints());
-					monsterHealth = theMonster.getHitPoints();
-					if(theMonster.isAlive()) {
-						theMonster.heal();
-						view.displayText("The monster attempted to heal and healed " + (theMonster.getHitPoints() - monsterHealth) + " health points. Monsters current health " + theMonster.getHitPoints() + "\n");
-					} else {
-						return;
-					}
-				//if normal failed
-				} else {
-					view.displayText("Your normal attack failed to land\n");
-				}
+			heroAttacks(theHero, theMonster, view);
+			if(!theMonster.isAlive()) {
+				return;
 			}
-			
-			//if user wants a special attack
-			if(attack.equalsIgnoreCase("special")) {
-				//if the hero is a priestess
-				if(theHero.getClassName().equalsIgnoreCase("priestess")) {
-					int heroHealth = theHero.getHitPoints();
-					theHero.special(theHero);
-					view.displayText("Your heal succeeded in healing " + (theHero.getHitPoints() - heroHealth) + " health points. Your current health is " + theHero.getHitPoints());				
-				//else if hero is a thief
-				}  else {
-					//if special succeeded
-					if(theHero.special(theMonster)) {
-						view.displayText("The special attack succeeded and you dealt " + (monsterHealth - theMonster.getHitPoints()) + " damage. Monsters current health " + theMonster.getHitPoints());
-						monsterHealth = theMonster.getHitPoints();
-						//if monster still alive try heal
-						if(theMonster.isAlive()) {
-							theMonster.heal();
-							view.displayText("The monster attempted to heal and healed " + (theMonster.getHitPoints() - monsterHealth) + " health points. Monsters current health " + theMonster.getHitPoints() + "\n");
-						//else dead so return
-						} else {
-							return;
-						}
-					//else special failed
-					} else {
-						view.displayText("Your special attack failed to land");
-					}
-				}
-			}
-			
-			theHero.setAttacks(theHero.getAttacks() - 1);			
 		}
 		
-		//monsters attack
-		view.displayText("\nIts the " + theMonster.getMonsterType() + " turn to attack");
-		int heroHealth = theHero.getHitPoints();
-		//if attack succeeded
-		if(theMonster.attack(theHero)) {
-			view.displayText("The " + theMonster.getMonsterType() + " succesfuly landed an attack.");
-			view.displayText("You lost " + (heroHealth - theHero.getHitPoints()) + " health points. Your current health " + theHero.getHitPoints() + "\n");
-		//else attack failed
+		monsterAttack(theHero, theMonster, view);
+	}
+	
+	private static void heroAttacks(final Hero theHero, final Monster theMonster, final View theView) {
+		//Get type of attack user wants
+		String attack = theView.displayHeroAttacks();
+		
+		//if User wants a normal attack
+		if(attack.equalsIgnoreCase("normal")) {
+			heroNormalAttack(theHero, theMonster, theView);
+		}
+		
+		//if user wants a special attack
+		if(attack.equalsIgnoreCase("special")) {
+			heroSpecialAttack(theHero, theMonster, theView);
+		}
+		
+		theHero.setAttacks(theHero.getAttacks() - 1);	
+	}
+	
+	private static void heroNormalAttack(final Hero theHero, final Monster theMonster, final View theView) {
+		int monsterHealth = theMonster.getHitPoints();
+		//if normal succeeded
+		if(theHero.attack(theMonster)) {
+			theView.displayText("The attack succeeded and you dealt " + (monsterHealth - theMonster.getHitPoints()) + " damage. Monsters current health " + theMonster.getHitPoints());
+			monsterHealth = theMonster.getHitPoints();
+			if(theMonster.isAlive()) {
+				theMonster.heal();
+				theView.displayText("The monster attempted to heal and healed " + (theMonster.getHitPoints() - monsterHealth) + " health points. Monsters current health " + theMonster.getHitPoints() + "\n");
+			} else {
+				return;
+			}
+		//if normal failed
 		} else {
-			view.displayText("The " + theMonster.getMonsterType() + " failed in landing an attack\n");
-		}	
+			theView.displayText("Your normal attack failed to land\n");
+		}
+	}
+	
+	private static void heroSpecialAttack(final Hero theHero, final Monster theMonster, final View theView) {
+		int monsterHealth = theMonster.getHitPoints();
+		//if the hero is a priestess
+		if(theHero.getClassName().equalsIgnoreCase("priestess")) {
+			int heroHealth = theHero.getHitPoints();
+			theHero.special(theHero);
+			theView.displayText("Your heal succeeded in healing " + (theHero.getHitPoints() - heroHealth) + " health points. Your current health is " + theHero.getHitPoints());				
+		//else if hero is a thief
+		}  else {
+			//if special succeeded
+			if(theHero.special(theMonster)) {
+				theView.displayText("The special attack succeeded and you dealt " + (monsterHealth - theMonster.getHitPoints()) + " damage. Monsters current health " + theMonster.getHitPoints());
+				monsterHealth = theMonster.getHitPoints();
+				//if monster still alive try heal
+				if(theMonster.isAlive()) {
+					theMonster.heal();
+					theView.displayText("The monster attempted to heal and healed " + (theMonster.getHitPoints() - monsterHealth) + " health points. Monsters current health " + theMonster.getHitPoints() + "\n");
+				//else dead so return
+				} else {
+					return;
+				}
+			//else special failed
+			} else {
+				theView.displayText("Your special attack failed to land");
+			}
+		}
+	}
+	
+	private static void monsterAttack(final Hero theHero, final Monster theMonster, final View theView) {
+				//monsters attack
+				theView.displayText("\nIts the " + theMonster.getMonsterType() + " turn to attack");
+				int heroHealth = theHero.getHitPoints();
+				//if attack succeeded
+				if(theMonster.attack(theHero)) {
+					theView.displayText("The " + theMonster.getMonsterType() + " succesfuly landed an attack.");
+					theView.displayText("You lost " + (heroHealth - theHero.getHitPoints()) + " health points. Your current health " + theHero.getHitPoints() + "\n");
+				//else attack failed
+				} else {
+					theView.displayText("The " + theMonster.getMonsterType() + " failed in landing an attack\n");
+				}	
 	}
 
 }
