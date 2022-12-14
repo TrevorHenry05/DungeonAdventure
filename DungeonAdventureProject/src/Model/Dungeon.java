@@ -33,6 +33,7 @@ public class Dungeon implements Serializable {
 		myColumns = theColumns;
 		myDungeon = createDungeon(theRows, theColumns);
 	}
+	
 	/**
 	 * getter for the dungeon room
 	 * @return the created dungeon layout for X rows and Y columns
@@ -40,6 +41,7 @@ public class Dungeon implements Serializable {
 	public DungeonRoom[][] getDungeon() {
 		return myDungeon;
 	}
+	
 	/**
 	 * getter for the amount of rows in the dungeon
 	 * @return the amount of rows that are in the dungeon
@@ -47,6 +49,7 @@ public class Dungeon implements Serializable {
 	public int getRows() {
 		return myRows;
 	}
+	
 	/**
 	 * getter for the amount of coulmns in the dungeon
 	 * @return the amount of columns that are in the dungeon
@@ -147,6 +150,7 @@ public class Dungeon implements Serializable {
 
 		return createDungeon(theRows, theColumns);
 	}
+	
 	/**
 	 * Determines if there is a door to the south in the room to the north of the current room
 	 * @param theDungeon

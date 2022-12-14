@@ -17,7 +17,7 @@ public class Sound {
 			AudioInputStream inputStream = AudioSystem.getAudioInputStream(new File(path));
 			Clip clip = AudioSystem.getClip();
 			clip.open(inputStream);
-			clip.loop(0);
+			clip.loop(100);
 		} catch (UnsupportedAudioFileException e) {
 			e.printStackTrace();
 		} catch (IOException e) {

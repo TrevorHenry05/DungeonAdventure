@@ -262,7 +262,7 @@ public class ViewGUI extends JFrame {
 				+ "they will have chance to heal.When your attacks have finished the monster will have one chance to attack you which will also have a chance to miss.");
     	addTexttoTextArea("\nInventory: When you view the inventory you will be shown your health, heal/vision potions, and pillars found and you will be given the option either use an item or go back\n"
 				+ "to the options menu. You are only able to use items if you have them." +
-				"\nDeveloper Options: When in the options menu enter dungeon to view the whole dungeon.\n");
+				"\n\nDeveloper Options: When in the options menu enter dungeon to view the whole dungeon. Entering Dev for hero type will give you a Stronger charavter.\n");
     	pack();
     	
     }
