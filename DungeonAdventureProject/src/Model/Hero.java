@@ -21,8 +21,8 @@ public abstract class Hero extends DungeonCharacter {
 	private DungeonRoom myCurrRoom;
 	private int myAttacks;
 	
-	public Hero(final int theHitPoints,final int theMaxHitPoints, final int theMinDamage, final int theMaxDamage, final double theChanceToHit, final int theAttackSpeed, final double theBlockChance, final String theClassName, final String theCharacterName, final int theAttacks) {
-		super(theHitPoints,theMaxHitPoints, theMinDamage, theMaxDamage, theChanceToHit, theAttackSpeed);
+	public Hero(final int theHitPoints, final int theMaxHitPoints, final int theMinDamage, final int theMaxDamage, final double theChanceToHit, final int theAttackSpeed, final double theBlockChance, final String theClassName, final String theCharacterName, final int theAttacks) {
+		super(theHitPoints, theMaxHitPoints, theMinDamage, theMaxDamage, theChanceToHit, theAttackSpeed);
 		myCharacterName = theCharacterName;
 		myBlockChance = theBlockChance;
 		myClassName = theClassName;
@@ -134,6 +134,7 @@ public abstract class Hero extends DungeonCharacter {
 				} else {
 					setHitPoints(newHealth);
 				}
+				return true;
 			} else if(theItem.getType() == 'V') {
 				return true;
 			} else if(theItem.getType() == 'X') {

@@ -17,8 +17,8 @@ public abstract class DungeonCharacter implements Serializable {
 	private final int myAttackSpeed;
 	private final int myMaxHitPoints;
 	
-	public DungeonCharacter(final int theHitPoints,final int theMaxHitPoints, final int theMinDamage, final int theMaxDamage, final double theChanceToHit, final int theAttackSpeed) {
-		myHitPoints = theHitPoints;
+	public DungeonCharacter(final int theHitPoints, final int theMaxHitPoints, final int theMinDamage, final int theMaxDamage, final double theChanceToHit, final int theAttackSpeed) {
+		myHitPoints = theMaxHitPoints;
 		myMaxHitPoints = theMaxHitPoints;
 		myMinDamage = theMinDamage;
 		myMaxDamage = theMaxDamage;

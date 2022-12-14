@@ -29,7 +29,7 @@ public class MonsterFactory {
 		            
 		            ResultSet rs = stmt.executeQuery(query);
 		            String type = rs.getString("monstertype");
-		            return new Monster(rs.getInt("hitpoints"),rs.getInt("hitpoints"), rs.getInt("mindamage"), rs.getInt("maxdamage"), rs.getDouble("hitchance"), rs.getInt("attackspeed"),rs.getDouble("healchance"), rs.getInt("healmin"), rs.getInt("healmax"), type );
+		            return new Monster(rs.getInt("hitpoints"), rs.getInt("hitpoints"), rs.getInt("mindamage"), rs.getInt("maxdamage"), rs.getDouble("hitchance"), rs.getInt("attackspeed"),rs.getDouble("healchance"), rs.getInt("healmin"), rs.getInt("healmax"), type );
 		        } catch ( SQLException e ) {
 		            e.printStackTrace();
 		            System.exit( 0 );
@@ -43,7 +43,7 @@ public class MonsterFactory {
 		            
 		            ResultSet rs = stmt.executeQuery(query);
 		            String type = rs.getString("monstertype");
-		            return new Monster(rs.getInt("hitpoints"),rs.getInt("hitpoints"),  rs.getInt("mindamage"), rs.getInt("maxdamage"), rs.getDouble("hitchance"), rs.getInt("attackspeed"),rs.getDouble("healchance"), rs.getInt("healmin"), rs.getInt("healmax"), type );
+		            return new Monster(rs.getInt("hitpoints"), rs.getInt("hitpoints"),  rs.getInt("mindamage"), rs.getInt("maxdamage"), rs.getDouble("hitchance"), rs.getInt("attackspeed"),rs.getDouble("healchance"), rs.getInt("healmin"), rs.getInt("healmax"), type );
 		        } catch ( SQLException e ) {
 		            e.printStackTrace();
 		            System.exit( 0 );
