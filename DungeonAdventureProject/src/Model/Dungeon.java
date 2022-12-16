@@ -5,67 +5,54 @@ import java.util.ArrayList;
 import java.util.List;
 
 import Utility.Utility;
-/**
- * A class that uses serialization to store the contents of the dungeon. The dungeon will be randomly generated based off of the user's input for the rows and collumns
- * and there will be monsters and items randomly inserted into each dungeon room
- * 
- * @author Trevor Henry, Riley Stevenson, and Colton Wickens
- * @version 1.0
- */
+
 public class Dungeon implements Serializable {
 	
 	/**
 	 * Serialization ID
 	 */
 	private static final long serialVersionUID = 1L;
-
-
-	private final DungeonRoom[][] myDungeon;
-	private final int myRows;
-	private final int myColumns;
 	/**
-	 * Constructor for the dungeon class, stores the entered rows and columns for the dungeon
-	 * @param theRows
-	 * @param theColumns
+	 * Multidimensional array of DungeonRooms that represents the dungeon
+	 * @serial
+	 */
+	private DungeonRoom[][] myDungeon;
+
+	/**
+	 * Constructor for the Dungeon class
+	 * @param theRows number of rows the dungeon should be
+	 * @param theColumns number of columns the dungeon should be
 	 */
 	public Dungeon(final int theRows, final int theColumns) {
-		myRows = theRows;
-		myColumns = theColumns;
 		myDungeon = createDungeon(theRows, theColumns);
 	}
 	
 	/**
-	 * getter for the dungeon room
-	 * @return the created dungeon layout for X rows and Y columns
+	 * Getter for myDungeon
+	 * 
+	 * @return the the MultiDimensional Array of DungeonRooms for the Dungeon
 	 */
 	public DungeonRoom[][] getDungeon() {
 		return myDungeon;
 	}
 	
 	/**
-	 * getter for the amount of rows in the dungeon
-	 * @return the amount of rows that are in the dungeon
+	 * Setter for myDungeon
+	 * 
+	 * @param theDungeon a multidimensional array of DungeonRoom's 
 	 */
-	public int getRows() {
-		return myRows;
-	}
-	
-	/**
-	 * getter for the amount of coulmns in the dungeon
-	 * @return the amount of columns that are in the dungeon
-	 */
-	public int getColumns() {
-		return myColumns;
+	public void setDungeon(final DungeonRoom[][] theDungeon) {
+		myDungeon = theDungeon;
 	}
 	
 	/**
 	 *Builds a dungeon room by room from top left to bottom right, inserts potions, monsters, and pillars at random
-	 *through out the dungeon. Then checks if the maze is traversable and you are able to obtain all the pillars, if not creates a new dungeons
+	 *through out the dungeon. Then checks if the maze is Traversable and you are able to obtain all the pillars, if not creates a new dungeons
 	 *until both are true
 	 * 
-	 * @return the created array that represents the dungeon
+	 * @return the created mutlidimensional array of DungeonRooms that represents the dungeon
 	 */
-	private static DungeonRoom[][] createDungeon(final int theRows, final int theColumns) {
+	public static DungeonRoom[][] createDungeon(final int theRows, final int theColumns) {
 		DungeonRoom[][] d = new DungeonRoom[theRows][theColumns];
 		MonsterFactory mf =  new MonsterFactory();
 		ItemFactory If = new ItemFactory();
@@ -150,15 +137,15 @@ public class Dungeon implements Serializable {
 
 		return createDungeon(theRows, theColumns);
 	}
-	
 	/**
 	 * Determines if there is a door to the south in the room to the north of the current room
-	 * @param theDungeon
-	 * @param theI
-	 * @param theJ
+	 * 
+	 * @param theDungeon a multidimensional array of DungeonRoom's 
+	 * @param theI the I values of the room in the MultiDimensional Array
+	 * @param theJ the J values of the room in the MultiDimensional Array
 	 * @return false if the room is on the top row of the array, returns whether or not there is a door going south in the room above it
 	 */
-	private static boolean isNorthDoor(final DungeonRoom[][] theDungeon, final int theI, final int theJ) {
+	public static boolean isNorthDoor(final DungeonRoom[][] theDungeon, final int theI, final int theJ) {
 		if(theI < 1) {
 			return false;
 		}
@@ -168,12 +155,13 @@ public class Dungeon implements Serializable {
 	
 	/**
 	 * Determines if there is a door to the east of the room to the west of the current room
-	 * @param theDungeon
-	 * @param theI
-	 * @param theJ
+	 * 
+	 * @param theDungeon a multidimensional array of DungeonRoom's 
+	 * @param theI the I values of the room in the MultiDimensional Array
+	 * @param theJ the J values of the room in the MultiDimensional Array
 	 * @return false if the door is in the first column of the array, returns whether or not there is a door going east in the room to the left of it
 	 */
-	private static boolean isWestDoor(final DungeonRoom[][] theDungeon, final int theI, final int theJ) {
+	public static boolean isWestDoor(final DungeonRoom[][] theDungeon, final int theI, final int theJ) {
 		if(theJ < 1) {
 			return false;
 		}
@@ -183,12 +171,13 @@ public class Dungeon implements Serializable {
 	
 	/**
 	 * Decides whether the current room should have a door to the east at a 70% chance
-	 * @param theDungeon
-	 * @param theI
-	 * @param theJ
+	 * 
+	 * @param theDungeon a multidimensional array of DungeonRoom's 
+	 * @param theI the I values of the room in the MultiDimensional Array
+	 * @param theJ the J values of the room in the MultiDimensional Array
 	 * @return true if the random number (chance) is above 70
 	 */
-	private static boolean isEastDoor(final DungeonRoom[][] theDungeon, final int theI, final int theJ) {
+	public static boolean isEastDoor(final DungeonRoom[][] theDungeon, final int theI, final int theJ) {
 		if(theJ > theDungeon[theI].length - 2) {
 			return false;
 		}
@@ -203,12 +192,13 @@ public class Dungeon implements Serializable {
 	
 	/**
 	 * Determines whether the current room should have a door to the south at a 70% chance
-	 * @param theDungeon
-	 * @param theI
-	 * @param theJ
+	 * 
+	 * @param theDungeon a multidimensional array of DungeonRoom's 
+	 * @param theI the I values of the room in the MultiDimensional Array
+	 * @param theJ the J values of the room in the MultiDimensional Array
 	 * @return true if the random number (chance) is above 70
 	 */
-	private static boolean isSouthDoor(final DungeonRoom[][] theDungeon, final int theI, final int theJ) {
+	public static boolean isSouthDoor(final DungeonRoom[][] theDungeon, final int theI, final int theJ) {
 		if(theI > theDungeon.length - 2) {
 			return false;
 		}
@@ -223,7 +213,7 @@ public class Dungeon implements Serializable {
 	/**
 	 * Resets all the rooms in the dungeon myRoomChecked instance variable back to false
 	 * 
-	 * @param theDungeon
+	 * @param theDungeon a multidimensional array of DungeonRoom's 
 	 */
 	public static void resetRoomsChecked(final DungeonRoom[][] theDungeon) {
 		for(int i = 0; i < theDungeon.length; i++) {
@@ -236,7 +226,7 @@ public class Dungeon implements Serializable {
 	/**
 	 * Places pillars through out the dungeon randomly and make sure no two pillars are in the same room
 	 * 
-	 * @param theDungeon
+	 * @param theDungeon a multidimensional array of DungeonRoom's 
 	 */
 	public static void placePillars(final DungeonRoom[][] theDungeon) {
 		ItemFactory If = new ItemFactory();
@@ -265,7 +255,7 @@ public class Dungeon implements Serializable {
 	/**
 	 * Resets the checked instance fields and then calls the helper method that checks if you can traverse the maze from start to finish
 	 * 
-	 * @param theDungeon
+	 * @param theDungeon a multidimensional array of DungeonRoom's 
 	 * @return Helper for isMazeTraversable method
 	 */
 	public static boolean isMazeTraversable(final DungeonRoom[][] theDungeon) {
@@ -276,10 +266,10 @@ public class Dungeon implements Serializable {
 	/**
 	 * Traverses the dungeon to check if you can traverse to the exit door
 	 * 
-	 * @param theDungeon
-	 * @param theX
-	 * @param theY
-	 * @param theDir
+	 * @param theDungeon a multidimensional array of DungeonRoom's 
+	 * @param theX current x values of the Room
+	 * @param theY current Y values of the Room
+	 * @param theDir that we came into the room from
 	 * @return true if the maze is able to go from start room to exit room, or false if the maze is unable to be completed
 	 */
 	private static boolean isMazeTraversable(final DungeonRoom[][] theDungeon, final int theX, final int theY, final String theDir) {
@@ -318,7 +308,7 @@ public class Dungeon implements Serializable {
 	 * Resets if the room checked instance variables of rooms in dungeon and then calls helper method that checks if you are able to get
 	 * to all rooms that contain pillars
 	 * 
-	 * @param theDungeon
+	 * @param theDungeon a multidimensional array of DungeonRoom's 
 	 * @return Helper for isPillarsObtainable method
 	 */
 	public static boolean isPillarsObtainable(final DungeonRoom[][] theDungeon) {
@@ -329,14 +319,14 @@ public class Dungeon implements Serializable {
 	/**
 	 * Traverses the maze room by room to finds out if you are able to obtain all pillars in the maze.
 	 * 
-	 * @param theDungeon
-	 * @param theX
-	 * @param theY
-	 * @param theDir
-	 * @param theCount
+	 * @param theDungeon a multidimensional array of DungeonRoom's 
+	 * @param theX value of the room in the Dungeon
+	 * @param theY value of the room in the Dungeon
+	 * @param theDir that we came into the room from
+	 * @param theCount of pillars found so far in the DFS search
 	 * @return false if the pillars are not obtainable and returns true if you can get to all pillars in the maze.
 	 */
-	public static boolean isPillarsObtainable(final DungeonRoom[][] theDungeon, final int theX, final int theY, final String theDir, final int theCount) {
+	private static boolean isPillarsObtainable(final DungeonRoom[][] theDungeon, final int theX, final int theY, final String theDir, final int theCount) {
 		DungeonRoom room = theDungeon[theX][theY];
 		boolean north = false, south = false, east = false, west = false;
 		int count = theCount;
@@ -374,6 +364,7 @@ public class Dungeon implements Serializable {
 	
 	/**
 	 * Builds a text representation of a dungeon instance using string builder.
+	 * 
 	 * @return the text representation of a dungeon instance
 	 */
 	public String toString() {

@@ -30,7 +30,7 @@ public class Dev extends Hero {
 	@Override
 	public boolean special(final DungeonCharacter  theMonster) {
 		
-		theMonster.takeDamage(Utility.randomNumberGen(125, 200));
+		theMonster.takeDamage(Utility.randomNumberGen(200, 200));
 		return true;
 		
 	}

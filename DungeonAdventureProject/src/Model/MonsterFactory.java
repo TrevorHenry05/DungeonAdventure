@@ -6,17 +6,12 @@ import java.sql.SQLException;
 import java.sql.Statement;
 
 import org.sqlite.SQLiteDataSource;
-/**
- * Class for the monster factory that will return which monster the user encounters in the dungeon
- * 
- * @author Trevor Henry, Riley Stevenson, and Colton Wickens
- * @version 1.0
- */
+
 public class MonsterFactory {
 	/**
 	 * Constructor for the monster
-	 * @param theMonster
-	 * @return monster
+	 * @param theMonster type that should be created
+	 * @return Monster object that was created
 	 */
 	public Monster createMonster(final String theMonster) {
 		
@@ -71,6 +66,10 @@ public class MonsterFactory {
 		            e.printStackTrace();
 		            System.exit( 0 );
 		        }
+		}
+		
+		if(theMonster.equalsIgnoreCase("mock")) {
+			return new MockMonster();
 		}
 		
 		throw new IllegalArgumentException("Illegal Argument Entered");
