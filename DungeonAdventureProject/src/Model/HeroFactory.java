@@ -1,6 +1,12 @@
 package Model;
 
 public class HeroFactory {
+	/**
+	 * Creates the hero based off of the selected class
+	 * @param theHero
+	 * @param theName
+	 * @return Hero
+	 */
 	public Hero createHero(final String theHero, final String theName) {
 		if(theHero.equalsIgnoreCase("warrior")) {
 			return new Warrior(theName);
@@ -14,7 +20,10 @@ public class HeroFactory {
 		if(theHero.equalsIgnoreCase("berserker")) {
 			return new Berserker(theName);
 		}
+		if(theHero.equalsIgnoreCase("dev")) {
+			return new Dev(theName);
+		}
 		
-		throw new IllegalArgumentException("Illegal Argument Entered"); 
+		throw new IllegalArgumentException("Illegal Argument Entered in CreateHero method");
 	}
 }

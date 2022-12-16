@@ -2,9 +2,7 @@ package Model;
 
 import Utility.Utility;
 
-public class Warrior extends Hero{
-
-	
+public class Dev extends Hero{
 	/**
 	 * Serialization ID
 	 */
@@ -14,8 +12,8 @@ public class Warrior extends Hero{
 	 * Constructor for the Warrior class
 	 * @param theCharacterName
 	 */
-	public Warrior(final String theCharacterName) {
-		super(125,125,35,60, 0.8, 4, 0.2, "Warrior", theCharacterName, 0);
+	public Dev(final String theCharacterName) {
+		super(200,200,100,150, 1.0, 6, 0.8, "Warrior", theCharacterName, 0);
 	}
 	
 	/**
@@ -24,12 +22,7 @@ public class Warrior extends Hero{
 	 */
 	@Override
 	public boolean special(final DungeonCharacter  theMonster) {
-		int chanceHit = Utility.randomNumberGen(0,100);
-		
-		if(chanceHit < 40) {
-			theMonster.takeDamage(Utility.randomNumberGen(75, 175));
-			return true;
-		}
-		return false;
+		theMonster.takeDamage(Utility.randomNumberGen(100, 200));
+		return true;	
 	}
 }

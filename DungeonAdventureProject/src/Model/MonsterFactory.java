@@ -8,7 +8,11 @@ import java.sql.Statement;
 import org.sqlite.SQLiteDataSource;
 
 public class MonsterFactory {
-	
+	/**
+	 * Constructor for the monster
+	 * @param theMonster
+	 * @return monster
+	 */
 	public Monster createMonster(final String theMonster) {
 		
 		SQLiteDataSource ds = null;

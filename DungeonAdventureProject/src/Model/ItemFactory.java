@@ -1,6 +1,12 @@
 package Model;
 
 public class ItemFactory {
+	
+	/**
+	 * Constructor for item class and what item will be created
+	 * @param theItem
+	 * @return Item
+	 */
 	public Item createItem(final String theItem) {
 		if(theItem.equalsIgnoreCase("heal")) {
 			return new Item('H', "Healing Potion", true, true);

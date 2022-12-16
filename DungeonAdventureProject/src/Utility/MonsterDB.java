@@ -7,7 +7,11 @@ import java.sql.Statement;
 import org.sqlite.SQLiteDataSource;
 
 public class MonsterDB {
-
+	
+	/**
+	 * The database for the monsters that can be called at any time throughout the game.
+	 * @param args
+	 */
 	public static void main(String[] args) {
 
 		SQLiteDataSource ds = null;
