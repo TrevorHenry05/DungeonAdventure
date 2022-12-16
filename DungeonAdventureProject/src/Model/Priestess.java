@@ -10,7 +10,7 @@ public class Priestess extends Hero {
 	private static final long serialVersionUID = 1L;
 	/**
 	 * Constructor for the Priestess class
-	 * @param theCharacterName
+	 * @param theCharacterName the User picked for his Hero
 	 */
 	public Priestess(final String theCharacterName) {
 		//Health, MinDMG, MaxDMG, Hit%, AtkSpd, Block%
@@ -18,9 +18,9 @@ public class Priestess extends Hero {
 	}
 	
 	/**
-	 * The chance for the priestess to heal
+	 * The special for the Priestess class
 	 * 
-	 * @param theCharacter
+	 * @param theCharacter the special should be performed on
 	 */
 	@Override
 	public boolean special(final DungeonCharacter theCharacter) {

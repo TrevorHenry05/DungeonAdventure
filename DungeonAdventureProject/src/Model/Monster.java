@@ -31,16 +31,16 @@ public class Monster extends DungeonCharacter {
 	
 	/**
 	 * Constructor for the monster class
-	 * @param theHitPoints
-	 * @param theMaxHitPoints
-	 * @param theMinDamage
-	 * @param theMaxDamage
-	 * @param theChanceToHit
-	 * @param theAttackSpeed
-	 * @param theHealChance
-	 * @param theHealMin
-	 * @param theHealMax
-	 * @param theMonsterType
+	 * @param theHitPoints the Heros current HitPoints
+	 * @param theMaxHitPoints the Heros Max hit points that it can be healed past
+	 * @param theMinDamage the minimum amount of damage a normal attack can do
+	 * @param theMaxDamage the maximum amount of damage a normal attack can do
+	 * @param theChanceToHit the chance for a normal attack top hit
+	 * @param theAttackSpeed the Hero attack speed
+	 * @param theHealChance the chance the monster can heal after being hit
+	 * @param theHealMin the minimum the Monster can heal after being hit
+	 * @param theHealMax the maximum the Monster can heal after being hit
+	 * @param theMonsterType the Type of Monster of the current monster
 	 */
 	public Monster(final int theHitPoints, final int theMaxHitPoints, final int theMinDamage, final int theMaxDamage, final double theChanceToHit, final int theAttackSpeed, final double theHealChance, final int theHealMin, final int theHealMax, final String theMonsterType) {
 		super(theHitPoints, theMaxHitPoints, theMinDamage, theMaxDamage, theChanceToHit, theAttackSpeed);

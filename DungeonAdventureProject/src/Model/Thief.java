@@ -18,8 +18,9 @@ public class Thief extends Hero {
 	}
 	
 	/**
-	 * The chance the thief lands a special attack
-	 * @param theMonster
+	 * The Special for the Thief Class
+	 * 
+	 * @param theMonster the special should be performed on
 	 */
 	@Override
 	public boolean special(final DungeonCharacter  theMonster) {

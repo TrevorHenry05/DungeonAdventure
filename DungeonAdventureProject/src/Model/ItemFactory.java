@@ -4,8 +4,8 @@ public class ItemFactory {
 	
 	/**
 	 * Constructor for item class and what item will be created
-	 * @param theItem
-	 * @return Item
+	 * @param theItem name
+	 * @return Item object that was created
 	 */
 	public Item createItem(final String theItem) {
 		if(theItem.equalsIgnoreCase("heal")) {

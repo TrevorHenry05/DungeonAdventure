@@ -40,12 +40,12 @@ public abstract class DungeonCharacter implements Serializable {
 
 	/**
 	 * The constructor for the DungeonCharacter class
-	 * @param theHitPoints
-	 * @param theMaxHitPoints
-	 * @param theMinDamage
-	 * @param theMaxDamage
-	 * @param theChanceToHit
-	 * @param theAttackSpeed
+	 * @param theHitPoints the current hit points of the DungeonCharacter
+	 * @param theMaxHitPoints the max hit points the DungeonCharacter can heal to
+	 * @param theMinDamage the minimum amount of damage a normal attack can do
+	 * @param theMaxDamage the maximum amount of damage a normal attack can do
+	 * @param theChanceToHit the chance for a normal attack top hit
+	 * @param theAttackSpeed the Hero attack speed
 	 */
 	public DungeonCharacter(final int theHitPoints,final int theMaxHitPoints, final int theMinDamage, final int theMaxDamage, final double theChanceToHit, final int theAttackSpeed) {
 		myHitPoints = theHitPoints;

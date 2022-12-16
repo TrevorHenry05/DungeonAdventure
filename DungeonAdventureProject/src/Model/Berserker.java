@@ -18,8 +18,9 @@ public class Berserker extends Hero{
 	}
 	
 	/**
-	 * The chance of the berserker's special ability being successful
-	 * @param theMonster
+	 * The special for the berserker class
+	 * 
+	 * @param theMonster the special should be performed on
 	 */
 	@Override
 	public boolean special(final DungeonCharacter  theMonster) {
