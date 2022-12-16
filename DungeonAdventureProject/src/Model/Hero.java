@@ -193,20 +193,6 @@ public abstract class Hero extends DungeonCharacter {
 		getInventory().add(theItem);
 	}
 	
-	/**
-	 * Uses string builder to generate a string to represent what items the user is currently holding
-	 * 
-	 * @return a text representation of the items the user is currently holding
-	 */
-	public String showInventory() {
-		StringBuilder sb = new StringBuilder();
-		for(Item item: getInventory()) {
-			sb.append(item.getDescription());
-			sb.append(System.lineSeparator());
-		}
-		
-		return sb.toString();
-	}
 	
 	/**
 	 * Uses a StringBuilder to build and Return a text representation of the rooms that are surrounding the room the hero is currently in.
