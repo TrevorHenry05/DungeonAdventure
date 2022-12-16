@@ -11,6 +11,7 @@ import Model.DungeonRoom;
 import Model.Hero;
 import Model.Item;
 import Model.ItemFactory;
+import Model.Monster;
 import Model.MonsterFactory;
 import Model.Warrior;
 
@@ -22,12 +23,13 @@ class DungeonRoomTest {
 	private MonsterFactory m = new MonsterFactory();
 	private Hero h = new Warrior("John");
 	private ItemFactory i = new ItemFactory();
+	
 	@BeforeEach
 	void setUp() {
 		a = new DungeonRoom(new ArrayList<Item>(), null, false, false, false, false, false, false, false);
 		a.addItem(i.createItem("heal"));
-		b = new DungeonRoom(new ArrayList<Item>(), null, true, true, true, true, true, true, true);
-		c = new DungeonRoom(new ArrayList<Item>(), null, true, false, true, false, false, false, true);
+		b = new DungeonRoom(new ArrayList<Item>(), null, true, true, true, true, true, true, false);
+		c = new DungeonRoom(new ArrayList<Item>(), null, true, false, true, false, false, false, false);
 		c.addItem(i.createItem("trap"));
 		c.addItem(i.createItem("vision"));
 		c.addItem(i.createItem("abstraction"));
@@ -39,6 +41,22 @@ class DungeonRoomTest {
 		assertTrue(d.isMonster());
 		assertFalse(c.isMonster());
 	}
+	
+	@Test
+	void testSetMonster() {
+		a.setMonster(m.createMonster("ogre"));
+		assertTrue(a.isMonster());
+		d.setMonster(null);
+		assertFalse(d.isMonster());
+	}
+	
+	@Test
+	void testGetMonster() {
+		Monster monster = m.createMonster("ogre");
+		a.setMonster(monster);
+		assertEquals(monster, a.getMonster());
+	}
+	
 	@Test
 	void testGetItems() {
 		assertEquals(1, a.getItemsInRoom().size());
@@ -65,23 +83,43 @@ class DungeonRoomTest {
 		assertFalse(a.isEast());
 		assertTrue(b.isEast());
 	}
-//	@Test
-//	void testIsFinalRoom() {
-//		assertFalse(a.isFinalRoom());
-//		assertTrue(b.isFinalRoom());
-//	}
+	
+	@Test
+	void testIsExit() {
+		assertFalse(a.isExit());
+		assertTrue(b.isExit());
+	}
+	
+	@Test
+	void testIsEntrance() {
+		assertFalse(a.isEntrance());
+		assertTrue(b.isEntrance());
+	}
+	
 	@Test
 	void testToString() {
-		//a.addItem(new Item('H', "Heal", true));
-		//System.out.println(a.getItemsInRoom().get(0).getType());
-		assertEquals("***\r\n*H*\r\n***\r\n", a.toString());
-		assertEquals("*-*\r\n|I|\r\n*-*\r\n", b.toString());
-		assertEquals("*-*\r\n|M*\r\n***\r\n", c.toString());
+		StringBuilder sb = new StringBuilder();
+		StringBuilder sb2 = new StringBuilder();
+		
+		sb.append("***");
+		sb.append(System.lineSeparator());
+		sb.append("*H*");
+		sb.append(System.lineSeparator());
+		sb.append("***");
+		sb.append(System.lineSeparator());
+		assertEquals(sb.toString(), a.toString());
+		
+		sb2.append("*-*");
+		sb2.append(System.lineSeparator());
+		sb2.append("|M*");
+		sb2.append(System.lineSeparator());
+		sb2.append("***");
+		sb2.append(System.lineSeparator());
+		assertEquals(sb2.toString(), c.toString());
 	}
 	@Test
 	void testGetRoom() {
 		char[][] p = a.getRoom();
-		//assertTrue(a.getRoom().equals(new char[][]{{'*', '*', '*'}, {'*', 'H', '*'}, {'*', '*', '*'}}));
 		assertTrue(p[0][0] == '*');
 		assertTrue(p[0][1] == '*');
 		assertTrue(p[0][2] == '*');
@@ -92,18 +130,69 @@ class DungeonRoomTest {
 		assertTrue(p[2][1] == '*');
 		assertTrue(p[2][2] == '*');
 	}
+	
+	@Test
+	void testCreateRoom() {
+		char[][] aRoom = a.getRoom();
+		char[][] created = a.createRoom();
+		assertTrue(aRoom[0][0] == created[0][0]);
+		assertTrue(aRoom[0][1] == created[0][1]);
+		assertTrue(aRoom[0][2] == created[0][2]);
+		assertTrue(aRoom[1][0] == created[1][0]);
+		assertTrue(aRoom[1][1] == created[1][1]);
+		assertTrue(aRoom[1][2] == created[1][2]);
+		assertTrue(aRoom[2][0] == created[2][0]);
+		assertTrue(aRoom[2][1] == created[2][1]);
+		assertTrue(aRoom[2][2] == created[2][2]);
+	}
+	
+	@Test
+	void testSetRoom() {
+		a.setRoom();
+		char[][] p = a.getRoom();
+		assertTrue(p[0][0] == '*');
+		assertTrue(p[0][1] == '*');
+		assertTrue(p[0][2] == '*');
+		assertTrue(p[1][0] == '*');
+		assertTrue(p[1][1] == 'H');
+		assertTrue(p[1][2] == '*');
+		assertTrue(p[2][0] == '*');
+		assertTrue(p[2][1] == '*');
+		assertTrue(p[2][2] == '*');
+	}
+	
 	@Test
 	void testRemoveItemFromRoom() {
-		c.removeItemsFromRoom(h);
-		assertEquals(0, c.getItemsInRoom().size());
-		assertEquals(2, h.getInventory().size());
+		StringBuilder sb = new StringBuilder();
+		sb.append("You obtained a Heal potion\n");
+		assertEquals(sb.toString(),a.removeItemsFromRoom(h));
+		assertEquals(0, a.getItemsInRoom().size());
+		assertEquals(1, h.getInventory().size());
 	}
+	
+	@Test
+	void testAddItem() {
+		a.addItem(i.createItem("heal"));
+		assertEquals(2, a.getItemsInRoom().size());
+	}
+	
 	@Test
 	void testIsChecked() {
 		assertFalse(a.isChecked());
+		assertFalse(b.isChecked());
+		assertFalse(c.isChecked());
+	}
+	
+	@Test
+	void testSetRoomChecked() {
+		a.setRoomChecked(true);
+		b.setRoomChecked(true);
+		c.setRoomChecked(true);
+		assertTrue(a.isChecked());
 		assertTrue(b.isChecked());
 		assertTrue(c.isChecked());
 	}
+	
 	@Test
 	void testContainsPillar() {
 		assertFalse(a.containsPillar());

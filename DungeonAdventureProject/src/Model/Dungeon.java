@@ -272,7 +272,7 @@ public class Dungeon implements Serializable {
 	 * @param theDir that we came into the room from
 	 * @return true if the maze is able to go from start room to exit room, or false if the maze is unable to be completed
 	 */
-	private static boolean isMazeTraversable(final DungeonRoom[][] theDungeon, final int theX, final int theY, final String theDir) {
+	public static boolean isMazeTraversable(final DungeonRoom[][] theDungeon, final int theX, final int theY, final String theDir) {
 		DungeonRoom room = theDungeon[theX][theY];
 		boolean north = false, south = false, east = false, west = false;
 		

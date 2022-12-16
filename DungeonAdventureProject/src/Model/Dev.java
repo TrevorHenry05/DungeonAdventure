@@ -13,7 +13,7 @@ public class Dev extends Hero{
 	 * @param theCharacterName
 	 */
 	public Dev(final String theCharacterName) {
-		super(200,200,100,150, 1.0, 6, 0.8, "Warrior", theCharacterName, 0);
+		super(200,200,150,150, 1.0, 6, 0.8, "Warrior", theCharacterName, 0);
 	}
 	
 	/**
