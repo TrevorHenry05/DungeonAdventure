@@ -10,18 +10,10 @@ import Model.Hero;
 import Model.HeroFactory;
 import Model.Item;
 
-/**
- * A Class that builds and displays propmpts to the user in the Console and collects input from the user through the console.
- * 
- * @author Trevor Henry, Riley Stevenson, and Colton Wickens
- * @version 1.0
- */
+
 public class View {
-	/**
-	 * A Global scanner variable to be used
-	 */
-	private static final Scanner INPUT = new Scanner(System.in);
 	
+	private static final Scanner INPUT = new Scanner(System.in);
 	/**
 	 * Displays the text instructions for the user to play the game
 	 */
@@ -39,8 +31,8 @@ public class View {
 		System.out.println("\nDeveloper Options: When in the options menu enter dungeon to view the whole dungeon.\n");
 	}
 	/**
-	 * The main menu for the game, prompts the user to create a new save file or load a saved file
-     * @return a boolean, true if user picks create and false for load
+	 * Allows the user to either create a new game or load a previously saved game
+	 * @return true or false
 	 */
 	public boolean displayMainMenu() {
 		System.out.println("Would you like to create a new game(create) or load a save game(load):");
@@ -59,8 +51,8 @@ public class View {
 	}
 	
 	/**
-	 * Display's the save game files that exist and prompts the user to enter a save game until they have entered a valid one.
-	 * @return A string that represents the file the user wants to load
+	 * Display's the loaded save game files that exist and prompts the user to select a game
+	 * @return save
 	 */
 	public String displayLoadSave() {
 		String currDirectory = System.getProperty("user.dir");
@@ -93,8 +85,8 @@ public class View {
 	}
 	
 	/**
-	 * Prompts user for a file name for the save and gets file name.
-	 * @return String representation of the name of the save file the user specified
+	 * User will enter what they want their save to be named
+	 * @return SaveGame
 	 */
 	public String displaySaveGame() {
 		System.out.println("\nWhat do you want the name of the save to be?");
@@ -102,8 +94,8 @@ public class View {
 	}
 	
 	/**
-	 * User has the option to overwrite file if they have entered a save file that already exists
-	 * @return yes or no based of if the user wanted to overwrite the current file or not
+	 * User has the option to overwrite file if they have entered a new name that already exists
+	 * @return OverWrite
 	 */
 	public String displayOverWrite() {
 		System.out.println("\nWould you like to overwrite this file(yes or no):");
@@ -116,10 +108,7 @@ public class View {
 		
 		return answer;
 	}
-	/**
-	 * Takes in how many rows the user wants to be in the dungeon and stores it in the rows variable	
-	 * @return the user chosen  number of rows that the dungeon will have
-	 */	
+	
 	public int displayRows() {
 		int rows;
 		
@@ -136,10 +125,7 @@ public class View {
 		
 		return rows;
 	}
-	/**
-	 * Takes in how many columns the user wants to be in the dungeon and stores it in the cols variable	
-	 * @return the user chosen number of columns the dungeon will have
-	 */		
+	
 	public int displayColumns() {
 		int cols;
 		
@@ -159,7 +145,7 @@ public class View {
 	
 	/**
 	 * User will enter the name of their hero, then calls the hero selection that obtains the class type they want to be.
-	 * @return Hero object that the user has created
+	 * @return Hero that the user has created
 	 */
 	public Hero heroName() {
 		System.out.println("What do you want your hero's name to be:");
@@ -167,11 +153,10 @@ public class View {
 			
 		return heroSelection(name);	
 	}
-	
 	/**
 	 * User enters the name of the class they wish to select and the Hero is created using the HeroFactory
 	 * @param theName character name that the user wants to be called
-	 * @return Hero object that the user has created
+	 * @return Hero that the user has created
 	 */
 	public static Hero heroSelection(final String theName) {
 		System.out.println("What hero class do you want to be (Warrior, Thief, berserker, or Priestess):");
@@ -194,19 +179,18 @@ public class View {
 	
 	/**
 	 * Displays the text representation of the room the user is currently in
-	 * @param theHero object
+	 * @param theHero
 	 */
 	public void displayCurrRoom(final Hero theHero) {
 		System.out.println("\n\nCurrent Room:\n");
 		System.out.println(theHero.getCurrRoom().toString());
 	}
-	
 	/**
 	 * Prompts the user with the only possible directions they can travel in the current room and calls the method that asks for 
 	 * which direction they wish to move
 	 * 
-	 * @param theRoom object the Hero is in
-	 * @return  a string representing the direction the user specified they wanted to move
+	 * @param theRoom
+	 * @return getMoveOption
 	 */
 	public String displayMoveOptions(final DungeonRoom theRoom) {
 		 StringBuilder sb = new StringBuilder();
@@ -249,11 +233,11 @@ public class View {
 	}
 	
 	/**
-	 * Prompts the user until a valid move option for the current room is entered.
+	 * Prompts the user by asking which way they would like to travel
 	 * 
-	 * @param theRoom object the Hero is in
-	 * @param theOptions a String array of the only move options available for the current room
-	 * @return direction string of the direction the user specifies to move
+	 * @param theRoom
+	 * @param theOptions
+	 * @return direction
 	 */
 	public String getMoveOption(final DungeonRoom theRoom, final String[] theOptions) {
 		System.out.println("Which way would you like to go:");
@@ -281,11 +265,11 @@ public class View {
 	}
 	
 	/**
-	 * Displays the options menu with the options "move", "inventory", and "save" and after the user specifies which option they want directs them to the prompt they want
 	 * 
-	 * @param theHero object
-	 * @param theDungeon object
-	 * @return a boolean, false if user entered move and true if user entered save
+	 * 
+	 * @param theHero
+	 * @param theDungeon
+	 * @return
 	 */
 	public boolean displayOptions(final Hero theHero, final Dungeon theDungeon) {
 		System.out.println("\nWould you like move on(move), or View inventory(inventory), or Save game and exit(save):");
@@ -327,9 +311,10 @@ public class View {
 	}
 	
 	/**
-	 * The options for the hero to attack. The user can enter either "normal" or "special" for the attacks. If neither are entered, then the user will 
-	 * see the "please enter valid attack option" and be prompted to enter another option
-	 * @return a string representation of the attack that the user has specified
+	 * Displays the current inventory of items the user has
+	 * 
+	 * @param theHero
+	 * @param theDungeon
 	 */
 	public static void displayInventory(final Hero theHero, final Dungeon theDungeon) {		
 		System.out.println("\nWould you like to use an item(use) or go back to options(options):");
@@ -369,7 +354,7 @@ public class View {
 	/**
 	 * User can type whether they would like to quit the game or restart the game
 	 * 
-	 * @return true if they wish to continue or false if they wish to quit
+	 * @return true or false
 	 */
 	public boolean displayKeepPlayingOptions() {
 		System.out.println("Do you want to restart(restart) or would you like to quit(quit)?");
