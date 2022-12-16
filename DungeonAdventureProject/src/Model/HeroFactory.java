@@ -3,9 +3,9 @@ package Model;
 public class HeroFactory {
 	/**
 	 * Creates the hero based off of the selected class
-	 * @param theHero
-	 * @param theName
-	 * @return Hero
+	 * @param theHero the class name the User picked to create
+	 * @param theName the User wants his Hero to be called
+	 * @return Hero object the User created
 	 */
 	public Hero createHero(final String theHero, final String theName) {
 		if(theHero.equalsIgnoreCase("warrior")) {

@@ -8,13 +8,18 @@ public class DungeonSaveGame implements Serializable {
 	 * Serialization ID
 	 */
 	private static final long serialVersionUID = 1L;
-	
+	/**
+	 * The Dungeon Object to be saved
+	 */
 	private final Dungeon myDungeon;
+	/**
+	 * The Hero Object to be saved
+	 */
 	private final Hero myHero;
 	/**
 	 * Constructor for saving the game and what information must be stored
-	 * @param theDungeon
-	 * @param theHero
+	 * @param theDungeon object we want to save
+	 * @param theHero object we want to save
 	 */
 	public DungeonSaveGame(final Dungeon theDungeon, final Hero theHero) {
 		myDungeon = theDungeon;
@@ -23,7 +28,7 @@ public class DungeonSaveGame implements Serializable {
 	
 	/**
 	 * getter for the created dungeon class of saved game
-	 * @return myDungeon
+	 * @return myDungeon the Dungeon object that is stored in the DungeonSaveGame object
 	 */
 	public Dungeon getDungeon() {
 		return myDungeon;
@@ -31,7 +36,7 @@ public class DungeonSaveGame implements Serializable {
 	
 	/**
 	 * getter for the hero of saved game
-	 * @return myHero
+	 * @return myHero the Hero object that is stored in the DungeonSaveGame object
 	 */
 	public Hero getHero() {
 		return myHero;

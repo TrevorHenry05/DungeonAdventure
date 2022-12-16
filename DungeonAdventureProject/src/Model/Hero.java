@@ -56,16 +56,16 @@ public abstract class Hero extends DungeonCharacter {
 	/**
 	 * Constructor for Hero class
 	 * 
-	 * @param theHitPoints
-	 * @param theMaxHitPoints
-	 * @param theMinDamage
-	 * @param theMaxDamage
-	 * @param theChanceToHit
-	 * @param theAttackSpeed
-	 * @param theBlockChance
-	 * @param theClassName
-	 * @param theCharacterName
-	 * @param theAttacks
+	 * @param theHitPoints the current hit points of the DungeonCharacter
+	 * @param theMaxHitPoints the max hit points the DungeonCharacter can heal to
+	 * @param theMinDamage the minimum amount of damage a normal attack can do
+	 * @param theMaxDamage the maximum amount of damage a normal attack can do
+	 * @param theChanceToHit the chance for a normal attack top hit
+	 * @param theAttackSpeed the Hero attack speed
+	 * @param theBlockChance the chance the Hero has to block Monsters attack
+	 * @param theClassName the Hero class the Hero is
+	 * @param theCharacterName the Name the User picked for Their Hero
+	 * @param theAttacks the number of attacks Hero has left in a encounter
 	 */
 	public Hero(final int theHitPoints,final int theMaxHitPoints, final int theMinDamage, final int theMaxDamage, final double theChanceToHit, final int theAttackSpeed, final double theBlockChance, final String theClassName, final String theCharacterName, final int theAttacks) {
 		super(theHitPoints,theMaxHitPoints, theMinDamage, theMaxDamage, theChanceToHit, theAttackSpeed);
@@ -151,7 +151,7 @@ public abstract class Hero extends DungeonCharacter {
 	/**
 	 * sets the user's X value and stores it in the current X
 	 * 
-	 * @param theCurrX
+	 * @param theCurrX the column the Hero is in
 	 */
 	public void setCurrX(final int theCurrX) {
 		myCurrX = theCurrX;
@@ -160,7 +160,7 @@ public abstract class Hero extends DungeonCharacter {
 	/**
 	 * Sets the user's Y value and stores it in the current Y
 	 * 
-	 * @param theCurrY
+	 * @param theCurrY the row the Hero is in
 	 */
 	public void setCurrY(final int theCurrY) {
 		myCurrY = theCurrY;
@@ -169,7 +169,7 @@ public abstract class Hero extends DungeonCharacter {
 	/**
 	 * Sets the current room the user is in
 	 * 
-	 * @param theCurrRoom
+	 * @param theCurrRoom the DungeonRoom object the Hero is currently in
 	 */
 	public void setCurrRoom(final DungeonRoom theCurrRoom) {
 		myCurrRoom = theCurrRoom;
@@ -178,7 +178,7 @@ public abstract class Hero extends DungeonCharacter {
 	/**
 	 * Sets the attacks the character has to use in the turn
 	 * 
-	 * @param theAttacks
+	 * @param theAttacks the Integer value of the number of attack the hero has
 	 */
 	public void setAttacks(final int theAttacks) {
 		myAttacks = theAttacks;
@@ -187,7 +187,7 @@ public abstract class Hero extends DungeonCharacter {
 	/**
 	 * adds the collected item to the inventory array
 	 * 
-	 * @param theItem
+	 * @param theItem to be added to the Hero's inventory
 	 */
 	public void addItemToInventory(final Item theItem) {
 		getInventory().add(theItem);
@@ -211,7 +211,7 @@ public abstract class Hero extends DungeonCharacter {
 	/**
 	 * Uses a StringBuilder to build and Return a text representation of the rooms that are surrounding the room the hero is currently in.
 	 * 
-	 * @param theDungeon
+	 * @param theDungeon Dungeon object of the current game
 	 * @return text representation of the rooms surrounding the room the hero is currently in
 	 */
 	public String displayDungeonNearHero(final Dungeon theDungeon) {
@@ -266,8 +266,8 @@ public abstract class Hero extends DungeonCharacter {
 	/**
 	 * Updates inventory by removing items that are used
 	 * 
-	 * @param theItem
-	 * @return the used item
+	 * @param theItem a string name of the Item to be removed from the Hero's Inventory
+	 * @return the Item object that was removed
 	 */
 	public Item removeItemFromInventory(final String theItem) {
 		int i = 0;
@@ -297,8 +297,8 @@ public abstract class Hero extends DungeonCharacter {
 	/**
 	 * Performs the action of the item the user is currently using
 	 * 
-	 * @param theItem
-	 * @return the used item
+	 * @param theItem to be used by the Hero
+	 * @return true if it was a vision potion and false otherwise
 	 */
 	public boolean useItem(final Item theItem) {
 		if(theItem == null) {
@@ -348,8 +348,9 @@ public abstract class Hero extends DungeonCharacter {
 	}
 	
 	/**
+	 * Takes in a Monster and attempts an attack on the Monster and if successful it removes the health form the monster
 	 * 
-	 * @param theMonster
+	 * @param theMonster being attacked by the Hero
 	 * @return if the attack was successful
 	 */
 	public boolean attack(final DungeonCharacter theMonster) {
@@ -365,9 +366,10 @@ public abstract class Hero extends DungeonCharacter {
 	}
 	
 	/**
+	 * Takes in a DungeonCharacter and attempts an special  on the DungeonCharacter and if successful it performs the special of the Hero class
 	 * 
-	 * @param theMonster
-	 * @return
+	 * @param theMonster the DungeonCharacter the special is being used on
+	 * @return if the attack was successful
 	 */
 	public abstract boolean special(final DungeonCharacter theMonster);
 	
