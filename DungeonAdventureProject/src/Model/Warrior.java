@@ -19,8 +19,9 @@ public class Warrior extends Hero{
 	}
 	
 	/**
-	 * The chance the warrior's special attack lands
-	 * @param theMonster
+	 * The special for the Warrior class
+	 * 
+	 * @param theMonster the special should be performed on
 	 */
 	@Override
 	public boolean special(final DungeonCharacter  theMonster) {

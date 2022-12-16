@@ -8,9 +8,20 @@ public class Item implements Serializable {
 	 * Serialization ID
 	 */
 	private static final long serialVersionUID = 1L;
-	
+	/**
+	 * a character representing the Item type
+	 * @serial
+	 */
 	private final char  myType;
+	/**
+	 * the Item Name
+	 * @serial
+	 */
 	private final String myDescription;
+	/**
+	 * if the Item Object is usable
+	 * @serial
+	 */
 	private final boolean myItemUsable;
 	/**
 	 * The constructor for the item

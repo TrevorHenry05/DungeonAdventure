@@ -51,15 +51,15 @@ public class DungeonRoom implements Serializable{
 	private boolean myRoomChecked;
 	/**
 	 * Constructor for the DungeonRoom class
-	 * @param theItemsInRoom
-	 * @param theMonster
-	 * @param theNorth
-	 * @param theSouth
-	 * @param theWest
-	 * @param theEast
-	 * @param theExit
-	 * @param theEntrance
-	 * @param theRoomChecked
+	 * @param theItemsInRoom a list of Items in the room
+	 * @param theMonster the Monster object that is in the room and null if none
+	 * @param theNorth if there is a door in the north direction
+	 * @param theSouth if there is a door in the south direction
+	 * @param theWest if there is a door in the west direction
+	 * @param theEast if there is a door in the east direction
+	 * @param theExit if the room is the exit
+	 * @param theEntrance if the room is the entrance
+	 * @param theRoomChecked if the room has been checked during the isMazeTraversible and isPillarsCollectable DFS search
 	 */
 	public DungeonRoom(final List<Item> theItemsInRoom, final Monster theMonster, final boolean theNorth, final boolean theSouth, final boolean theWest, final boolean theEast, final boolean theExit, final boolean theEntrance, final boolean theRoomChecked) {
 		myItemsInRoom = theItemsInRoom;		

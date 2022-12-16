@@ -10,8 +10,8 @@ import org.sqlite.SQLiteDataSource;
 public class MonsterFactory {
 	/**
 	 * Constructor for the monster
-	 * @param theMonster
-	 * @return monster
+	 * @param theMonster type that should be created
+	 * @return Monster object that was created
 	 */
 	public Monster createMonster(final String theMonster) {
 		
