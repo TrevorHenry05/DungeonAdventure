@@ -2,6 +2,11 @@ package Model;
 
 public class MockMonster extends Monster {
 	/**
+	 * Serialization ID
+	 */
+	private static final long serialVersionUID = 1L;
+
+	/**
 	 * Constructor for a MockMonster
 	 */
 	public MockMonster() {

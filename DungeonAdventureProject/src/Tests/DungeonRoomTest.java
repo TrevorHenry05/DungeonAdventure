@@ -16,84 +16,89 @@ import Model.MonsterFactory;
 import Model.Warrior;
 
 class DungeonRoomTest {
-	private DungeonRoom a;
-	private DungeonRoom b;
-	private DungeonRoom c;
-	private DungeonRoom d;
-	private MonsterFactory m = new MonsterFactory();
-	private Hero h = new Warrior("John");
-	private ItemFactory i = new ItemFactory();
+	
+	private DungeonRoom myDungeonRoom1;
+	private DungeonRoom myDungeonRoom2;
+	private DungeonRoom myDungeonRoom3;
+	private DungeonRoom myDungeonRoom4;
+	private MonsterFactory myMonsterfactory;
+	private Hero myHero;
+	private ItemFactory myItemFactory;
 	
 	@BeforeEach
 	void setUp() {
-		a = new DungeonRoom(new ArrayList<Item>(), null, false, false, false, false, false, false, false);
-		a.addItem(i.createItem("heal"));
-		b = new DungeonRoom(new ArrayList<Item>(), null, true, true, true, true, true, true, false);
-		c = new DungeonRoom(new ArrayList<Item>(), null, true, false, true, false, false, false, false);
-		c.addItem(i.createItem("trap"));
-		c.addItem(i.createItem("vision"));
-		c.addItem(i.createItem("abstraction"));
-		d = new DungeonRoom(new ArrayList<Item>(), m.createMonster("ogre"), false, true, false, true, false, false, false);
+		myItemFactory= new ItemFactory();
+		myHero = new Warrior("John");
+		myMonsterfactory = new MonsterFactory();
+		myDungeonRoom1 = new DungeonRoom(new ArrayList<Item>(), null, false, false, false, false, false, false, false);
+		myDungeonRoom1.addItem(myItemFactory.createItem("heal"));
+		myDungeonRoom2 = new DungeonRoom(new ArrayList<Item>(), null, true, true, true, true, true, true, false);
+		myDungeonRoom3 = new DungeonRoom(new ArrayList<Item>(), null, true, false, true, false, false, false, false);
+		myDungeonRoom3.addItem(myItemFactory.createItem("trap"));
+		myDungeonRoom3.addItem(myItemFactory.createItem("vision"));
+		myDungeonRoom3.addItem(myItemFactory.createItem("abstraction"));
+		myDungeonRoom4 = new DungeonRoom(new ArrayList<Item>(), myMonsterfactory.createMonster("ogre"), false, true, false, true, false, false, false);
 	}
+	
 	@Test
 	void testIsMonster() {
-		assertFalse(a.isMonster());
-		assertTrue(d.isMonster());
-		assertFalse(c.isMonster());
+		assertFalse(myDungeonRoom1.isMonster());
+		assertTrue(myDungeonRoom4.isMonster());
+		assertFalse(myDungeonRoom3.isMonster());
 	}
 	
 	@Test
 	void testSetMonster() {
-		a.setMonster(m.createMonster("ogre"));
-		assertTrue(a.isMonster());
-		d.setMonster(null);
-		assertFalse(d.isMonster());
+		myDungeonRoom1.setMonster(myMonsterfactory.createMonster("ogre"));
+		assertTrue(myDungeonRoom1.isMonster());
+		myDungeonRoom4.setMonster(null);
+		assertFalse(myDungeonRoom4.isMonster());
 	}
 	
 	@Test
 	void testGetMonster() {
-		Monster monster = m.createMonster("ogre");
-		a.setMonster(monster);
-		assertEquals(monster, a.getMonster());
+		Monster monster = myMonsterfactory.createMonster("ogre");
+		myDungeonRoom1.setMonster(monster);
+		assertEquals(monster, myDungeonRoom1.getMonster());
 	}
 	
 	@Test
 	void testGetItems() {
-		assertEquals(1, a.getItemsInRoom().size());
+		assertEquals(1, myDungeonRoom1.getItemsInRoom().size());
 	}
 	@Test
 	void testIsNorth() {
-		assertFalse(a.isNorth());
-		assertTrue(b.isNorth());
-		assertTrue(c.isNorth());
+		assertFalse(myDungeonRoom1.isNorth());
+		assertTrue(myDungeonRoom2.isNorth());
+		assertTrue(myDungeonRoom3.isNorth());
 	}
 	@Test
 	void testIsSouth() {
-		assertFalse(a.isSouth());
-		assertTrue(b.isSouth());
-		assertFalse(c.isSouth());
+		assertFalse(myDungeonRoom1.isSouth());
+		assertTrue(myDungeonRoom2.isSouth());
+		assertFalse(myDungeonRoom3.isSouth());
 	}
 	@Test
 	void testIsWest() {
-		assertFalse(a.isWest());
-		assertTrue(b.isWest());
+		assertFalse(myDungeonRoom1.isWest());
+		assertTrue(myDungeonRoom2.isWest());
 	}
 	@Test
 	void testIsEast() {
-		assertFalse(a.isEast());
-		assertTrue(b.isEast());
+		assertFalse(myDungeonRoom1.isEast());
+		assertTrue(myDungeonRoom2.isEast());
 	}
 	
 	@Test
 	void testIsExit() {
-		assertFalse(a.isExit());
-		assertTrue(b.isExit());
+		assertFalse(myDungeonRoom1.isExit());
+		assertTrue(myDungeonRoom2.isExit());
 	}
 	
 	@Test
 	void testIsEntrance() {
-		assertFalse(a.isEntrance());
-		assertTrue(b.isEntrance());
+		assertFalse(myDungeonRoom1.isEntrance());
+		assertTrue(myDungeonRoom2.isEntrance());
 	}
 	
 	@Test
@@ -107,7 +112,7 @@ class DungeonRoomTest {
 		sb.append(System.lineSeparator());
 		sb.append("***");
 		sb.append(System.lineSeparator());
-		assertEquals(sb.toString(), a.toString());
+		assertEquals(sb.toString(), myDungeonRoom1.toString());
 		
 		sb2.append("*-*");
 		sb2.append(System.lineSeparator());
@@ -115,11 +120,11 @@ class DungeonRoomTest {
 		sb2.append(System.lineSeparator());
 		sb2.append("***");
 		sb2.append(System.lineSeparator());
-		assertEquals(sb2.toString(), c.toString());
+		assertEquals(sb2.toString(), myDungeonRoom3.toString());
 	}
 	@Test
 	void testGetRoom() {
-		char[][] p = a.getRoom();
+		char[][] p = myDungeonRoom1.getRoom();
 		assertTrue(p[0][0] == '*');
 		assertTrue(p[0][1] == '*');
 		assertTrue(p[0][2] == '*');
@@ -133,8 +138,8 @@ class DungeonRoomTest {
 	
 	@Test
 	void testCreateRoom() {
-		char[][] aRoom = a.getRoom();
-		char[][] created = a.createRoom();
+		char[][] aRoom = myDungeonRoom1.getRoom();
+		char[][] created = myDungeonRoom1.createRoom();
 		assertTrue(aRoom[0][0] == created[0][0]);
 		assertTrue(aRoom[0][1] == created[0][1]);
 		assertTrue(aRoom[0][2] == created[0][2]);
@@ -148,8 +153,8 @@ class DungeonRoomTest {
 	
 	@Test
 	void testSetRoom() {
-		a.setRoom();
-		char[][] p = a.getRoom();
+		myDungeonRoom1.setRoom();
+		char[][] p = myDungeonRoom1.getRoom();
 		assertTrue(p[0][0] == '*');
 		assertTrue(p[0][1] == '*');
 		assertTrue(p[0][2] == '*');
@@ -165,38 +170,38 @@ class DungeonRoomTest {
 	void testRemoveItemFromRoom() {
 		StringBuilder sb = new StringBuilder();
 		sb.append("You obtained a Heal potion\n");
-		assertEquals(sb.toString(),a.removeItemsFromRoom(h));
-		assertEquals(0, a.getItemsInRoom().size());
-		assertEquals(1, h.getInventory().size());
+		assertEquals(sb.toString(),myDungeonRoom1.removeItemsFromRoom(myHero));
+		assertEquals(0, myDungeonRoom1.getItemsInRoom().size());
+		assertEquals(1, myHero.getInventory().size());
 	}
 	
 	@Test
 	void testAddItem() {
-		a.addItem(i.createItem("heal"));
-		assertEquals(2, a.getItemsInRoom().size());
+		myDungeonRoom1.addItem(myItemFactory.createItem("heal"));
+		assertEquals(2, myDungeonRoom1.getItemsInRoom().size());
 	}
 	
 	@Test
 	void testIsChecked() {
-		assertFalse(a.isChecked());
-		assertFalse(b.isChecked());
-		assertFalse(c.isChecked());
+		assertFalse(myDungeonRoom1.isChecked());
+		assertFalse(myDungeonRoom2.isChecked());
+		assertFalse(myDungeonRoom3.isChecked());
 	}
 	
 	@Test
 	void testSetRoomChecked() {
-		a.setRoomChecked(true);
-		b.setRoomChecked(true);
-		c.setRoomChecked(true);
-		assertTrue(a.isChecked());
-		assertTrue(b.isChecked());
-		assertTrue(c.isChecked());
+		myDungeonRoom1.setRoomChecked(true);
+		myDungeonRoom2.setRoomChecked(true);
+		myDungeonRoom3.setRoomChecked(true);
+		assertTrue(myDungeonRoom1.isChecked());
+		assertTrue(myDungeonRoom2.isChecked());
+		assertTrue(myDungeonRoom3.isChecked());
 	}
 	
 	@Test
 	void testContainsPillar() {
-		assertFalse(a.containsPillar());
-		assertTrue(c.containsPillar());
+		assertFalse(myDungeonRoom1.containsPillar());
+		assertTrue(myDungeonRoom3.containsPillar());
 	}
 
 }

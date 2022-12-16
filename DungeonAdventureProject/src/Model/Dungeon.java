@@ -52,7 +52,7 @@ public class Dungeon implements Serializable {
 	 * 
 	 * @return the created mutlidimensional array of DungeonRooms that represents the dungeon
 	 */
-	private static DungeonRoom[][] createDungeon(final int theRows, final int theColumns) {
+	public static DungeonRoom[][] createDungeon(final int theRows, final int theColumns) {
 		DungeonRoom[][] d = new DungeonRoom[theRows][theColumns];
 		MonsterFactory mf =  new MonsterFactory();
 		ItemFactory If = new ItemFactory();
@@ -145,7 +145,7 @@ public class Dungeon implements Serializable {
 	 * @param theJ the J values of the room in the MultiDimensional Array
 	 * @return false if the room is on the top row of the array, returns whether or not there is a door going south in the room above it
 	 */
-	private static boolean isNorthDoor(final DungeonRoom[][] theDungeon, final int theI, final int theJ) {
+	public static boolean isNorthDoor(final DungeonRoom[][] theDungeon, final int theI, final int theJ) {
 		if(theI < 1) {
 			return false;
 		}
@@ -161,7 +161,7 @@ public class Dungeon implements Serializable {
 	 * @param theJ the J values of the room in the MultiDimensional Array
 	 * @return false if the door is in the first column of the array, returns whether or not there is a door going east in the room to the left of it
 	 */
-	private static boolean isWestDoor(final DungeonRoom[][] theDungeon, final int theI, final int theJ) {
+	public static boolean isWestDoor(final DungeonRoom[][] theDungeon, final int theI, final int theJ) {
 		if(theJ < 1) {
 			return false;
 		}
@@ -177,7 +177,7 @@ public class Dungeon implements Serializable {
 	 * @param theJ the J values of the room in the MultiDimensional Array
 	 * @return true if the random number (chance) is above 70
 	 */
-	private static boolean isEastDoor(final DungeonRoom[][] theDungeon, final int theI, final int theJ) {
+	public static boolean isEastDoor(final DungeonRoom[][] theDungeon, final int theI, final int theJ) {
 		if(theJ > theDungeon[theI].length - 2) {
 			return false;
 		}
@@ -198,7 +198,7 @@ public class Dungeon implements Serializable {
 	 * @param theJ the J values of the room in the MultiDimensional Array
 	 * @return true if the random number (chance) is above 70
 	 */
-	private static boolean isSouthDoor(final DungeonRoom[][] theDungeon, final int theI, final int theJ) {
+	public static boolean isSouthDoor(final DungeonRoom[][] theDungeon, final int theI, final int theJ) {
 		if(theI > theDungeon.length - 2) {
 			return false;
 		}
@@ -272,7 +272,7 @@ public class Dungeon implements Serializable {
 	 * @param theDir that we came into the room from
 	 * @return true if the maze is able to go from start room to exit room, or false if the maze is unable to be completed
 	 */
-	public static boolean isMazeTraversable(final DungeonRoom[][] theDungeon, final int theX, final int theY, final String theDir) {
+	private static boolean isMazeTraversable(final DungeonRoom[][] theDungeon, final int theX, final int theY, final String theDir) {
 		DungeonRoom room = theDungeon[theX][theY];
 		boolean north = false, south = false, east = false, west = false;
 		
@@ -326,7 +326,7 @@ public class Dungeon implements Serializable {
 	 * @param theCount of pillars found so far in the DFS search
 	 * @return false if the pillars are not obtainable and returns true if you can get to all pillars in the maze.
 	 */
-	public static boolean isPillarsObtainable(final DungeonRoom[][] theDungeon, final int theX, final int theY, final String theDir, final int theCount) {
+	private static boolean isPillarsObtainable(final DungeonRoom[][] theDungeon, final int theX, final int theY, final String theDir, final int theCount) {
 		DungeonRoom room = theDungeon[theX][theY];
 		boolean north = false, south = false, east = false, west = false;
 		int count = theCount;

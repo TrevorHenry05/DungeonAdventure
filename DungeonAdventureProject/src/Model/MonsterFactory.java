@@ -68,6 +68,10 @@ public class MonsterFactory {
 		        }
 		}
 		
+		if(theMonster.equalsIgnoreCase("mock")) {
+			return new MockMonster();
+		}
+		
 		throw new IllegalArgumentException("Illegal Argument Entered");
 	}
 }
