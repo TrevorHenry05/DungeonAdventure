@@ -1,12 +1,9 @@
 package Tests;
 
 import static org.junit.jupiter.api.Assertions.*;
-
 import java.util.ArrayList;
-
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
-
 import Model.DungeonRoom;
 import Model.Hero;
 import Model.Item;
@@ -14,7 +11,12 @@ import Model.ItemFactory;
 import Model.Monster;
 import Model.MonsterFactory;
 import Model.Warrior;
-
+/**
+ * Test class for the DungeonRoom class
+ * 
+ * @author Trevor Henry, Riley Stevenson, and Colton Wickens
+ * @version 1.0
+ */
 class DungeonRoomTest {
 	
 	private DungeonRoom myDungeonRoom1;

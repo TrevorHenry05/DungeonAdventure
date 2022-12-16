@@ -11,7 +11,12 @@ import Model.Item;
 import Model.ItemFactory;
 import Model.Monster;
 import Model.MonsterFactory;
-
+/**
+ * Test class for the Dungeon class
+ * 
+ * @author Trevor Henry, Riley Stevenson, and Colton Wickens
+ * @version 1.0
+ */
 class DungeonTest {
 	
 	private Dungeon myDungeon1;

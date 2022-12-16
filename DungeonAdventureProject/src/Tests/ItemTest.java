@@ -9,7 +9,12 @@ import org.junit.jupiter.api.Test;
 
 import Model.Item;
 import Model.ItemFactory;
-
+/**
+ * Test class for the Item class
+ * 
+ * @author Trevor Henry, Riley Stevenson, and Colton Wickens
+ * @version 1.0
+ */
 public class ItemTest {
 
 	private ItemFactory myItemFactory;

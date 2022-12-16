@@ -9,7 +9,12 @@ import org.junit.jupiter.api.Test;
 import Model.Hero;
 import Model.HeroFactory;
 import Model.Warrior;
-
+/**
+ * Test class for the HeroFactory class
+ * 
+ * @author Trevor Henry, Riley Stevenson, and Colton Wickens
+ * @version 1.0
+ */
 public class HeroFactoryTest {
 	
 	private HeroFactory myHeroFactory;

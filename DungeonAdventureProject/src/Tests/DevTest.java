@@ -9,7 +9,12 @@ import Model.Dev;
 import Model.Hero;
 import Model.MockMonster;
 import Model.Monster;
-
+/**
+ * Test class for the Dev class
+ * 
+ * @author Trevor Henry, Riley Stevenson, and Colton Wickens
+ * @version 1.0
+ */
 public class DevTest {
 	
 	private Hero myHero;

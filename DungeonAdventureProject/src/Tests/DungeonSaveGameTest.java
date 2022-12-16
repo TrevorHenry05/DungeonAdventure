@@ -9,7 +9,12 @@ import Model.Dungeon;
 import Model.DungeonSaveGame;
 import Model.Hero;
 import Model.Warrior;
-
+/**
+ * Test class for the DungeonSaveGame class
+ * 
+ * @author Trevor Henry, Riley Stevenson, and Colton Wickens
+ * @version 1.0
+ */
 public class DungeonSaveGameTest {
 
 	private DungeonSaveGame myDungeonSaveGame;

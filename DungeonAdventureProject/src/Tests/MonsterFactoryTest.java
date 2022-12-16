@@ -9,7 +9,12 @@ import org.junit.jupiter.api.Test;
 import Model.MockMonster;
 import Model.Monster;
 import Model.MonsterFactory;
-
+/**
+ * Test class for the MonsterFactory class
+ * 
+ * @author Trevor Henry, Riley Stevenson, and Colton Wickens
+ * @version 1.0
+ */
 public class MonsterFactoryTest {
 	
 	private MonsterFactory myMonsterFactory;
