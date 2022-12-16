@@ -78,12 +78,7 @@ public class DungeonRoom implements Serializable{
 	 * Creating the room
 	 */
 	public void setRoom() {
-		createRoom();
-	}
-	private void checkForMonster() {
-		if (this.isMonster()) {
-			myItemsInRoom.add(new Item('M', myMonster.getMonsterType(), false, false));
-		}
+		myRoom = createRoom();
 	}
 	
 	/**
@@ -131,7 +126,6 @@ public class DungeonRoom implements Serializable{
 	 * @return myRoom
 	 */
 	public char[][] getRoom() {
-		createRoom();
 		return myRoom;
 	}
 	
@@ -202,7 +196,7 @@ public class DungeonRoom implements Serializable{
 	public void addItem(final Item theItem) {
 		getItemsInRoom().add(theItem);
 		//update room representation after adding item
-		createRoom();
+		myRoom = createRoom();
 	}
 	
 	/**
@@ -250,6 +244,7 @@ public class DungeonRoom implements Serializable{
 		
 		getItemsInRoom().clear();
 		setRoom();
+		
 		return sb.toString();
 	}
 	
@@ -265,8 +260,9 @@ public class DungeonRoom implements Serializable{
 		room[0][2] = '*';
 		room[2][0] = '*';
 		room[2][2] = '*';
+		
 		if(isEntrance()) {
-			room[1][1] = 'I';
+			room[1][1] = 'i';
 		} else if(isExit()) {
 			room[1][1] = 'O';
 		} else {			
@@ -308,19 +304,18 @@ public class DungeonRoom implements Serializable{
 			room[2][1] = '*';
 		}
 		
-		myRoom = room;
+		return room;
 	}
 	
 	/**
 	 * String builder for the room layout and possible items, monsters or pillars in room
 	 */
 	public String toString() {
-		createRoom();
 		StringBuilder sb = new StringBuilder();
 		
-		for(int i = 0; i < myRoom.length; i++) {
-			for(int j = 0; j < myRoom[i].length; j++) {
-				sb.append(myRoom[i][j]);
+		for(int i = 0; i < getRoom().length; i++) {
+			for(int j = 0; j < getRoom()[i].length; j++) {
+				sb.append(getRoom()[i][j]);
 			}
 			sb.append(System.lineSeparator());
 		}

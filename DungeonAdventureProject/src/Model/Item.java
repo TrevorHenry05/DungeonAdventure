@@ -23,7 +23,6 @@ public class Item implements Serializable {
 	 * @serial
 	 */
 	private final boolean myItemUsable;
-  
 	/**
 	 * The constructor for the item
 	 * @param theType
@@ -34,7 +33,6 @@ public class Item implements Serializable {
 		myType = theType;
 		myDescription = theDescription;
 		myItemUsable = theItemUsable;
-		myIsCollectable = true;
 	}
 	
 	/**

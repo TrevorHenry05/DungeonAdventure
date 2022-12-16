@@ -313,7 +313,6 @@ public abstract class Hero extends DungeonCharacter {
 				} else {
 					setHitPoints(newHealth);
 				}
-				return true;
 			} else if(theItem.getType() == 'V') {
 				return true;
 			} else if(theItem.getType() == 'X') {

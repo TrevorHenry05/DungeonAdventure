@@ -9,7 +9,7 @@ public class ItemFactory {
 	 */
 	public Item createItem(final String theItem) {
 		if(theItem.equalsIgnoreCase("heal")) {
-			return new Item('H', "Healing Potion", true, true);
+			return new Item('H', "Heal", true);
 		}
 		
 		if(theItem.equalsIgnoreCase("vision")) {
@@ -17,25 +17,23 @@ public class ItemFactory {
 		}
 		
 		if(theItem.equalsIgnoreCase("abstraction")) {
-			return new Item('A', "Pillar of Abstraction", false, true);
+			return new Item('A', "Pillar of Abstraction", false);
 		}
 		
 		if(theItem.equalsIgnoreCase("encapsulation")) {
-			return new Item('E', "Pillar of Encapsulation", false, true);
+			return new Item('E', "Pillar of Encapsulation", false);
 		}
 		
 		if(theItem.equalsIgnoreCase("inheritance")) {
-			return new Item('I', "Pillar of Inheritance", false, true);
+			return new Item('I', "Pillar of Inheritance", false);
 		}
 		
 		if(theItem.equalsIgnoreCase("polymorphism")) {
-			return new Item('P', "Pillar of Polymorphism", false, true);
+			return new Item('P', "Pillar of Polymorphism", false);
 		}
 		
 		if(theItem.equalsIgnoreCase("trap")) {
-			return new Item('X', "Trap", true, false);
-		} else if (theItem.equalsIgnoreCase("vision")) {
-			return new Item('V', "Vision Potion", true, true);
+			return new Item('X', "Trap", true);
 		}
 		throw new IllegalArgumentException("Illegal Argument Entered");
 	}
