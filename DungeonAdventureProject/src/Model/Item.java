@@ -12,6 +12,7 @@ public class Item implements Serializable {
 	private final char  myType;
 	private final String myDescription;
 	private final boolean myItemUsable;
+  
 	/**
 	 * The constructor for the item
 	 * @param theType
@@ -22,6 +23,7 @@ public class Item implements Serializable {
 		myType = theType;
 		myDescription = theDescription;
 		myItemUsable = theItemUsable;
+		myIsCollectable = true;
 	}
 	
 	/**

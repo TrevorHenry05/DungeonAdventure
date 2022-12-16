@@ -3,6 +3,7 @@ package Model;
 import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Random;
 
 import Utility.Utility;
 
@@ -22,6 +23,9 @@ public class Dungeon implements Serializable {
 		myRows = theRows;
 		myColumns = theColumns;
 		myDungeon = createDungeon(theRows, theColumns);
+	}
+	public Dungeon(final DungeonRoom[][] theDungeon) {
+		myDungeon = theDungeon;
 	}
 	
 	public DungeonRoom[][] getDungeon() {
@@ -114,6 +118,8 @@ public class Dungeon implements Serializable {
 						west = isWestDoor(d,rows,columns);
 						room = new DungeonRoom(items, monster, north, south, west, east, true, false, false);
 					}
+
+
 				}
 					
 				d[rows][columns] = room;	
@@ -384,7 +390,9 @@ public class Dungeon implements Serializable {
 			sb.append(row2.toString());
 			sb.append(System.lineSeparator());
 			sb.append(row3.toString());
-			sb.append(System.lineSeparator());
+			if (i < myDungeon.length - 1) {
+				sb.append(System.lineSeparator());
+			}
 		}
 		
 		return sb.toString();
